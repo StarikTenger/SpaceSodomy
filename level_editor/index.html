@@ -1,0 +1,35 @@
+<style>
+*{
+margin: 0;
+padding: 0;
+}
+</style>
+
+
+SIZE<input id="size" type="number" value=25></input>
+<button onclick="create()">CREATE</button><br>
+SCALE<input id="scale" type="range" value=1 max=100 min=10 step=1></input>
+<button onclick="create()">CREATE</button><br>
+<table>
+<td>
+<canvas id="screen" onmousedown="mouseDown()" onmousemove="mouseMove()" onmouseup="mouseUp()" style="border: 1px solid"></canvas>
+</td>
+<td valign=top>
+<textarea id="output" style="border: 1px solid; font: 9px Arial"  >Here will be code</textarea>
+</td>
+</table>
+<br>
+
+
+DIR<input id="dir" type="number" value=0></input><br>
+W<input id="w" type="number" value=1></input><br>
+BV<input id="bv" type="number" value=50></input><br>
+CD<input id="cd" type="number" value=10></input><br>
+<br>
+<button onclick="mouse.mode = !mouse.mode">MODE</button>
+<button onclick="mouse.mode = 2">TURRET</button>
+<button onclick="mouse.mode = 3">EXIT</button>
+<button onclick="generate();">GENERATE!</button>
+<br>
+
+<script src="script.js"></script>

@@ -61,6 +61,7 @@ void DrawSystem::draw() {
 		drawExit(dynamic_cast<Exit*>(u));
 		drawDummy(dynamic_cast<Dummy*>(u));
 		drawBonus(dynamic_cast<Bonus*>(u));
+		drawRocketLauncher(dynamic_cast<RocketLauncher*>(u));
 	}
 	drawWalls(sys);
 

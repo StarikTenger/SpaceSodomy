@@ -11,6 +11,7 @@
 #include "Exit.h"
 #include "Dummy.h"
 #include "Bonus.h"
+#include "RocketLauncher.h"
 
 class System{
 public:

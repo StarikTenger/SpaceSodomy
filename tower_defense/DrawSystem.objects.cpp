@@ -88,6 +88,12 @@ void  DrawSystem::drawBonus(Bonus* s) {
 	if(s->type == "shield")
 		image("shieldBonus", p.x, p.y, newSize, newSize, s->body.direction);
 }
+void DrawSystem::drawRocketLauncher(RocketLauncher* s) {
+	if (!s)
+		return;
+	auto p = s->body.pos;
+	image("rocketLauncher", p.x, p.y, blockSize, blockSize, s->body.direction);
+}
 
 //////////////////////////////////////////////////////////////////////
 void DrawSystem::damageScreen() {

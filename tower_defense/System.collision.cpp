@@ -22,8 +22,19 @@ void System::collision() {
 			if (distance(aPos, bPos) < EPS || !a->collision || !b->collision)
 				continue;
 			if (distance(a->body.pos, b->body.pos) < a->body.r + b->body.r) {
-				a->body.vel += direction(a->body.pos, b->body.pos)*dt * 10;
-			}else
+				a->body.vel += direction(a->body.pos, b->body.pos)*dt*100/a->body.m;
+			}
+			else {
+				if (distance(aPos, bPos) < a->body.r + b->body.r) {
+					double ang = angle(a->body.pos - b->body.pos);
+					Vector2d v = rotate(a->body.vel, -ang);
+					v.x *= bounce;
+					a->body.vel = rotate(v, ang);
+					touch = 1;
+				}
+			}
+			
+			/* else
 			if (distance(aPos, bPos) < a->body.r + b->body.r) {
 				
 				double ang = angle(a->body.pos - b->body.pos);
@@ -33,7 +44,7 @@ void System::collision() {
 				a->body.vel -= dp / a->body.m;
 				b->body.vel += dp / b->body.m;
 				touch = 1;
-			}
+			}*/
 			
 		}
 		if (touch && !dynamic_cast<Bullet*>(a) && !dynamic_cast<Explosion*>(a)) {

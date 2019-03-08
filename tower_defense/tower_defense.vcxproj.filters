@@ -155,6 +155,9 @@
     <ClInclude Include="Bonus.h">
       <Filter>Header Files\system\classes</Filter>
     </ClInclude>
+    <ClInclude Include="RocketLauncher.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Control.cpp">
@@ -291,6 +294,9 @@
     </ClCompile>
     <ClCompile Include="System.getNeighbors.cpp">
       <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketLauncher.cpp">
+      <Filter>Source Files\system\classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

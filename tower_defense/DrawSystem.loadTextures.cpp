@@ -35,4 +35,5 @@ void DrawSystem::loadTextures() {
 	loadTexture("blood", "textures/blood.png");
 	loadTexture("turretBody", "textures/turretBody.png");
 	loadTexture("shieldBonus", "textures/shield.png");
+	loadTexture("rocketLauncher", "textures/rocketLauncher.png");
 }

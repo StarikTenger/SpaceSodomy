@@ -40,6 +40,7 @@ private:
 	void drawExplosion(Explosion* s);
 	void drawExit(Exit* s);
 	void drawDummy(Dummy* s);
+	void drawBonus(Bonus* s);
 	//load
 	std::map<std::string, sf::Texture*> textures;
 	void loadWalls(std::string name, std::string img, System& sys);

@@ -60,6 +60,7 @@ void DrawSystem::draw() {
 		drawTurret(dynamic_cast<Turret*>(u));
 		drawExit(dynamic_cast<Exit*>(u));
 		drawDummy(dynamic_cast<Dummy*>(u));
+		drawBonus(dynamic_cast<Bonus*>(u));
 	}
 	drawWalls(sys);
 

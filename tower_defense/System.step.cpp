@@ -18,6 +18,7 @@ void System::step() {
 	time += dt;
 	//collision
 	collision();
+	fillChunks();
 
 	//movement
 	for (Unit* u : units) {
@@ -29,65 +30,14 @@ void System::step() {
 
 	}
 
-	//personal managment
-	for (Unit* u : units){
-		Creature* c;
-		Shooter* s;
-		if (s = dynamic_cast<Shooter*>(u)) {
-			s->gun.timeToCooldown -= dt;
-		}
-		if (c = dynamic_cast<Creature*>(u)) {
-			think(c);
-			c->immortality -= dt;
-		}
-		Bullet* b;
-		if (b = dynamic_cast<Bullet*>(u)) {
-			b->hp -= dt;
-			if (b->hp < 0) {
-				Explosion* e = new Explosion();
-				e->body = u->body;
-				e->body.w = 0;
-				e->body.vel = e->body.vel / 2;
-				additionalUnits.push_back(e);
-				sound("explosion", u->body.pos, 1);
-			}
-		}
-		Explosion* e;
-		if (e = dynamic_cast<Explosion*>(u)) {
-			e->body.r += dt*e->explosionVel;
-			if (e->body.r > e->maxR) {
-				e->hp = -EPS;
-			}
-		}
-	}
+	
 
-
-
-	//killing
-	for (int i = 0; i < units.size(); i++) {
-		if (units[i]->hp <= 0) {
-			if (i == 0) {
-				start();
-			}
-			else if(!dynamic_cast<Creature*>(units[i])){
-				delete units[i];
-				units.erase(units.begin() + i);
-				i--;
-			}
-			else {
-				sound("death", units[i]->body.pos, 100);
-				Dummy* d = new Dummy();
-				d->body = units[i]->body;
-				delete units[i];
-				units[i] = d;
-			}
-		}		
-	}
 
 	//bullet-check
 	for (Unit* u : units) {
 		if (dynamic_cast<Bullet*>(u) || dynamic_cast<Explosion*>(u)) {
-			for (Unit* u1 : units) {
+			auto neighbors = getNeighbors(u);
+			for (Unit* u1 : neighbors) {
 				if (dynamic_cast<Creature*>(u1) || dynamic_cast<Bullet*>(u1) || dynamic_cast<Dummy*>(u1)) {
 					if (distance(u->body.pos, u1->body.pos) < u->body.r + u1->body.r && u->team != u1->team) {
 						bool dmg = 0;
@@ -120,12 +70,25 @@ void System::step() {
 			}
 		}
 	}
+	for (Unit* u : units) {
+		auto neighbors = getNeighbors(u);
+		for (Unit* u1 : neighbors) {
+			Bonus* bonus = dynamic_cast<Bonus*>(u1);
+			Creature* creature = dynamic_cast<Creature*>(u);
+			if (bonus && creature && distance(u->body.pos, u1->body.pos) <= u->body.r + u1->body.r && bonus->hp > 0) {
+				if (bonus->type == "shield") {
+					bonus->hp = 0;
+					creature->shields++;
+				}
+			}
+		}
+	}
 
 
 	//orders	
 	for (Unit* u : units) {
 		Creature* c;
-		if (c = dynamic_cast<Creature*>(u)) {
+		if (c = dynamic_cast<Creature*>(u)){
 			checkOrders(c);
 		}
 		
@@ -134,4 +97,57 @@ void System::step() {
 		units.push_back(u);
 	}
 	additionalUnits = {};
+
+	//personal managment
+	for (Unit* u : units) {
+		Creature* c;
+		Shooter* s;
+		if (s = dynamic_cast<Shooter*>(u)) {
+			s->gun.timeToCooldown -= dt;
+		}
+		if (c = dynamic_cast<Creature*>(u)) {
+			think(c);
+			c->immortality -= dt;
+		}
+		Bullet* b;
+		if (b = dynamic_cast<Bullet*>(u)) {
+			b->hp -= dt;
+			if (b->hp < 0) {
+				Explosion* e = new Explosion();
+				e->body = u->body;
+				e->body.w = 0;
+				e->body.vel = e->body.vel / 2;
+				additionalUnits.push_back(e);
+				sound("explosion", u->body.pos, 1);
+			}
+		}
+		Explosion* e;
+		if (e = dynamic_cast<Explosion*>(u)) {
+			e->body.r += dt * e->explosionVel;
+			if (e->body.r > e->maxR) {
+				e->hp = -EPS;
+			}
+		}
+	}
+
+	//killing
+	for (int i = 0; i < units.size(); i++) {
+		if (units[i]->hp <= 0) {
+			if (i == 0) {
+				start();
+			}
+			else if (!dynamic_cast<Creature*>(units[i])) {
+				delete units[i];
+				units.erase(units.begin() + i);
+				i--;
+			}
+			else {
+				sound("death", units[i]->body.pos, 100);
+				Dummy* d = new Dummy();
+				d->body = units[i]->body;
+				delete units[i];
+				units[i] = d;
+			}
+		}
+	}
 }

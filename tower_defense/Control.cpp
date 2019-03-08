@@ -29,6 +29,12 @@ void Control::step() {
 	int timeMs = getMilliCount();
 	if (timeMs - timePrev > dt) {
 		timePrev = timeMs;
+		frames++;
+		if (timeMs - timePrevFrame > 1000) {
+			std::cout << frames << "\n";
+			frames = 0;
+			timePrevFrame = timeMs;
+		}
 		//std::cout << getMilliCount() << "\n";
 		sys.level = level;
 

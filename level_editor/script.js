@@ -3,6 +3,8 @@ var ctx = screen.getContext("2d");
 var blocks = [];
 var turrets = [];
 var exits = [];
+var bonuses = [];
+
 var sizeM = 25;
 var size = 1;
 for(var i=0; i<sizeM; i++){
@@ -45,7 +47,7 @@ function mouseDown(){
 		if(mouse.mode < 2)
 		blocks[Math.floor(mouse.x/size/scale)][Math.floor(mouse.y/size/scale)] = mouse.mode;
 	}
-	if(mouse.mode==2){
+	if(mouse.mode == 2){
 		turrets.push({x: Math.floor(mouse.x/size/scale)*size + size/2, y: Math.floor(mouse.y/size/scale)*size + size/2, 
 		dir: document.getElementById("dir").value*Math.PI,
 		w: document.getElementById("w").value*Math.PI,
@@ -54,9 +56,13 @@ function mouseDown(){
 		});
 		mouse.mode = 0;
 	}
-	if(mouse.mode==3){
+	if(mouse.mode == 3){
 		exits.push({x: Math.floor(mouse.x/size/scale)*size + size/2, y: Math.floor(mouse.y/size/scale)*size + size/2, 
 		});
+		mouse.mode = 0;
+	}
+	if(mouse.mode == 4){
+		bonuses.push({x: Math.floor(mouse.x/size/scale)*size + size/2, y: Math.floor(mouse.y/size/scale)*size + size/2, type: "shield"});
 		mouse.mode = 0;
 	}
 }
@@ -96,6 +102,9 @@ function draw(){
 	for(var i=0; i<exits.length; i++){
 		drawCircle(exits[i].x, exits[i].y, size/2, "green");
 	}
+	for(var i=0; i<bonuses.length; i++){
+		drawCircle(bonuses[i].x, bonuses[i].y, size/2, "blue");
+	}
 	if(mouse.mode==1)
 	ctx.strokeStyle = "rgb(0, 200, 0)";
 	else
@@ -132,6 +141,11 @@ function getModel(s){
 		var t = exits[i];
 		str += " EXIT " + (t.x-0.5) + " " + (t.y-0.5) +  
 		"\n";
+	}
+	for(var i=0; i<bonuses.length; i++){
+		var t = bonuses[i];
+		str += " BONUS POS " + (t.x-0.5) + " " + (t.y-0.5) +  " TYPE " + t.type + 
+		" END\n";
 	}
 	
 	return str;

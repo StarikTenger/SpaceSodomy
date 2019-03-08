@@ -1,14 +1,11 @@
-﻿  System.collision.cpp
-c:\users\dryn\documents\cpp\tower_defense\tower_defense\system.collision.cpp(66): warning C4018: '>=': signed/unsigned mismatch
-c:\users\dryn\documents\cpp\tower_defense\tower_defense\system.collision.cpp(66): warning C4018: '<': signed/unsigned mismatch
-c:\users\dryn\documents\cpp\tower_defense\tower_defense\system.collision.cpp(73): warning C4018: '>=': signed/unsigned mismatch
-c:\users\dryn\documents\cpp\tower_defense\tower_defense\system.collision.cpp(73): warning C4018: '<': signed/unsigned mismatch
-c:\users\dryn\documents\cpp\tower_defense\tower_defense\system.collision.cpp(90): warning C4018: '<': signed/unsigned mismatch
-c:\users\dryn\documents\cpp\tower_defense\tower_defense\system.collision.cpp(95): warning C4018: '<': signed/unsigned mismatch
-c:\users\dryn\documents\cpp\tower_defense\tower_defense\system.collision.cpp(100): warning C4018: '<': signed/unsigned mismatch
+﻿  Control.cpp
+  Control.events.cpp
+  Control.gameEvents.cpp
+c:\github\spacesodomy\tower_defense\control.gameevents.cpp(7): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
   Generating code
-  1 of 1239 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  4 of 1430 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  tower_defense.vcxproj -> C:\Users\dryn\Documents\cpp\tower_defense\Release\tower_defense.exe
+  tower_defense.vcxproj -> C:\GitHub\SpaceSodomy\Release\tower_defense.exe

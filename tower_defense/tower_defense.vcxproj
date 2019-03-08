@@ -200,6 +200,8 @@
     <ClCompile Include="System.checkWall.cpp" />
     <ClCompile Include="System.collision.cpp" />
     <ClCompile Include="System.cpp" />
+    <ClCompile Include="System.fillChunks.cpp" />
+    <ClCompile Include="System.getNeighbors.cpp" />
     <ClCompile Include="System.start.cpp" />
     <ClCompile Include="System.step.cpp" />
     <ClCompile Include="System.think.cpp" />

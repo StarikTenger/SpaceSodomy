@@ -1,6 +1,8 @@
 #include "Bonus.h"
 
-Bonus::Bonus(){
+Bonus::Bonus() {
+	body.w = 0.5;
+	collision = 0;
 }
 
 Bonus::~Bonus(){

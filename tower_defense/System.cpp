@@ -79,7 +79,7 @@ System::System(string path) {
 			ship->body.pos.x += 0.5*blockSize;
 			ship->body.pos.y += 0.5*blockSize;
 			ship->body.r = 0.24;
-			ship->shields = 3;
+			ship->shields = 1;
 			units.push_back(ship);
 		} else
 		if (command == "TURRET") {
@@ -120,7 +120,7 @@ System::System(string path) {
 					cout << characteristic << "\n";
 					//return;
 				}
-		}
+			}
 			units.push_back(turret);
 		} else
 		if (command == "EXIT") {
@@ -129,6 +129,42 @@ System::System(string path) {
 			exit->body.pos.x += 0.5*blockSize;
 			exit->body.pos.y += 0.5*blockSize;
 			units.push_back(exit);
+		} else
+		if (command == "BONUS") {
+			Bonus* bonus = new Bonus();
+			while (1) {
+				std::string characteristic;
+				file >> characteristic;
+				if (characteristic == "END") {
+					cout << "END\n";
+					break;
+				}
+				else if (characteristic == "POS") {
+					file >> bonus->body.pos.x >> bonus->body.pos.y;
+					bonus->body.pos.x += 0.5*blockSize;
+					bonus->body.pos.y += 0.5*blockSize;
+				}
+				else if (characteristic == "DIR") {
+					file >> bonus->body.direction;
+				}
+				else if (characteristic == "W") {
+					file >> bonus->body.w;
+				}
+				else if (characteristic == "M") {
+					file >> bonus->body.m;
+				}
+				else if (characteristic == "R") {
+					file >> bonus->body.r;
+				}
+				else if (characteristic == "TYPE") {
+					file >> bonus->type;
+				}
+				else {
+					cout << characteristic << "\n";
+					//return;
+				}
+			}
+			units.push_back(bonus);
 		}
 	}
 }

@@ -79,6 +79,17 @@ void  DrawSystem::drawDummy(Dummy* s) {
 	image("turretBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
 }
 
+void  DrawSystem::drawBonus(Bonus* s) {
+	if (!s)
+		return;
+	auto p = s->body.pos;
+	double k = sin(system->time)*0.05;
+	double newSize = blockSize * (0.5 + k);
+	if(s->type == "shield")
+		image("shieldBonus", p.x, p.y, newSize, newSize, s->body.direction);
+}
+
+//////////////////////////////////////////////////////////////////////
 void DrawSystem::damageScreen() {
 	animation(
 		"blood",
@@ -87,3 +98,4 @@ void DrawSystem::damageScreen() {
 		5
 	);
 }
+

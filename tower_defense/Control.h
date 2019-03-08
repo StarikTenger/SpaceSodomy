@@ -30,6 +30,9 @@ public:
 	bool stop = 0;
 	int iteration = 0;
 
+	int frames = 0;
+	int timePrevFrame = 0;
+
 	Control();
 	~Control();
 

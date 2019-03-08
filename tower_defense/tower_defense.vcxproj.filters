@@ -153,7 +153,7 @@
       <Filter>Header Files\audio</Filter>
     </ClInclude>
     <ClInclude Include="Bonus.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\system\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,7 +284,13 @@
       <Filter>Source Files\control</Filter>
     </ClCompile>
     <ClCompile Include="Bonus.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="System.fillChunks.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.getNeighbors.cpp">
+      <Filter>Source Files\system\methods</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

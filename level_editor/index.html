@@ -9,7 +9,6 @@ padding: 0;
 SIZE<input id="size" type="number" value=25></input>
 <button onclick="create()">CREATE</button><br>
 SCALE<input id="scale" type="range" value=1 max=100 min=10 step=1></input>
-<button onclick="create()">CREATE</button><br>
 <table>
 <td>
 <canvas id="screen" onmousedown="mouseDown()" onmousemove="mouseMove()" onmouseup="mouseUp()" style="border: 1px solid"></canvas>
@@ -29,6 +28,7 @@ CD<input id="cd" type="number" value=10></input><br>
 <button onclick="mouse.mode = !mouse.mode">MODE</button>
 <button onclick="mouse.mode = 2">TURRET</button>
 <button onclick="mouse.mode = 3">EXIT</button>
+<button onclick="mouse.mode = 4">SHIELD</button>
 <button onclick="generate();">GENERATE!</button>
 <br>
 

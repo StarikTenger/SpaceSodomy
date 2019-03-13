@@ -7,6 +7,7 @@
 class Audio {
 public:
 	std::map<std::string, sf::Sound*> sounds;
+	std::vector<sf::Sound*> activeSounds;
 	Audio();
 	~Audio();
 	void loadSound(std::string name, std::string path);

@@ -33,14 +33,21 @@ void System::checkOrders(Creature* c) {
 	if (t = dynamic_cast<Shooter*>(c)) {
 		if (c->orders.shoot) {
 			if (t->gun.timeToCooldown <= 0) {
-				Bullet* b = new Bullet;
-				b->body = c->body;
-				b->body.r = 0.1;
-				b->body.vel += direction(c->body.direction)*t->gun.bulletVelocity;
-				b->team = c->team;
-				additionalUnits.push_back(b);
-				t->gun.timeToCooldown = t->gun.cooldownTime;
-				sound("launch", c->body.pos, 1);
+				double da = t->gun.divergenceAngle / (double)t->gun.directions;
+				for (int i = 0; i < t->gun.directions; i++) {
+					Bullet* b = new Bullet;
+					b->body = c->body;
+					b->body.r = 0.1;
+					double a = c->body.direction -t->gun.divergenceAngle / 2.0 + da / 2.0 + da * i;
+					//std::cout << t->gun.divergenceAngle << " " << da << " " << i << " " << ((-t->gun.divergenceAngle)/2.0 + (da) / 2.0 + da * i) << "\n";
+					b->body.vel += direction(a)*t->gun.bulletVelocity;
+					b->body.direction = a;
+					b->body.w = 0;
+					b->team = c->team;
+					additionalUnits.push_back(b);
+					t->gun.timeToCooldown = t->gun.cooldownTime;
+					sound("launch", c->body.pos, 1);
+				}
 			}
 		}
 	}

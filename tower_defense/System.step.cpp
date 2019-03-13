@@ -145,6 +145,12 @@ void System::step() {
 				sound("death", units[i]->body.pos, 100);
 				Dummy* d = new Dummy();
 				d->body = units[i]->body;
+				if (dynamic_cast<Turret*>(units[i])) {
+					d->type = "turret";
+				}
+				if (dynamic_cast<RocketLauncher*>(units[i])) {
+					d->type = "rocketLauncher";
+				}
 				delete units[i];
 				units[i] = d;
 			}

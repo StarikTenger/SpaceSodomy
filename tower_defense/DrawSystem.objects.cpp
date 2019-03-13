@@ -76,7 +76,10 @@ void  DrawSystem::drawDummy(Dummy* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
-	image("turretBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
+	if(s->type == "turret")
+		image("turretBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
+	if(s->type == "rocketLauncher")
+		image("rocketLauncherBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
 }
 
 void  DrawSystem::drawBonus(Bonus* s) {
@@ -92,7 +95,14 @@ void DrawSystem::drawRocketLauncher(RocketLauncher* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
-	image("rocketLauncher", p.x, p.y, blockSize, blockSize, s->body.direction);
+	double da = s->gun.divergenceAngle / (double)s->gun.directions;
+	for (int i = 0; i < s->gun.directions; i++) {
+		Bullet* b = new Bullet;
+		b->body = s->body;
+		b->body.r = 0.1;
+		double a = s->body.direction - s->gun.divergenceAngle / 2.0 + da / 2.0 + da * i;
+		image("rocketLauncher", p.x, p.y, blockSize, blockSize, a);
+	}
 }
 
 //////////////////////////////////////////////////////////////////////

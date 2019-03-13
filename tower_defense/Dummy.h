@@ -3,7 +3,7 @@
 #include <string>
 class Dummy : public Unit {
 public:
-	std::string type;
+	std::string type = "turret";
 	Dummy();
 	~Dummy();
 };

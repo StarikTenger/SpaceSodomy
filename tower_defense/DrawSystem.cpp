@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+
+
 DrawSystem::DrawSystem(){
 	window = new sf::RenderWindow(sf::VideoMode(600, 600), "Space Sodomy Eternal");
 	loadTextures();

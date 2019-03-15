@@ -31,7 +31,7 @@ void Control::step() {
 		timePrev = timeMs;
 		frames++;
 		if (timeMs - timePrevFrame > 1000) {
-			std::cout << frames << "\n";
+			//std::cout << frames << "\n";
 			frames = 0;
 			timePrevFrame = timeMs;
 		}

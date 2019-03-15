@@ -7,7 +7,7 @@ public:
 	double timeToCooldown = 0;
 	double bulletVelocity = 0;
 	int directions = 1;
-	int divergenceAngle = M_PI*2;
+	double divergenceAngle = M_PI*2;
 	Gun();
 	Gun(double _cooldownTime, double _bulletVelocity);
 	~Gun();

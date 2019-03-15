@@ -54,7 +54,7 @@ void System::step() {
 							}
 							if (dynamic_cast<Creature*>(u1)->shields) {
 								dynamic_cast<Creature*>(u1)->shields--;
-								dynamic_cast<Creature*>(u1)->immortality = 0.2;
+								dynamic_cast<Creature*>(u1)->immortality = 0.5;
 							}
 							else {
 								u1->hp -= 100;
@@ -93,10 +93,7 @@ void System::step() {
 		}
 		
 	}
-	for (Unit* u : additionalUnits) {
-		units.push_back(u);
-	}
-	additionalUnits = {};
+	
 
 	//personal managment
 	for (Unit* u : units) {
@@ -129,6 +126,10 @@ void System::step() {
 			}
 		}
 	}
+	for (Unit* u : additionalUnits) {
+		units.push_back(u);
+	}
+	additionalUnits = {};
 
 	//killing
 	for (int i = 0; i < units.size(); i++) {
@@ -145,6 +146,7 @@ void System::step() {
 				sound("death", units[i]->body.pos, 100);
 				Dummy* d = new Dummy();
 				d->body = units[i]->body;
+				d->hp = 100000;
 				if (dynamic_cast<Turret*>(units[i])) {
 					d->type = "turret";
 				}

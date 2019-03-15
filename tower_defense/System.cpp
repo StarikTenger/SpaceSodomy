@@ -167,7 +167,7 @@ System::System(string path) {
 			units.push_back(bonus);
 		} else
 		if (command == "ROCKET_LAUNCHER") {
-				RocketLauncher* bonus = new RocketLauncher();
+				RocketLauncher* rocketLauncher = new RocketLauncher();
 				while (1) {
 					std::string characteristic;
 					file >> characteristic;
@@ -176,28 +176,37 @@ System::System(string path) {
 						break;
 					}
 					else if (characteristic == "POS") {
-						file >> bonus->body.pos.x >> bonus->body.pos.y;
-						bonus->body.pos.x += 0.5*blockSize;
-						bonus->body.pos.y += 0.5*blockSize;
+						file >> rocketLauncher->body.pos.x >> rocketLauncher->body.pos.y;
+						rocketLauncher->body.pos.x += 0.5*blockSize;
+						rocketLauncher->body.pos.y += 0.5*blockSize;
 					}
 					else if (characteristic == "DIR") {
-						file >> bonus->body.direction;
+						file >> rocketLauncher->body.direction;
 					}
 					else if (characteristic == "W") {
-						file >> bonus->body.w;
+						file >> rocketLauncher->body.w;
 					}
 					else if (characteristic == "M") {
-						file >> bonus->body.m;
+						file >> rocketLauncher->body.m;
 					}
 					else if (characteristic == "R") {
-						file >> bonus->body.r;
+						file >> rocketLauncher->body.r;
+					}
+					else if (characteristic == "DIRECTIONS") {
+						file >> rocketLauncher->gun.directions;
+					}
+					else if (characteristic == "CD") {
+						file >> rocketLauncher->gun.cooldownTime;
+					}
+					else if (characteristic == "BV") {
+						file >> rocketLauncher->gun.bulletVelocity;
 					}
 					else {
 						cout << characteristic << "\n";
 						//return;
 					}
 				}
-				units.push_back(bonus);
+				units.push_back(rocketLauncher);
 			}
 	}
 }

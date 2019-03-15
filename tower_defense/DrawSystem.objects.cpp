@@ -95,12 +95,9 @@ void DrawSystem::drawRocketLauncher(RocketLauncher* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
-	double da = s->gun.divergenceAngle / (double)s->gun.directions;
+	double da = M_PI*2 / (double)s->gun.directions;
 	for (int i = 0; i < s->gun.directions; i++) {
-		Bullet* b = new Bullet;
-		b->body = s->body;
-		b->body.r = 0.1;
-		double a = s->body.direction - s->gun.divergenceAngle / 2.0 + da / 2.0 + da * i;
+		double a = s->body.direction - s->gun.divergenceAngle / 2.0 + da / 2.0 + da * (double)i;
 		image("rocketLauncher", p.x, p.y, blockSize, blockSize, a);
 	}
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include "Creature.h"
 #include "Shooter.h"
+#include "Gun.h"
 
 class RocketLauncher : public Creature, public Shooter{
 public:

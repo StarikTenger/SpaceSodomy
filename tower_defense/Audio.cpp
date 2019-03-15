@@ -1,4 +1,5 @@
 #include "Audio.h"
+#include <iostream>
 
 
 Audio::Audio(){
@@ -34,6 +35,7 @@ void Audio::play(std::string name, double volume) {
 void Audio::play(std::string name, Vector2d pos, double volume) {
 	for (int i = 0; i < activeSounds.size(); i++) {
 		if (activeSounds[i]->getStatus() != sf::Sound::Playing) {
+			//std::cout << activeSounds.size() << " deleted\n";
 			delete activeSounds[i];
 			activeSounds.erase(activeSounds.begin() + i);
 			i--;
@@ -42,7 +44,7 @@ void Audio::play(std::string name, Vector2d pos, double volume) {
 	sf::Listener::setDirection(1.f, 0.f, 0.f);
 	sf::Sound* sound = new sf::Sound();
 	*sound = *sounds[name];
-	sound->setPosition(5, pos.x, pos.y);
+	sound->setPosition(5, pos.x, pos.y); 
 	sound->setVolume(volume);
 	sound->play();
 	activeSounds.push_back(sound);

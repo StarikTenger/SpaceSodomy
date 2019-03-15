@@ -38,7 +38,7 @@ void System::checkOrders(Creature* c) {
 					Bullet* b = new Bullet;
 					b->body = c->body;
 					b->body.r = 0.1;
-					double a = c->body.direction -t->gun.divergenceAngle / 2.0 + da / 2.0 + da * i;
+					double a = c->body.direction - t->gun.divergenceAngle / 2.0 + da / 2.0 + da * (double)i;
 					//std::cout << t->gun.divergenceAngle << " " << da << " " << i << " " << ((-t->gun.divergenceAngle)/2.0 + (da) / 2.0 + da * i) << "\n";
 					b->body.vel += direction(a)*t->gun.bulletVelocity;
 					b->body.direction = a;
@@ -47,6 +47,7 @@ void System::checkOrders(Creature* c) {
 					additionalUnits.push_back(b);
 					t->gun.timeToCooldown = t->gun.cooldownTime;
 					sound("launch", c->body.pos, 1);
+					//cout << "launch\n";
 				}
 			}
 		}

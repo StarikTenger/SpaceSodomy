@@ -10,7 +10,7 @@ void Control::gameEvents() {
 		event << sys.events[i];
 		event >> type;
 		if (type == "damage") {
-			audio.play("damage");
+			audio.play("damage"); 
 			//drawSys.
 			sys.events.erase(sys.events.begin() + i);
 		}

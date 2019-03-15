@@ -4,6 +4,7 @@ var blocks = [];
 var turrets = [];
 var exits = [];
 var bonuses = [];
+var rocketLaunchers = [];
 
 var sizeM = 25;
 var size = 1;
@@ -65,6 +66,16 @@ function mouseDown(){
 		bonuses.push({x: Math.floor(mouse.x/size/scale)*size + size/2, y: Math.floor(mouse.y/size/scale)*size + size/2, type: "shield"});
 		mouse.mode = 0;
 	}
+	if(mouse.mode == 5){
+		rocketLaunchers.push({x: Math.floor(mouse.x/size/scale)*size + size/2, y: Math.floor(mouse.y/size/scale)*size + size/2, 
+		dir: document.getElementById("dir").value*Math.PI,
+		w: document.getElementById("w").value*Math.PI,
+		bv: document.getElementById("bv").value,
+		cd: document.getElementById("cd").value,
+		directions: document.getElementById("directions").value
+		});
+		mouse.mode = 0;
+	}
 }
 function mouseUp(){
 	mouse.down = 0;
@@ -96,6 +107,14 @@ function draw(){
 		ctx.beginPath();
 		ctx.moveTo(turrets[i].x*scale, turrets[i].y*scale);
 		ctx.lineTo(turrets[i].x*scale + Math.cos(turrets[i].dir)*scale, turrets[i].y*scale+Math.sin(turrets[i].dir)*scale);
+		ctx.strokeStyle = "black";
+		ctx.stroke();
+	}
+	for(var i=0; i<rocketLaunchers.length; i++){
+		drawCircle(rocketLaunchers[i].x, rocketLaunchers[i].y, size/2, "orange");
+		ctx.beginPath();
+		ctx.moveTo(rocketLaunchers[i].x*scale, rocketLaunchers[i].y*scale);
+		ctx.lineTo(rocketLaunchers[i].x*scale + Math.cos(rocketLaunchers[i].dir)*scale, rocketLaunchers[i].y*scale+Math.sin(rocketLaunchers[i].dir)*scale);
 		ctx.strokeStyle = "black";
 		ctx.stroke();
 	}
@@ -135,6 +154,17 @@ function getModel(s){
 		" W " + t.w + 
 		" CD " + t.cd + 
 		" BV " + t.bv + 
+		" END\n";
+	}
+	for(var i=0; i<rocketLaunchers.length; i++){
+		var t = rocketLaunchers[i];
+		str += " ROCKET_LAUNCHER " 
+		+ " POS " + (t.x-0.5) + " " + (t.y-0.5) + 
+		" DIR " + t.dir + 
+		" W " + t.w + 
+		" CD " + t.cd + 
+		" BV " + t.bv + 
+		" DIRECTIONS " + t.directions + 
 		" END\n";
 	}
 	for(var i=0; i<exits.length; i++){

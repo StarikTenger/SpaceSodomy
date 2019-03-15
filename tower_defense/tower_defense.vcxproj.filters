@@ -265,9 +265,6 @@
     <ClCompile Include="DrawSystem.basics.cpp">
       <Filter>Source Files\draw\methods</Filter>
     </ClCompile>
-    <ClCompile Include="DrawSystem.cpp">
-      <Filter>Source Files\draw\methods</Filter>
-    </ClCompile>
     <ClCompile Include="DrawSystem.drawWalls.cpp">
       <Filter>Source Files\draw\methods</Filter>
     </ClCompile>
@@ -297,6 +294,9 @@
     </ClCompile>
     <ClCompile Include="RocketLauncher.cpp">
       <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.cpp">
+      <Filter>Source Files\draw</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

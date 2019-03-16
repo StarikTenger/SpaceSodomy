@@ -4,6 +4,15 @@
 
 #include <iostream>
 
+void  DrawSystem::drawTarget(Creature* s) {
+	if (!s)
+		return;
+	if (system->checkAbility(system->units[0], s, 0.1)) {
+		auto p = s->body.pos;
+		image("pointer", p.x, p.y, blockSize, blockSize, system->units[0]->body.direction - M_PI/4);
+	}
+}
+
 void DrawSystem::drawShip(Ship* s) {
 	if (!s)
 		return;

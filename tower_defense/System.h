@@ -36,6 +36,7 @@ public:
 	void step();
 	Ship* getShip(int n);
 	Bullet* getBullet(int n);
+	bool checkAbility(Unit* shooter, Unit* target, double threshold);
 private:
 	double chunkSize = 3;
 	void fillChunks();

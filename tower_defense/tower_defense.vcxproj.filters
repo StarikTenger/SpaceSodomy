@@ -298,5 +298,8 @@
     <ClCompile Include="DrawSystem.cpp">
       <Filter>Source Files\draw</Filter>
     </ClCompile>
+    <ClCompile Include="System.checkAbility.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

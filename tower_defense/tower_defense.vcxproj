@@ -197,6 +197,7 @@
     <ClCompile Include="RocketLauncher.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Shooter.cpp" />
+    <ClCompile Include="System.checkAbility.cpp" />
     <ClCompile Include="System.checkExplosions.cpp" />
     <ClCompile Include="System.checkOrders.cpp" />
     <ClCompile Include="System.checkWall.cpp" />

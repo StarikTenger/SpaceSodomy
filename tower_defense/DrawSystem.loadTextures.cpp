@@ -10,6 +10,8 @@ void DrawSystem::loadTexture(std::string name, std::string path) {
 }
 
 void DrawSystem::loadTextures() {
+	loadTexture("arrow", "textures/arrow.png");
+	loadTexture("pointer", "textures/pointer.png");
 	loadTexture("backwall", "textures/backwall.png");
 	loadTexture("backwall1", "textures/backwall1.png");
 	loadTexture("background", "textures/background.png");
@@ -27,7 +29,6 @@ void DrawSystem::loadTextures() {
 	loadTexture("exit1", "textures/exit1.png");
 	loadTexture("exit2", "textures/exit2.png");
 	loadTexture("circle", "textures/circle.png");
-	loadTexture("arrow", "textures/arrow.png");
 	loadTexture("angerParticle", "textures/angerParticle.png");
 	loadTexture("wall", "textures/wall.png");
 	loadTexture("wallBorder", "textures/wallBorder.png");

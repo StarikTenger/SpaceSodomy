@@ -34,6 +34,7 @@ private:
 	void image(std::string name, double x, double y, double width, double height, double angle, double d);
 	//objects
 	void drawWalls(System& sys);
+	void drawTarget(Creature* s);
 	void drawShip(Ship* s);
 	void drawBullet(Bullet* s);
 	void drawTurret(Turret* s);

@@ -19,7 +19,7 @@ void System::checkExplosions(Unit* c) {
 		if (!(e = dynamic_cast<Explosion*>(u)) || distance(c->body.pos, u->body.pos) < EPS)
 			continue;
 		double r = distance(c->body.pos, u->body.pos);
-		if (r < c->body.r + u->body.r * 2 ) {
+		if (r < c->body.r + u->body.r) {
 			c->body.vel += direction(c->body.pos, u->body.pos) * k / c->body.m / r / r * dt;
 		}
 	}

@@ -30,8 +30,10 @@ void Control::step() {
 	if (timeMs - timePrev > dt) {
 		timePrev = timeMs;
 		frames++;
+		
 		if (timeMs - timePrevFrame > 1000) {
 			//std::cout << frames << "\n";
+			fps = frames;
 			frames = 0;
 			timePrevFrame = timeMs;
 		}
@@ -81,6 +83,18 @@ void Control::step() {
 
 		drawSys.system = &sys;
 		drawSys.draw();
+
+		sf::Text text;
+		//drawSys.window->setView(sf::View(sf::FloatRect(0, 0, drawSys.window->getSize().x, drawSys.window->getSize().y)));
+		text.setFont(drawSys.font);
+		text.setString(std::to_string(fps));
+		text.setCharacterSize(32);
+		//text.setPosition(0, 0);
+		//drawSys.window->draw(shape);
+		drawSys.window->draw(text);
+		drawSys.window->display();
+		//drawSys.image
+
 		gameEvents();
 	}
 

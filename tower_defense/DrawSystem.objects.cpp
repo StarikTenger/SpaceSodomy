@@ -4,8 +4,8 @@
 
 #include <iostream>
 
-void  DrawSystem::drawTarget(Creature* s) {
-	if (!s)
+void  DrawSystem::drawTarget(Unit* s) {
+	if (!s || dynamic_cast<Explosion*>(s) || dynamic_cast<Bonus*>(s))
 		return;
 	if (system->checkAbility(system->units[0], s, 0.1)) {
 		auto p = s->body.pos;

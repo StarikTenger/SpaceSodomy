@@ -32,6 +32,7 @@ public:
 
 	int frames = 0;
 	int timePrevFrame = 0;
+	int fps = 0;
 
 	Control();
 	~Control();

@@ -10,6 +10,8 @@ void DrawSystem::loadTexture(std::string name, std::string path) {
 }
 
 void DrawSystem::loadTextures() {
+	font.loadFromFile("Dropy.ttf");
+
 	loadTexture("arrow", "textures/arrow.png");
 	loadTexture("pointer", "textures/pointer.png");
 	loadTexture("backwall", "textures/backwall.png");

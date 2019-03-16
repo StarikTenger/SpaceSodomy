@@ -23,7 +23,9 @@ public:
 	void draw();
 	//decoration
 	void damageScreen();
-private:
+	sf::Font font;
+	
+//private:
 	//basics
 	std::vector<Animation> animations;
 	void animation(std::string img, AnimationState p1, AnimationState p2, double time);
@@ -34,7 +36,7 @@ private:
 	void image(std::string name, double x, double y, double width, double height, double angle, double d);
 	//objects
 	void drawWalls(System& sys);
-	void drawTarget(Creature* s);
+	void drawTarget(Unit* s);
 	void drawShip(Ship* s);
 	void drawBullet(Bullet* s);
 	void drawTurret(Turret* s);

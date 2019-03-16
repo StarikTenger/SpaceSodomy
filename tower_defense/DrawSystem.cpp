@@ -56,7 +56,7 @@ void DrawSystem::draw() {
 		(sys.field.size())*blockSize, 0);
 
 	for (auto u : sys.units) {
-		drawTarget(dynamic_cast<Creature*>(u));
+		drawTarget(dynamic_cast<Unit*>(u));
 		drawExplosion(dynamic_cast<Explosion*>(u));
 		drawShip(dynamic_cast<Ship*>(u));
 		drawBullet(dynamic_cast<Bullet*>(u));
@@ -113,5 +113,5 @@ void DrawSystem::draw() {
 	
 
 
-	window->display();
+	//window->display();
 }

@@ -2,6 +2,7 @@
 
 
 Bullet::Bullet() {
+	
 }
 
 Bullet::~Bullet() {

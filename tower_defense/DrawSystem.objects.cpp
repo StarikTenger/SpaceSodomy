@@ -35,6 +35,10 @@ void DrawSystem::drawShip(Ship* s) {
 		image("leftFire", p.x, p.y, blockSize, blockSize, s->body.direction);
 	if (s->orders.left)
 		image("rightFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+	if (s->orders.turnRight)
+		image("leftTurnFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+	if (s->orders.turnLeft)
+		image("rightTurnFire", p.x, p.y, blockSize, blockSize, s->body.direction);
 }
 
 void DrawSystem::drawBullet(Bullet* s) {

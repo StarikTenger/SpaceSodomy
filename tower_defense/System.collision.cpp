@@ -16,7 +16,8 @@ void System::collision() {
 	bool touch = 0;
 	//objects
 	for (Unit* a : units) {
-		for (Unit* b : units) {
+		auto neighbors = getNeighbors(a);
+		for (Unit* b : neighbors) {
 			Vector2d aPos = a->body.pos + a->body.vel*dt;
 			Vector2d bPos = b->body.pos + b->body.vel*dt;
 			if (distance(aPos, bPos) < EPS || !a->collision || !b->collision)

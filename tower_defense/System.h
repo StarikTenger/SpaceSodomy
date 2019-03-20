@@ -25,6 +25,7 @@ public:
 	std::vector<Unit*> additionalUnits;
 	std::vector<std::string> events;
 	double bounce = 0.5;
+	double wetFrictionK = 1;
 	std::string status = "running";
 	int level = 0;
 
@@ -49,4 +50,3 @@ private:
 	int checkWall(Vector2d pos);
 	std::vector<Unit*> getNeighbors(const Unit* unit);
 };
-

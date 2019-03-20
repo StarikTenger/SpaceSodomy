@@ -17,20 +17,24 @@ using namespace std;
 void System::step() {
 	time += dt;
 	//collision
-	collision();
 	fillChunks();
+	collision();
+	
 
 	//movement
 	for (Unit* u : units) {
 		auto& b = u->body;
+		//b.vel -= b.vel*wetFrictionK*b.wetFrictionK*dt;
+		if (dynamic_cast<Ship*>(u)) {
+			//b.w -= b.w*wetFrictionK*b.wetFrictionK*dt;
+		}
 		b.pos += b.vel*dt;
 		b.direction += b.w*dt;
 		b.posPrev = b.pos;
 		b.velPrev = b.vel;
-
 	}
 
-	
+
 
 
 	//bullet-check
@@ -88,12 +92,12 @@ void System::step() {
 	//orders	
 	for (Unit* u : units) {
 		Creature* c;
-		if (c = dynamic_cast<Creature*>(u)){
+		if (c = dynamic_cast<Creature*>(u)) {
 			checkOrders(c);
 		}
-		
+
 	}
-	
+
 
 	//personal managment
 	for (Unit* u : units) {

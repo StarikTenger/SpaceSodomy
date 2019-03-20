@@ -50,10 +50,10 @@ void Control::step() {
 
 		drawSys.cam.pos = sys.getShip(0)->body.pos + getCursorPos()*0;
 		drawSys.cam.angle = sys.getShip(0)->body.direction+M_PI/2;
-		if (keys[A]) {
+		if (keys[LEFT]) {
 			sys.getShip(0)->orders.left = 1;
 		}
-		if (keys[D]) {
+		if (keys[RIGHT]) {
 			sys.getShip(0)->orders.right = 1;
 		}
 		if (keys[W]) {
@@ -61,6 +61,12 @@ void Control::step() {
 		}
 		if (keys[S]) {
 			sys.getShip(0)->orders.backward = 1;
+		}
+		if (keys[A]) {
+			sys.getShip(0)->orders.turnLeft = 1;
+		}
+		if (keys[D]) {
+			sys.getShip(0)->orders.turnRight = 1;
 		}
 		if (keys[SPACE]) {
 			sys.getShip(0)->orders.shoot = 1;

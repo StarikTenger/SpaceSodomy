@@ -12,6 +12,7 @@ public:
 	double direction = 0;
 	double m = 1;
 	double r = 0.3;
+	double wetFrictionK = 1;
 	bool collision = 0;
 
 	Body();

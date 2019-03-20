@@ -23,6 +23,8 @@ void DrawSystem::loadTextures() {
 	loadTexture("backFire", "textures/Ffire.png");
 	loadTexture("leftFire", "textures/Lfire.png");
 	loadTexture("rightFire", "textures/Rfire.png");
+	loadTexture("rightTurnFire", "textures/RTfire.png");
+	loadTexture("leftTurnFire", "textures/LTfire.png");
 	loadTexture("bullet", "textures/bullet.png");
 	loadTexture("turret", "textures/turret.png");
 	loadTexture("turretAngry", "textures/turretAngry.png");

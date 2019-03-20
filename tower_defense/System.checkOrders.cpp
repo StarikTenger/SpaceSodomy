@@ -13,19 +13,21 @@ void System::checkOrders(Creature* c) {
 	Mover* s;
 	if (s = dynamic_cast<Ship*>(c)) {
 		if (c->orders.forward) {
-			//sound("fire", c->body.pos, 1);
 			c->body.vel += direction(c->body.direction)*s->engine.mainForce / c->body.m * dt;
 		}
 		if (c->orders.backward) {
-			//sound("fire", c->body.pos, 1);
 			c->body.vel -= direction(c->body.direction)*s->engine.mainForce / c->body.m * dt;
 		}
 		if (c->orders.right) {
-			//sound("fire", c->body.pos, 1);
-			c->body.w += s->engine.turnForce / c->body.m * dt;
+			c->body.vel += direction(c->body.direction + M_PI/2)*s->engine.mainForce / c->body.m * dt;
 		}
 		if (c->orders.left) {
-			//sound("fire", c->body.pos, 1);
+			c->body.vel += direction(c->body.direction - M_PI / 2)*s->engine.mainForce / c->body.m * dt;
+		}
+		if (c->orders.turnRight) {
+			c->body.w += s->engine.turnForce / c->body.m * dt;
+		}
+		if (c->orders.turnLeft) {
 			c->body.w -= s->engine.turnForce / c->body.m * dt;
 		}
 	}
@@ -37,6 +39,7 @@ void System::checkOrders(Creature* c) {
 				for (int i = 0; i < t->gun.directions; i++) {
 					Bullet* b = new Bullet;
 					b->body = c->body;
+					b->body.wetFrictionK = 0;
 					b->body.r = 0.1;
 					double a = c->body.direction - t->gun.divergenceAngle / 2.0 + da / 2.0 + da * (double)i;
 					//std::cout << t->gun.divergenceAngle << " " << da << " " << i << " " << ((-t->gun.divergenceAngle)/2.0 + (da) / 2.0 + da * i) << "\n";

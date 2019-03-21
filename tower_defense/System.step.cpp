@@ -52,7 +52,7 @@ void System::step() {
 						else if (distance(u->body.pos, u1->body.pos) < u->body.r / 2) {
 							dmg = 1;
 						}
-						if (dmg && dynamic_cast<Creature*>(u1) && dynamic_cast<Creature*>(u1)->immortality <= 0) {
+						if (dmg && dynamic_cast<Creature*>(u1) && dynamic_cast<Creature*>(u1)->immortality <= 0 && u1->hp > 0) {
 							if (dynamic_cast<Ship*>(u1)) {
 								events.push_back("damage");
 							}
@@ -135,11 +135,14 @@ void System::step() {
 	}
 	additionalUnits = {};
 
+	
+
 	//killing
 	for (int i = 0; i < units.size(); i++) {
 		if (units[i]->hp <= 0) {
 			if (i == 0) {
-				start();
+				//start();
+				status = "death";
 			}
 			else if (!dynamic_cast<Creature*>(units[i])) {
 				delete units[i];

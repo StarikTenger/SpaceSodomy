@@ -110,6 +110,9 @@ void DrawSystem::draw() {
 		a.setState();
 		image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
 	}
+	if (sys.status == "death") {
+		image("death", w/2, h/2, w, h, 0);
+	}
 	
 
 

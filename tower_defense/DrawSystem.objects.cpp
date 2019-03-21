@@ -26,7 +26,10 @@ void DrawSystem::drawShip(Ship* s) {
 	}
 
 	//image("circle", p.x, p.y, s->body.r*2, s->body.r * 2, s->body.direction*0);
-	image("ship", p.x, p.y, blockSize, blockSize, s->body.direction);
+	if(system->status == "death")
+		image("shipBody", p.x, p.y, blockSize, blockSize, s->body.direction);
+	else
+		image("ship", p.x, p.y, blockSize, blockSize, s->body.direction);
 	if(s->orders.forward)
 		image("mainFire", p.x, p.y, blockSize, blockSize, s->body.direction);
 	if (s->orders.backward)

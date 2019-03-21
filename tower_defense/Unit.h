@@ -12,6 +12,7 @@ public:
 	double maxHp = 100;
 	double hp = maxHp;
 	bool collision = 0;
+	bool alive = 1;
 
 	Unit();
 	virtual ~Unit();

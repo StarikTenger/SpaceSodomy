@@ -46,36 +46,43 @@ void Control::step() {
 		for(int i = 0; i < dt/sys.dt/1000; i++)
 			sys.step();
 		double camVel = 0.005;
-		sys.getShip(0)->orders = {};
+		
 
 		drawSys.cam.pos = sys.getShip(0)->body.pos + getCursorPos()*0;
 		drawSys.cam.angle = sys.getShip(0)->body.direction+M_PI/2;
-		if (keys[LEFT]) {
-			sys.getShip(0)->orders.left = 1;
+		sys.getShip(0)->orders = {};
+		if (sys.status != "death") {
+			
+			if (keys[LEFT]) {
+				sys.getShip(0)->orders.left = 1;
+			}
+			if (keys[RIGHT]) {
+				sys.getShip(0)->orders.right = 1;
+			}
+			if (keys[W] || keys[UP]) {
+				sys.getShip(0)->orders.forward = 1;
+			}
+			if (keys[S] || keys[DOWN]) {
+				sys.getShip(0)->orders.backward = 1;
+			}
+			if (keys[A]) {
+				sys.getShip(0)->orders.turnLeft = 1;
+			}
+			if (keys[D]) {
+				sys.getShip(0)->orders.turnRight = 1;
+			}
+			if (keys[SPACE]) {
+				sys.getShip(0)->orders.shoot = 1;
+			}
+			if (keys[Q]) {
+				drawSys.cam.scale /= pow(drawSys.cam.scaleVel, 1 / (double)dt);
+			}
+			if (keys[E]) {
+				drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1 / (double)dt);
+			}
 		}
-		if (keys[RIGHT]) {
-			sys.getShip(0)->orders.right = 1;
-		}
-		if (keys[W]) {
-			sys.getShip(0)->orders.forward = 1;
-		}
-		if (keys[S]) {
-			sys.getShip(0)->orders.backward = 1;
-		}
-		if (keys[A]) {
-			sys.getShip(0)->orders.turnLeft = 1;
-		}
-		if (keys[D]) {
-			sys.getShip(0)->orders.turnRight = 1;
-		}
-		if (keys[SPACE]) {
-			sys.getShip(0)->orders.shoot = 1;
-		}
-		if (keys[Q]) {
-			drawSys.cam.scale /= pow(drawSys.cam.scaleVel, 1 / (double)dt);
-		}
-		if (keys[E]) {
-			drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1 / (double)dt);
+		if (keys[R]) {
+			sys.status = "restart";
 		}
 		if (sys.status == "restart") {
 			sys = System(levels[level]);
@@ -91,15 +98,11 @@ void Control::step() {
 		drawSys.draw();
 
 		sf::Text text;
-		//drawSys.window->setView(sf::View(sf::FloatRect(0, 0, drawSys.window->getSize().x, drawSys.window->getSize().y)));
 		text.setFont(drawSys.font);
 		text.setString(std::to_string(fps));
 		text.setCharacterSize(32);
-		//text.setPosition(0, 0);
-		//drawSys.window->draw(shape);
 		drawSys.window->draw(text);
 		drawSys.window->display();
-		//drawSys.image
 
 		gameEvents();
 	}

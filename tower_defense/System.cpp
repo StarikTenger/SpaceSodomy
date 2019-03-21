@@ -168,6 +168,7 @@ System::System(string path) {
 		} else
 		if (command == "ROCKET_LAUNCHER") {
 				RocketLauncher* rocketLauncher = new RocketLauncher();
+				rocketLauncher->body.m = 10000;
 				while (1) {
 					std::string characteristic;
 					file >> characteristic;

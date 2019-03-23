@@ -35,14 +35,12 @@ void System::checkOrders(Creature* c) {
 	if (t = dynamic_cast<Shooter*>(c)) {
 		if (c->orders.shoot) {
 			if (t->gun.timeToCooldown <= 0) {
-				double da = t->gun.divergenceAngle / (double)t->gun.directions;
-				for (int i = 0; i < t->gun.directions; i++) {
+				auto angles = angleDistribution(c->body.direction, t->gun.divergenceAngle, t->gun.directions);
+				for (double a : angles) {
 					Bullet* b = new Bullet;
 					b->body = c->body;
 					b->body.wetFrictionK = 0;
 					b->body.r = 0.1;
-					double a = c->body.direction - t->gun.divergenceAngle / 2.0 + da / 2.0 + da * (double)i;
-					//std::cout << t->gun.divergenceAngle << " " << da << " " << i << " " << ((-t->gun.divergenceAngle)/2.0 + (da) / 2.0 + da * i) << "\n";
 					b->body.vel += direction(a)*t->gun.bulletVelocity;
 					b->body.direction = a;
 					b->body.w = 0;
@@ -50,7 +48,6 @@ void System::checkOrders(Creature* c) {
 					additionalUnits.push_back(b);
 					t->gun.timeToCooldown = t->gun.cooldownTime;
 					sound("launch", c->body.pos, 1);
-					//cout << "launch\n";
 				}
 			}
 		}

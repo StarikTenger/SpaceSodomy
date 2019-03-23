@@ -14,4 +14,5 @@ namespace geom {
 	double distance(Vector2d  a, Vector2d  b);
 	Vector2d rotate(Vector2d p, double angle);
 	double square(std::vector<Vector2d> polygon);
+	std::vector<double> angleDistribution(double direction, double width, int n);
 }

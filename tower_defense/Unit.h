@@ -17,4 +17,3 @@ public:
 	Unit();
 	virtual ~Unit();
 };
-

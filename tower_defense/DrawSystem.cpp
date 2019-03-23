@@ -24,7 +24,6 @@ void DrawSystem::draw() {
 	w = window->getSize().x;
 	h = window->getSize().y;
 
-
 	image("background",
 		w / 2,
 		h / 2,
@@ -65,6 +64,7 @@ void DrawSystem::draw() {
 		drawDummy(dynamic_cast<Dummy*>(u));
 		drawBonus(dynamic_cast<Bonus*>(u));
 		drawRocketLauncher(dynamic_cast<RocketLauncher*>(u));
+		drawLaserCarrier(dynamic_cast<LaserCarrier*>(u));
 	}
 	drawWalls(sys);
 

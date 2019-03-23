@@ -38,42 +38,47 @@ void System::step() {
 
 
 	//bullet-check
-	for (Unit* u : units) {
-		if (dynamic_cast<Bullet*>(u) || dynamic_cast<Explosion*>(u)) {
-			auto neighbors = getNeighbors(u);
-			for (Unit* u1 : neighbors) {
-				if (dynamic_cast<Creature*>(u1) || dynamic_cast<Bullet*>(u1) || dynamic_cast<Dummy*>(u1)) {
-					if (distance(u->body.pos, u1->body.pos) < u->body.r + u1->body.r && u->team != u1->team) {
+	for (Unit* agressor : units) {
+		if (dynamic_cast<Bullet*>(agressor) || dynamic_cast<Explosion*>(agressor) || dynamic_cast<LaserCarrier*>(agressor)) {
+			auto neighbors = getNeighbors(agressor);
+			for (Unit* victim : units) {
+				if (dynamic_cast<LaserCarrier*>(agressor)) {
+					LaserCarrier* laserCarrier = dynamic_cast<LaserCarrier*>(agressor);
+					for (auto laser : laserCarrier->lasers) {
+						double a = laserCarrier->body.direction + laser.direction +M_PI/2;
+						Vector2d r = direction(a) *  victim->body.r;
+						if (agressor->team != victim->team && isCross(laser.end, laser.base, victim->body.pos - r, victim->body.pos + r)) {
+							damage(victim);
+							
+						}
+						
+					}
+				} else 
+				if (dynamic_cast<Creature*>(victim) || dynamic_cast<Bullet*>(victim) || dynamic_cast<Dummy*>(victim)) {
+					if (distance(agressor->body.pos, victim->body.pos) < agressor->body.r + victim->body.r && agressor->team != victim->team) {
 						bool dmg = 0;
-						if (!dynamic_cast<Explosion*>(u)) {
-							u->hp -= 100;
+						if (!dynamic_cast<Explosion*>(agressor)) {
+							damage(agressor);
 							dmg = 1;
 						}
-						else if (distance(u->body.pos, u1->body.pos) < u->body.r / 2) {
+						else if (distance(agressor->body.pos, victim->body.pos) < agressor->body.r / 2) {
 							dmg = 1;
 						}
-						if (dmg && dynamic_cast<Creature*>(u1) && dynamic_cast<Creature*>(u1)->immortality <= 0 && u1->hp > 0) {
-							if (dynamic_cast<Ship*>(u1)) {
-								events.push_back("damage");
-							}
-							if (dynamic_cast<Creature*>(u1)->shields) {
-								dynamic_cast<Creature*>(u1)->shields--;
-								dynamic_cast<Creature*>(u1)->immortality = 0.5;
-							}
-							else {
-								u1->hp -= 100;
-							}
+						if (dmg && dynamic_cast<Creature*>(victim) && victim->hp > 0) {
+							damage(victim);
 						}
 					}
 				}
 			}
 		}
-		if (dynamic_cast<Exit*>(u)) {
-			if (distance(u->body.pos, units[0]->body.pos) < u->body.r + units[0]->body.r) {
+		if (dynamic_cast<Exit*>(agressor)) {
+			if (distance(agressor->body.pos, units[0]->body.pos) < agressor->body.r + units[0]->body.r) {
 				status = "next level";
 			}
 		}
 	}
+
+	//bonuses
 	for (Unit* u : units) {
 		auto neighbors = getNeighbors(u);
 		for (Unit* u1 : neighbors) {
@@ -127,6 +132,56 @@ void System::step() {
 			e->body.r += dt * e->explosionVel;
 			if (e->body.r > e->maxR) {
 				e->hp = -EPS;
+			}
+		}
+		LaserCarrier* lC;
+		if (lC = dynamic_cast<LaserCarrier*>(u)) {
+			for (auto& laser : lC->lasers) {
+				Vector2d pos = lC->body.pos;
+				laser.base = pos;
+				double a = lC->body.direction + laser.direction;
+				Vector2d dir = direction(a);
+				
+				for (int i = 0; i < 100; i++) {
+					if (checkWall(pos)) {
+						double x = (int)(pos.x / blockSize + field.size()) - field.size();
+						double y = (int)(pos.y / blockSize + field[0].size()) - field[0].size();
+						double width = field.size();
+						double height = field[0].size();
+						Vector2d centre(x + 0.5, y + 0.5);
+						double r = 0.55;
+						if (isCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos)) {
+							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos);
+						} else 
+						if (isCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos)) {
+							laser.end = getCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos);
+						} else
+						if (isCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos)) {
+							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos);
+						} else
+						if (isCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos)) {
+							laser.end = getCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos);
+						} else if (isCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos)) {
+							laser.end = getCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos);
+						} else 
+						if (isCross(Vector2d(0, 0), Vector2d(0, height), laser.base, pos)) {
+							laser.end = getCross(Vector2d(0, 0), Vector2d(0, height), laser.base, pos);
+						} else
+						if (isCross(Vector2d(width, height), Vector2d(width, 0), laser.base, pos)) {
+							laser.end = getCross(Vector2d(width, height), Vector2d(width, 0), laser.base, pos);
+						} else
+						if (isCross(Vector2d(width, height), Vector2d(0, height), laser.base, pos)) {
+							laser.end = getCross(Vector2d(width, height), Vector2d(0, height), laser.base, pos);
+						} else
+						if (isCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos)) {
+							laser.end = getCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos);
+						} else {
+							laser.end = pos;
+						}
+						break;
+					}
+					pos += dir * 0.5;
+				}
 			}
 		}
 	}

@@ -158,6 +158,12 @@
     <ClInclude Include="RocketLauncher.h">
       <Filter>Header Files\system\classes</Filter>
     </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserCarrier.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Control.cpp">
@@ -299,6 +305,18 @@
       <Filter>Source Files\draw</Filter>
     </ClCompile>
     <ClCompile Include="System.checkAbility.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserCarrier.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="System.getCell.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.damage.cpp">
       <Filter>Source Files\system\methods</Filter>
     </ClCompile>
   </ItemGroup>

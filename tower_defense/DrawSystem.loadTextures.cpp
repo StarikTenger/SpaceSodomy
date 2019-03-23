@@ -25,6 +25,8 @@ void DrawSystem::loadTextures() {
 	loadTexture("rightFire", "textures/Rfire.png");
 	loadTexture("rightTurnFire", "textures/RTfire.png");
 	loadTexture("leftTurnFire", "textures/LTfire.png");
+	loadTexture("laser", "textures/laser.png");
+	loadTexture("laserEnd", "textures/laserEnd.png");
 	loadTexture("bullet", "textures/bullet.png");
 	loadTexture("turret", "textures/turret.png");
 	loadTexture("turretAngry", "textures/turretAngry.png");
@@ -44,4 +46,5 @@ void DrawSystem::loadTextures() {
 	loadTexture("rocketLauncherBody", "textures/rocketLauncherBody.png");
 	loadTexture("shieldBonus", "textures/shield.png");
 	loadTexture("rocketLauncher", "textures/rocketLauncher.png");
+	loadTexture("laserCarrier", "textures/laserCarrier.png");
 }

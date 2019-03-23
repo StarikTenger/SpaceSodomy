@@ -107,14 +107,29 @@ void  DrawSystem::drawBonus(Bonus* s) {
 	if(s->type == "shield")
 		image("shieldBonus", p.x, p.y, newSize, newSize, s->body.direction);
 }
+
 void DrawSystem::drawRocketLauncher(RocketLauncher* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
 	double da = M_PI*2 / (double)s->gun.directions;
-	for (int i = 0; i < s->gun.directions; i++) {
-		double a = s->body.direction - s->gun.divergenceAngle / 2.0 + da / 2.0 + da * (double)i;
+	auto angles = geom::angleDistribution(s->body.direction, s->gun.divergenceAngle, s->gun.directions);
+	for (double a : angles) {
 		image("rocketLauncher", p.x, p.y, blockSize, blockSize, a);
+	}
+}
+
+void DrawSystem::drawLaserCarrier(LaserCarrier* s) {
+	if (!s)
+		return;
+	auto p = s->body.pos;
+	for (auto l : s->lasers) {
+		Vector2d pos = (l.base + l.end) / 2;
+		image("laserEnd", l.end.x, l.end.y, 1, 1, system->time*137 + l.direction);
+		image("laser", pos.x, pos.y, geom::distance(l.base, l.end) - 0, 1, s->body.direction + l.direction);
+	}
+	for (auto l : s->lasers) {
+		image("laserCarrier", p.x, p.y, blockSize, blockSize, s->body.direction + l.direction);
 	}
 }
 

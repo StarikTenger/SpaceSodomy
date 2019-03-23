@@ -45,6 +45,7 @@ public:
 	void drawDummy(Dummy* s);
 	void drawBonus(Bonus* s);
 	void drawRocketLauncher(RocketLauncher* s);
+	void drawLaserCarrier(LaserCarrier* s);
 	//load
 	std::map<std::string, sf::Texture*> textures;
 	void loadWalls(std::string name, std::string img, System& sys);

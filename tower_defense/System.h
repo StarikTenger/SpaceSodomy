@@ -12,6 +12,7 @@
 #include "Dummy.h"
 #include "Bonus.h"
 #include "RocketLauncher.h"
+#include "LaserCarrier.h"
 
 class System{
 public:
@@ -47,6 +48,8 @@ private:
 	void think(Creature* c);
 	void checkOrders(Creature* c);
 	void checkExplosions(Unit* c);
+	void damage(Unit* c);
 	int checkWall(Vector2d pos);
+	Cell& getCell(Vector2d pos);
 	std::vector<Unit*> getNeighbors(const Unit* unit);
 };

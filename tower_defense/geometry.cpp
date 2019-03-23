@@ -75,3 +75,13 @@ double geom::square(std::vector<Vector2d> polygon) {
 	s = abs(s) / 2;
 	return s;
 }
+
+std::vector<double> geom::angleDistribution(double direction, double width, int n) {
+	std::vector<double> arr;
+	double da = width / (double)n;
+	for (int i = 0; i < n; i++) {
+		double a = direction - width / 2.0 + da / 2.0 + da * (double)i;
+		arr.push_back(a);
+	}
+	return arr;
+}

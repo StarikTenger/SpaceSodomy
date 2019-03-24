@@ -45,15 +45,21 @@ void System::step() {
 				if (dynamic_cast<LaserCarrier*>(agressor)) {
 					LaserCarrier* laserCarrier = dynamic_cast<LaserCarrier*>(agressor);
 					for (auto laser : laserCarrier->lasers) {
-						double a = laserCarrier->body.direction + laser.direction +M_PI/2;
+						double a = laserCarrier->body.direction + laser.direction + M_PI / 2;
 						Vector2d r = direction(a) *  victim->body.r;
 						if (agressor->team != victim->team && isCross(laser.end, laser.base, victim->body.pos - r, victim->body.pos + r)) {
 							damage(victim);
-							
 						}
-						
+
 					}
-				} else 
+				}
+			}
+		}
+	}
+	for (Unit* agressor : units) {
+		if (dynamic_cast<Bullet*>(agressor) || dynamic_cast<Explosion*>(agressor) || dynamic_cast<LaserCarrier*>(agressor)) {
+			auto neighbors = getNeighbors(agressor);
+			for (Unit* victim : neighbors) {
 				if (dynamic_cast<Creature*>(victim) || dynamic_cast<Bullet*>(victim) || dynamic_cast<Dummy*>(victim)) {
 					if (distance(agressor->body.pos, victim->body.pos) < agressor->body.r + victim->body.r && agressor->team != victim->team) {
 						bool dmg = 0;

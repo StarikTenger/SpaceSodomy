@@ -164,6 +164,9 @@
     <ClInclude Include="LaserCarrier.h">
       <Filter>Header Files\system\classes</Filter>
     </ClInclude>
+    <ClInclude Include="Gamepad.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Control.cpp">
@@ -318,6 +321,9 @@
     </ClCompile>
     <ClCompile Include="System.damage.cpp">
       <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Gamepad.cpp">
+      <Filter>Source Files\global</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

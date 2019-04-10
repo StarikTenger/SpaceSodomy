@@ -1,8 +1,8 @@
-﻿  System.step.cpp
-c:\github\spacesodomy\tower_defense\system.step.cpp(202): warning C4018: '<': signed/unsigned mismatch
+﻿  Control.cpp
+  Control.events.cpp
   Generating code
-  2 of 1640 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  3 of 1643 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    10 functions had inline decision re-evaluated but remain unchanged
+    11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   tower_defense.vcxproj -> C:\GitHub\SpaceSodomy\Release\tower_defense.exe

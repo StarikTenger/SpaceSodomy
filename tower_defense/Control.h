@@ -10,6 +10,7 @@
 #include "System.h"
 #include "geometry.h"
 #include "Mouse.h"
+#include "Gamepad.h"
 
 class Control{
 public:
@@ -18,6 +19,7 @@ public:
 	Audio audio;
 
 	Mouse mouse;
+	Gamepad joystick;
 
 	std::vector<bool> keys = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 

@@ -52,36 +52,36 @@ void Control::step() {
 		drawSys.cam.angle = sys.getShip(0)->body.direction+M_PI/2;
 		sys.getShip(0)->orders = {};
 		if (sys.status != "death") {
-			
-			if (keys[LEFT]) {
+			double threshold = 50;
+			if (keys[LEFT] || joystick.pos.x < -threshold) {
 				sys.getShip(0)->orders.left = 1;
 			}
-			if (keys[RIGHT]) {
+			if (keys[RIGHT] || joystick.pos.x > threshold) {
 				sys.getShip(0)->orders.right = 1;
 			}
-			if (keys[W] || keys[UP]) {
+			if (keys[W] || keys[UP] || joystick.pos.y < -threshold) {
 				sys.getShip(0)->orders.forward = 1;
 			}
-			if (keys[S] || keys[DOWN]) {
+			if (keys[S] || keys[DOWN] || joystick.pos.y > threshold) {
 				sys.getShip(0)->orders.backward = 1;
 			}
-			if (keys[A]) {
+			if (keys[A] || joystick.leftUp || joystick.leftDown) {
 				sys.getShip(0)->orders.turnLeft = 1;
 			}
-			if (keys[D]) {
+			if (keys[D] || joystick.rightUp || joystick.rightDown) {
 				sys.getShip(0)->orders.turnRight = 1;
 			}
-			if (keys[SPACE]) {
+			if (keys[SPACE] || joystick.button4) {
 				sys.getShip(0)->orders.shoot = 1;
 			}
-			if (keys[Q]) {
+			if (keys[Q] || joystick.button3) {
 				drawSys.cam.scale /= pow(drawSys.cam.scaleVel, 1 / (double)dt);
 			}
-			if (keys[E]) {
+			if (keys[E] || joystick.button2) {
 				drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1 / (double)dt);
 			}
 		}
-		if (keys[R]) {
+		if (keys[R] || joystick.button1) {
 			sys.status = "restart";
 		}
 		if (sys.status == "restart") {

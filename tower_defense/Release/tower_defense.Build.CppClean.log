@@ -46,6 +46,10 @@ c:\github\spacesodomy\tower_defense\release\system.think.obj
 c:\github\spacesodomy\tower_defense\release\system.step.obj
 c:\github\spacesodomy\tower_defense\release\system.start.obj
 c:\github\spacesodomy\tower_defense\release\system.getneighbors.obj
+c:\github\spacesodomy\tower_defense\release\laser.obj
+c:\github\spacesodomy\tower_defense\release\lasercarrier.obj
+c:\github\spacesodomy\tower_defense\release\system.getcell.obj
+c:\github\spacesodomy\tower_defense\release\system.damage.obj
 c:\github\spacesodomy\release\tower_defense.exe
 c:\github\spacesodomy\release\tower_defense.pdb
 c:\github\spacesodomy\tower_defense\release\tower_defense.res

@@ -158,6 +158,7 @@
     <ClInclude Include="names.h" />
     <ClInclude Include="Orderlist.h" />
     <ClInclude Include="random.h" />
+    <ClInclude Include="Robot.h" />
     <ClInclude Include="RocketLauncher.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="Shooter.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Mover.cpp" />
     <ClCompile Include="Orderlist.cpp" />
     <ClCompile Include="random.cpp" />
+    <ClCompile Include="Robot.cpp" />
     <ClCompile Include="RocketLauncher.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="Shooter.cpp" />

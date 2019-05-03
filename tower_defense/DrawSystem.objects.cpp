@@ -28,8 +28,12 @@ void DrawSystem::drawShip(Ship* s) {
 	//image("circle", p.x, p.y, s->body.r*2, s->body.r * 2, s->body.direction*0);
 	if(system->status == "death")
 		image("shipBody", p.x, p.y, blockSize, blockSize, s->body.direction);
-	else
-		image("ship", p.x, p.y, blockSize, blockSize, s->body.direction);
+	else {
+		if(dynamic_cast<Robot*>(s))
+			image("robot", p.x, p.y, blockSize, blockSize, s->body.direction);
+		else
+			image("ship", p.x, p.y, blockSize, blockSize, s->body.direction);
+	}
 	if(s->orders.forward)
 		image("mainFire", p.x, p.y, blockSize, blockSize, s->body.direction);
 	if (s->orders.backward)
@@ -131,6 +135,12 @@ void DrawSystem::drawLaserCarrier(LaserCarrier* s) {
 	for (auto l : s->lasers) {
 		image("laserCarrier", p.x, p.y, blockSize, blockSize, s->body.direction + l.direction);
 	}
+}
+
+void DrawSystem::drawRobot(Robot* s) {
+	if (!s)
+		return;
+	drawShip(s);
 }
 
 //////////////////////////////////////////////////////////////////////

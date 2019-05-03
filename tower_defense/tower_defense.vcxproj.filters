@@ -167,6 +167,9 @@
     <ClInclude Include="Gamepad.h">
       <Filter>Header Files\global</Filter>
     </ClInclude>
+    <ClInclude Include="Robot.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Control.cpp">
@@ -324,6 +327,9 @@
     </ClCompile>
     <ClCompile Include="Gamepad.cpp">
       <Filter>Source Files\global</Filter>
+    </ClCompile>
+    <ClCompile Include="Robot.cpp">
+      <Filter>Source Files\system\classes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

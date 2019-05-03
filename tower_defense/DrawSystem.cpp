@@ -65,6 +65,7 @@ void DrawSystem::draw() {
 		drawBonus(dynamic_cast<Bonus*>(u));
 		drawRocketLauncher(dynamic_cast<RocketLauncher*>(u));
 		drawLaserCarrier(dynamic_cast<LaserCarrier*>(u));
+		drawRobot(dynamic_cast<Robot*>(u));
 	}
 	drawWalls(sys);
 

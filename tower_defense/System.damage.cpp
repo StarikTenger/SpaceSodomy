@@ -20,14 +20,14 @@ void System::damage(Unit* c) {
 	if (dynamic_cast<Creature*>(c) && dynamic_cast<Creature*>(c)->shields) {
 		dynamic_cast<Creature*>(c)->shields--;
 		dynamic_cast<Creature*>(c)->immortality = 1;
-		if (dynamic_cast<Ship*>(c) && status != "death") {
+		if (dynamic_cast<Ship*>(c) && !dynamic_cast<Robot*>(c) && status != "death") { //!!!!!NEED FIX!!!!! add class for player
 			events.push_back("damage");
 		}
 		return;
 	}
 	
 	c->hp -= 100;
-	if (dynamic_cast<Ship*>(c) && status != "death") {
+	if (dynamic_cast<Ship*>(c) && !dynamic_cast<Robot*>(c) && status != "death") { //!!!!!NEED FIX!!!!! add class for player
 		events.push_back("damage");
 	}
 }

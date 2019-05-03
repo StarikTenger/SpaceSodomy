@@ -14,10 +14,14 @@ void Control::events() {
 			drawSys.window->close();
 			break;
 		case sf::Event::KeyPressed:
-			keys[getKey(event.key.code)] = 1;
+			for (int k : keyMatches[getKey(event.key.code)]) {
+				keys[k] = 1;
+			}
 			break;
 		case sf::Event::KeyReleased:
-			keys[getKey(event.key.code)] = 0;
+			for (int k : keyMatches[getKey(event.key.code)]) {
+				keys[k] = 0;
+			}
 			break;
 		case sf::Event::MouseMoved:
 			mouse.pos.x = event.mouseMove.x;

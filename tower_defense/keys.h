@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <string>
 
 enum Commands {
 	NONE,
@@ -50,3 +51,39 @@ inline Commands getKey(sf::Keyboard::Key key) {
 	}
 	return NONE;
 }
+
+inline Commands getKey(std::string s) {
+	if(s == "RIGHT")
+		return RIGHT;
+	if (s == "LEFT")
+		return LEFT;
+	if (s == "DOWN")
+		return DOWN;
+	if (s == "UP")
+		return UP;
+	if (s == "SPACE")
+		return SPACE;
+	if (s == "SHIFT")
+		return SHIFT;
+
+		//WASD
+	if (s == "W")
+		return W;
+	if (s == "A")
+		return A;
+	if (s == "S")
+		return S;
+	if (s == "D")
+		return D;
+		//symbols
+	if (s == "R")
+		return R;
+	if (s == "F")
+		return F;
+	if (s == "Q")
+		return Q;
+	if (s == "E")
+		return E;
+	return NONE;
+}
+

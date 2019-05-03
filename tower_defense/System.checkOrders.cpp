@@ -37,6 +37,7 @@ void System::checkOrders(Creature* c) {
 			if (t->gun.timeToCooldown <= 0) {
 				auto angles = angleDistribution(c->body.direction, t->gun.divergenceAngle, t->gun.directions);
 				for (double a : angles) {
+					
 					Bullet* b = new Bullet;
 					b->body = c->body;
 					b->body.wetFrictionK = 0;
@@ -48,6 +49,7 @@ void System::checkOrders(Creature* c) {
 					additionalUnits.push_back(b);
 					t->gun.timeToCooldown = t->gun.cooldownTime;
 					sound("launch", c->body.pos, 1);
+					
 				}
 			}
 		}

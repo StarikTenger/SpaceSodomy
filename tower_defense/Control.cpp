@@ -14,6 +14,9 @@ Control::Control() {
 		levels.push_back(path);
 	}
 	sys = {levels[0]};
+	for (int i = 0; i < 15; i++) {
+		keyMatches.push_back({(i)});
+	}
 }
 
 

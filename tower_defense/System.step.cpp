@@ -38,6 +38,7 @@ void System::step() {
 
 
 	//bullet-check
+	//lasers
 	for (Unit* agressor : units) {
 		if (dynamic_cast<Bullet*>(agressor) || dynamic_cast<Explosion*>(agressor) || dynamic_cast<LaserCarrier*>(agressor)) {
 			auto neighbors = getNeighbors(agressor);
@@ -56,6 +57,7 @@ void System::step() {
 			}
 		}
 	}
+	//bullets
 	for (Unit* agressor : units) {
 		if (dynamic_cast<Bullet*>(agressor) || dynamic_cast<Explosion*>(agressor) || dynamic_cast<LaserCarrier*>(agressor)) {
 			auto neighbors = getNeighbors(agressor);
@@ -191,6 +193,7 @@ void System::step() {
 			}
 		}
 	}
+	//additing units
 	for (Unit* u : additionalUnits) {
 		units.push_back(u);
 	}

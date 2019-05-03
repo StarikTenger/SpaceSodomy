@@ -13,6 +13,7 @@
 #include "Bonus.h"
 #include "RocketLauncher.h"
 #include "LaserCarrier.h"
+#include "Robot.h"
 
 class System{
 public:
@@ -46,6 +47,8 @@ private:
 	void collision();
 	void start();
 	void think(Creature* c);
+	void think(Turret* t);
+	void think(Robot* r);
 	void checkOrders(Creature* c);
 	void checkExplosions(Unit* c);
 	void damage(Unit* c);

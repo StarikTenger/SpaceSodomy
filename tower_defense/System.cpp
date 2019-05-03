@@ -257,6 +257,53 @@ System::System(string path) {
 			}
 			units.push_back(laserCarrier);
 		}
+		if (command == "ROBOT") {
+			Robot* robot = new Robot();
+			robot->body.m = 1;
+			robot->shields = 2;
+			robot->team = "enemy";
+			while (1) {
+				std::string characteristic;
+				file >> characteristic;
+				if (characteristic == "END") {
+					cout << "END\n";
+					break;
+				}
+				else if (characteristic == "POS") {
+					file >> robot->body.pos.x >> robot->body.pos.y;
+					robot->body.pos.x += 0.5*blockSize;
+					robot->body.pos.y += 0.5*blockSize;
+				}
+				else if (characteristic == "DIR") {
+					file >> robot->body.direction;
+				}
+				else if (characteristic == "W") {
+					file >> robot->body.w;
+				}
+				else if (characteristic == "CD") {
+					file >> robot->gun.cooldownTime;
+				}
+				else if (characteristic == "BV") {
+					file >> robot->gun.bulletVelocity;
+				}
+				else if (characteristic == "M") {
+					file >> robot->body.m;
+				}
+				else if (characteristic == "R") {
+					file >> robot->body.r;
+				}
+				else if (characteristic == "MF") {
+					file >> robot->engine.mainForce;
+					robot->engine.backForce = robot->engine.mainForce;
+				}
+				else if (characteristic == "TF") {
+					file >> robot->engine.turnForce;
+				}
+
+				
+			}
+			units.push_back(robot);
+		}
 	}
 }
 

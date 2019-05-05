@@ -20,10 +20,14 @@ void DrawSystem::drawShip(Ship* s) {
 	double a = geom::angle(s->body.vel);
 	double d = geom::distance({}, s->body.vel)*1;
 	int n = 5;
+	if (!dynamic_cast<Robot*>(s))
 	for (int i = 0; i < n; i++) {
 		Vector2d pos = p + geom::direction(a)*d*i / n;
 		image("arrow", pos.x, pos.y, blockSize*0.5, blockSize*0.5, a);
 	}
+
+	if (s->engine.directMode && s->orders.forward)
+		image("directFireRed", p.x, p.y, blockSize, blockSize, s->body.direction + s->engine.direction);
 
 	//image("circle", p.x, p.y, s->body.r*2, s->body.r * 2, s->body.direction*0);
 	if(system->status == "death")
@@ -34,25 +38,30 @@ void DrawSystem::drawShip(Ship* s) {
 		else
 			image("ship", p.x, p.y, blockSize, blockSize, s->body.direction);
 	}
-	if(s->orders.forward)
-		image("mainFire", p.x, p.y, blockSize, blockSize, s->body.direction);
-	if (s->orders.backward)
-		image("backFire", p.x, p.y, blockSize, blockSize, s->body.direction);
-	if (s->orders.right)
-		image("leftFire", p.x, p.y, blockSize, blockSize, s->body.direction);
-	if (s->orders.left)
-		image("rightFire", p.x, p.y, blockSize, blockSize, s->body.direction);
-	if (s->orders.turnRight)
-		image("leftTurnFire", p.x, p.y, blockSize, blockSize, s->body.direction);
-	if (s->orders.turnLeft)
-		image("rightTurnFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+	if (!s->engine.directMode) {
+		if (s->orders.forward)
+			image("mainFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+		if (s->orders.backward)
+			image("backFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+		if (s->orders.right)
+			image("leftFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+		if (s->orders.left)
+			image("rightFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+		if (s->orders.turnRight)
+			image("leftTurnFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+		if (s->orders.turnLeft)
+			image("rightTurnFire", p.x, p.y, blockSize, blockSize, s->body.direction);
+	}
 }
 
 void DrawSystem::drawBullet(Bullet* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
-	image("bullet", p.x, p.y, blockSize, blockSize, s->body.direction);
+	if(s->team == "enemy")
+		image("bulletBad", p.x, p.y, blockSize, blockSize, s->body.direction);
+	else
+		image("bullet", p.x, p.y, blockSize, blockSize, s->body.direction);
 }
 
 void DrawSystem::drawTurret(Turret* s) {
@@ -100,6 +109,8 @@ void  DrawSystem::drawDummy(Dummy* s) {
 		image("turretBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
 	if(s->type == "rocketLauncher")
 		image("rocketLauncherBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
+	if (s->type == "robot")
+		image("robotBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
 }
 
 void  DrawSystem::drawBonus(Bonus* s) {

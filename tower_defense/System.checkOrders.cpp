@@ -12,23 +12,28 @@ using namespace std;
 void System::checkOrders(Creature* c) {
 	Mover* s;
 	if (s = dynamic_cast<Ship*>(c)) {
-		if (c->orders.forward) {
-			c->body.vel += direction(c->body.direction)*s->engine.mainForce / c->body.m * dt;
+		if (!s->engine.directMode) {
+			if (c->orders.forward) {
+				c->body.vel += direction(c->body.direction)*s->engine.mainForce / c->body.m * dt;
+			}
+			if (c->orders.backward) {
+				c->body.vel -= direction(c->body.direction)*s->engine.mainForce / c->body.m * dt;
+			}
+			if (c->orders.right) {
+				c->body.vel += direction(c->body.direction + M_PI / 2)*s->engine.mainForce / c->body.m * dt;
+			}
+			if (c->orders.left) {
+				c->body.vel += direction(c->body.direction - M_PI / 2)*s->engine.mainForce / c->body.m * dt;
+			}
+			if (c->orders.turnRight) {
+				c->body.w += s->engine.turnForce / c->body.m * dt;
+			}
+			if (c->orders.turnLeft) {
+				c->body.w -= s->engine.turnForce / c->body.m * dt;
+			}
 		}
-		if (c->orders.backward) {
-			c->body.vel -= direction(c->body.direction)*s->engine.mainForce / c->body.m * dt;
-		}
-		if (c->orders.right) {
-			c->body.vel += direction(c->body.direction + M_PI/2)*s->engine.mainForce / c->body.m * dt;
-		}
-		if (c->orders.left) {
-			c->body.vel += direction(c->body.direction - M_PI / 2)*s->engine.mainForce / c->body.m * dt;
-		}
-		if (c->orders.turnRight) {
-			c->body.w += s->engine.turnForce / c->body.m * dt;
-		}
-		if (c->orders.turnLeft) {
-			c->body.w -= s->engine.turnForce / c->body.m * dt;
+		else if (c->orders.forward) {
+			 c->body.vel += direction(c->body.direction + s->engine.direction)*s->engine.mainForce / c->body.m * dt;
 		}
 	}
 	Shooter* t;
@@ -37,7 +42,6 @@ void System::checkOrders(Creature* c) {
 			if (t->gun.timeToCooldown <= 0) {
 				auto angles = angleDistribution(c->body.direction, t->gun.divergenceAngle, t->gun.directions);
 				for (double a : angles) {
-					
 					Bullet* b = new Bullet;
 					b->body = c->body;
 					b->body.wetFrictionK = 0;

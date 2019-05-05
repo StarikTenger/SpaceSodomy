@@ -67,6 +67,7 @@ void DrawSystem::draw() {
 		drawLaserCarrier(dynamic_cast<LaserCarrier*>(u));
 		drawRobot(dynamic_cast<Robot*>(u));
 	}
+	//draw walls
 	drawWalls(sys);
 
 	//draw shields

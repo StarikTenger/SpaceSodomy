@@ -224,6 +224,9 @@ void System::step() {
 				if (dynamic_cast<RocketLauncher*>(units[i])) {
 					d->type = "rocketLauncher";
 				}
+				if (dynamic_cast<Robot*>(units[i])) {
+					d->type = "robot";
+				}
 				delete units[i];
 				units[i] = d;
 			}

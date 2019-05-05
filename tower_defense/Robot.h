@@ -10,6 +10,8 @@
 
 class Robot : public Ship {
 public:
+	double fear = 0;
+	int characteristic = 0;
 	Robot();
 	~Robot();
 };

@@ -19,6 +19,7 @@ void System::think(Creature* c){
 }
 
 void System::think(Turret* t) {
+	t->orders.shoot = 0;
 	Ship* target;
 	if (!(target = dynamic_cast<Ship*>(units[0])) && dynamic_cast<Robot*>(units[0]))
 		return;
@@ -61,42 +62,45 @@ void System::think(Turret* t) {
 	while (a <= 0) {
 		a += 2 * M_PI;
 	}
-	t->orders.shoot = 0;
 	if (a < 0.02) {
 		t->orders.shoot = 1;
 	}
 }
 void System::think(Robot* r) {
-	Ship* target;
-	if (!(target = dynamic_cast<Ship*>(units[0])) && dynamic_cast<Robot*>(units[0]))
-		return;
-	bool contact = 1;
-	double stepSize = 0.5;
-	Vector2d step = direction(target->body.pos, r->body.pos) * stepSize;
-	for (int i = 0; i < distance(r->body.pos, target->body.pos) / stepSize; i++) {
-		if (checkWall(r->body.pos + step * i)) {
-			contact = 0;
+	r->fear -= dt;
+	for (Unit* target : units) {
+		if (target->team == r->team || (!dynamic_cast<Ship*>(target) && !dynamic_cast<Bullet*>(target)))
+			continue;
+		bool contact = 1;
+		double stepSize = 0.5;
+		Vector2d step = direction(target->body.pos, r->body.pos) * stepSize;
+		for (int i = 0; i < distance(r->body.pos, target->body.pos) / stepSize; i++) {
+			if (checkWall(r->body.pos + step * i)) {
+				contact = 0;
+			}
+		}
+
+		double a = abs(angle(r->body.vel - target->body.vel + direction(r->body.direction) * r->gun.bulletVelocity)
+			- angle(target->body.pos - r->body.pos));
+		while (a >= 2 * M_PI) {
+			a -= 2 * M_PI;
+		}
+		while (a <= 0) {
+			a += 2 * M_PI;
+		}
+		r->orders.shoot = 0;
+		if (a < 0.02) {
+			r->orders.shoot = 1;
 		}
 	}
 
-	double a = abs(angle(r->body.vel - target->body.vel + direction(r->body.direction) * r->gun.bulletVelocity)
-		- angle(target->body.pos - r->body.pos));
-	while (a >= 2 * M_PI) {
-		a -= 2 * M_PI;
-	}
-	while (a <= 0) {
-		a += 2 * M_PI;
-	}
-	r->orders.shoot = 0;
-	if (a < 0.02) {
-		r->orders.shoot = 1;
-	}
-
 	r->orders.forward = 0;
+	r->engine.directMode = 1;
 	for (auto u : units) {
 		Bullet* b = dynamic_cast<Bullet*>(u);
 		if (dynamic_cast<Bullet*>(u)) {
-			
+			if (u->team == r->team)
+				continue;
 			double a = abs(angle(r->body.vel - b->body.vel)
 				- angle(b->body.pos - r->body.pos));
 			while (a >= 2 * M_PI) {
@@ -105,11 +109,32 @@ void System::think(Robot* r) {
 			while (a <= 0) {
 				a += 2 * M_PI;
 			}
-			r->orders.forward = 0;
-			if (a < 0.2) {
+			
+			if (a < (r->body.r*2 + b->body.r) / distance(r->body.pos, b->body.pos)) {
 				r->orders.forward = 1;
-				std::cout << "Bullet\n";
+				r->fear = 1;
+				double da = M_PI * 0.5;
+				if ((r->characteristic/2) % 2) {
+					da = -da;
+				}
+				r->engine.direction = angle(b->body.pos - r->body.pos) - r->body.direction + da;
 			}
+		}
+	}
+	if (r->fear <= 0) {
+		if (distance(units[0]->body.pos, r->body.pos) < 4) {
+			r->orders.forward = 1;
+			double deviation = double(r->characteristic % 100) / 400 * M_PI;
+			double da = M_PI * 0.5 + deviation;
+			
+			if (r->characteristic % 2) {
+				da = -da;
+			}
+			r->engine.direction = angle(units[0]->body.pos - r->body.pos) - r->body.direction + da;
+		}else 
+		if (distance({}, r->body.vel) > EPS * 100) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + angle(r->body.vel) + M_PI;
 		}
 	}
 }

@@ -101,18 +101,7 @@ void System::step() {
 		}
 	}
 
-
-	//orders	
-	for (Unit* u : units) {
-		Creature* c;
-		if (c = dynamic_cast<Creature*>(u)) {
-			checkOrders(c);
-		}
-
-	}
-
-
-	//personal managment
+	//personal managment (think)
 	for (Unit* u : units) {
 		Creature* c;
 		Shooter* s;
@@ -193,6 +182,17 @@ void System::step() {
 			}
 		}
 	}
+
+	//orders	
+	for (Unit* u : units) {
+		Creature* c;
+		if (c = dynamic_cast<Creature*>(u)) {
+			checkOrders(c);
+		}
+
+	}
+
+
 	//additing units
 	for (Unit* u : additionalUnits) {
 		units.push_back(u);

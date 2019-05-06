@@ -260,7 +260,7 @@ System::System(string path) {
 		if (command == "ROBOT") {
 			Robot* robot = new Robot();
 			robot->body.m = 1;
-			robot->shields = 2;
+			robot->shields = 1;
 			robot->team = "enemy";
 			while (1) {
 				std::string characteristic;
@@ -298,6 +298,9 @@ System::System(string path) {
 				}
 				else if (characteristic == "TF") {
 					file >> robot->engine.turnForce;
+				}
+				else if (characteristic == "SHIELDS") {
+					file >> robot->shields;
 				}
 
 				

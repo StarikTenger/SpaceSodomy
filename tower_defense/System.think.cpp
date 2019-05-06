@@ -68,15 +68,19 @@ void System::think(Turret* t) {
 }
 void System::think(Robot* r) {
 	r->fear -= dt;
+	if (r->fear < -1 && r->fear + dt >= -1)
+		r->characteristic = random::intRandom(0, 16000);
 	for (Unit* target : units) {
 		if (target->team == r->team || (!dynamic_cast<Ship*>(target) && !dynamic_cast<Bullet*>(target)))
 			continue;
 		bool contact = 1;
 		double stepSize = 0.5;
-		Vector2d step = direction(target->body.pos, r->body.pos) * stepSize;
+		Vector2d step = direction(r->body.direction) * stepSize;
 		for (int i = 0; i < distance(r->body.pos, target->body.pos) / stepSize; i++) {
 			if (checkWall(r->body.pos + step * i)) {
 				contact = 0;
+				break;
+				//std::cout << "no contact\n";
 			}
 		}
 
@@ -89,7 +93,7 @@ void System::think(Robot* r) {
 			a += 2 * M_PI;
 		}
 		r->orders.shoot = 0;
-		if (a < 0.02) {
+		if (a < 0.02 && contact) {
 			r->orders.shoot = 1;
 		}
 	}
@@ -112,7 +116,7 @@ void System::think(Robot* r) {
 			
 			if (a < (r->body.r*2 + b->body.r) / distance(r->body.pos, b->body.pos)) {
 				r->orders.forward = 1;
-				r->fear = 1;
+				r->fear = 0.2;
 				double da = M_PI * 0.5;
 				if ((r->characteristic/2) % 2) {
 					da = -da;
@@ -122,8 +126,42 @@ void System::think(Robot* r) {
 		}
 	}
 	if (r->fear <= 0) {
-		if (distance(units[0]->body.pos, r->body.pos) < 4) {
+		double radius = 1;
+		if (checkWall(r->body.pos + Vector2d(radius, 0))) {
 			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + M_PI;
+		} 
+		else if (checkWall(r->body.pos + Vector2d(-radius, 0))) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction;
+		}
+		else if (checkWall(r->body.pos + Vector2d(0, radius))) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + M_PI*1.5;
+		}
+		else if (checkWall(r->body.pos + Vector2d(0, -radius))) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + M_PI * 0.5;
+		}
+		else if (checkWall(r->body.pos + Vector2d(radius, radius))) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + M_PI * 1.25;
+		}
+		else if (checkWall(r->body.pos + Vector2d(-radius, radius))) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + M_PI * 1.75;
+		}
+		else if (checkWall(r->body.pos + Vector2d(-radius, -radius))) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + M_PI * 0.25;
+		}
+		else if (checkWall(r->body.pos + Vector2d(radius, -radius))) {
+			r->orders.forward = 1;
+			r->engine.direction = -r->body.direction + M_PI * 0.75;
+		}
+		else if (distance(units[0]->body.pos, r->body.pos) < 4) {
+			if(random::intRandom(0, 4) == 0)
+				r->orders.forward = 1;
 			double deviation = double(r->characteristic % 100) / 400 * M_PI;
 			double da = M_PI * 0.5 + deviation;
 			

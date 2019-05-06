@@ -6,6 +6,7 @@ var exits = [];
 var bonuses = [];
 var rocketLaunchers = [];
 var laserCarriers = [];
+var robots = [];
 
 var sizeM = 25;
 var size = 1;
@@ -85,6 +86,17 @@ function mouseDown(){
 		});
 		mouse.mode = 0;
 	}
+	if(mouse.mode == 7){
+		robots.push({x: Math.floor(mouse.x/size/scale)*size + size/2, y: Math.floor(mouse.y/size/scale)*size + size/2, 
+		dir: document.getElementById("dir").value*Math.PI,
+		w: document.getElementById("w").value*Math.PI,
+		bv: document.getElementById("bv").value,
+		mf: document.getElementById("mf").value,
+		cd: document.getElementById("cd").value,
+		shields: document.getElementById("shields").value,
+		});
+		mouse.mode = 0;
+	}
 }
 function mouseUp(){
 	mouse.down = 0;
@@ -106,6 +118,10 @@ function draw(){
 	for(var x=0; x<sizeM; x++){
 		for(var y=0; y<sizeM; y++){
 			ctx.strokeRect(x*size*scale, y*size*scale, size*scale, size*scale);
+			if(blocks[x][y] == -1)
+				ctx.fillStyle = "red";
+			else
+				ctx.fillStyle = "black";
 			if(blocks[x][y]){
 				ctx.fillRect(x*size*scale, y*size*scale, size*scale, size*scale);
 			}
@@ -135,6 +151,10 @@ function draw(){
 		ctx.strokeStyle = "black";
 		ctx.stroke();
 	}
+	for(var i=0; i<robots.length; i++){
+		drawCircle(robots[i].x, robots[i].y, size/2, "red");
+		drawCircle(robots[i].x, robots[i].y, size/2-0.1, "grey");
+	}
 	for(var i=0; i<exits.length; i++){
 		drawCircle(exits[i].x, exits[i].y, size/2, "green");
 	}
@@ -153,8 +173,10 @@ function getModel(s){
 	var sc = s/sizeM;
 	for(var x=0; x<sizeM; x++){
 		for(var y=0; y<sizeM; y++){
-			if(blocks[y][x]){
+			if(blocks[y][x] == 1){
 				str += "1";
+			}else if(blocks[y][x] == -1){
+				str += "2";
 			}else{
 				str += "0";
 			}
@@ -191,6 +213,18 @@ function getModel(s){
 		" DIR " + t.dir + 
 		" W " + t.w + 
 		" DIRECTIONS " + t.directions + 
+		" END\n";
+	}
+	for(var i=0; i<robots.length; i++){
+		var t = robots[i];
+		str += " ROBOT " 
+		+ " POS " + (t.x-0.5) + " " + (t.y-0.5) + 
+		" DIR " + t.dir + 
+		" W " + t.w +
+		" BV " + t.bv +
+		" CD " + t.cd + 
+		" MF " + t.mf + 
+		" SHIELDS " + t.shields + 
 		" END\n";
 	}
 	for(var i=0; i<exits.length; i++){

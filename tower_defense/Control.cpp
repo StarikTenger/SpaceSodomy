@@ -14,8 +14,20 @@ Control::Control() {
 		levels.push_back(path);
 	}
 	sys = {levels[0]};
-	for (int i = 0; i < 15; i++) {
-		keyMatches.push_back({(i)});
+	for (int i = 0; i < 50; i++) {
+		keyMatches.push_back({});
+	}
+	std::ifstream keys("keys.conf");
+	while (keys) {
+		std::string key;
+		keys >> key;
+		while (keys) {
+			std::string key1;
+			keys >> key1;
+			if (key1 == "END")
+				break;
+			keyMatches[getKey(key1)].push_back(getKey(key));
+		}
 	}
 }
 

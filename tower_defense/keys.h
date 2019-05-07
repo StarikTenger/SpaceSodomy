@@ -10,8 +10,7 @@ enum Commands {
 	UP,
 	SPACE,
 	SHIFT,
-	W, A, S, D,
-	E, Q, P, R, F
+	Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M
 };
 
 
@@ -30,24 +29,59 @@ inline Commands getKey(sf::Keyboard::Key key) {
 	case sf::Keyboard::LShift:
 		return SHIFT;
 
-		//WASD
+	case sf::Keyboard::Q:
+		return Q;
 	case sf::Keyboard::W:
 		return W;
+	case sf::Keyboard::E:
+		return E;
+	case sf::Keyboard::R:
+		return R;
+	case sf::Keyboard::T:
+		return T;
+	case sf::Keyboard::Y:
+		return Y;
+	case sf::Keyboard::U:
+		return U;
+	case sf::Keyboard::I:
+		return I;
+	case sf::Keyboard::O:
+		return O;
+	case sf::Keyboard::P:
+		return P;
 	case sf::Keyboard::A:
 		return A;
 	case sf::Keyboard::S:
 		return S;
 	case sf::Keyboard::D:
 		return D;
-		//symbols
-	case sf::Keyboard::R:
-		return R;
 	case sf::Keyboard::F:
 		return F;
-	case sf::Keyboard::Q:
-		return Q;
-	case sf::Keyboard::E:
-		return E;
+	case sf::Keyboard::G:
+		return G;
+	case sf::Keyboard::H:
+		return H;
+	case sf::Keyboard::J:
+		return J;
+	case sf::Keyboard::K:
+		return K;
+	case sf::Keyboard::L:
+		return L;
+	case sf::Keyboard::Z:
+		return Z;
+	case sf::Keyboard::X:
+		return X;
+	case sf::Keyboard::C:
+		return C;
+	case sf::Keyboard::V:
+		return V;
+	case sf::Keyboard::B:
+		return B;
+	case sf::Keyboard::N:
+		return N;
+	case sf::Keyboard::M:
+		return M;
+
 	}
 	return NONE;
 }
@@ -66,24 +100,52 @@ inline Commands getKey(std::string s) {
 	if (s == "SHIFT")
 		return SHIFT;
 
-		//WASD
+	if (s == "Q")
+		return Q;
 	if (s == "W")
 		return W;
+	if (s == "E")
+		return E;
+	if (s == "R")
+		return R;
+	if (s == "T")
+		return T;
+	if (s == "Y")
+		return Y;
+	if (s == "U")
+		return U;
+	if (s == "I")
+		return I;
+	if (s == "O")
+		return O;
+	if (s == "P")
+		return P;
 	if (s == "A")
 		return A;
 	if (s == "S")
 		return S;
 	if (s == "D")
 		return D;
-		//symbols
-	if (s == "R")
-		return R;
 	if (s == "F")
 		return F;
-	if (s == "Q")
-		return Q;
-	if (s == "E")
-		return E;
+	if (s == "G")
+		return G;
+	if (s == "H")
+		return H;
+	if (s == "J")
+		return J;
+	if (s == "K")
+		return K;
+	if (s == "L")
+		return L;
+	if (s == "Z")
+		return Z;
+	if (s == "X")
+		return X;
+	if (s == "C")
+		return C;
+	if (s == "V")
+		return V;
 	return NONE;
 }
 

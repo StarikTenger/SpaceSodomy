@@ -143,6 +143,15 @@ void DrawSystem::drawLaserCarrier(LaserCarrier* s) {
 		image("laserEnd", l.end.x, l.end.y, 1, 1, system->time*137 + l.direction);
 		image("laser", pos.x, pos.y, geom::distance(l.base, l.end) - 0, 1, s->body.direction + l.direction);
 	}
+}
+void DrawSystem::drawLaserCarrierBase(LaserCarrier* s) {
+	if (!s)
+		return;
+	auto p = s->body.pos;
+	for (auto l : s->lasers) {
+		Vector2d pos = (l.base + l.end) / 2;
+		image("laserBase", pos.x, pos.y, geom::distance(l.base, l.end) - 0, 1, s->body.direction + l.direction);
+	}
 	for (auto l : s->lasers) {
 		image("laserCarrier", p.x, p.y, blockSize, blockSize, s->body.direction + l.direction);
 	}

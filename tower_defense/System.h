@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <fstream>
 #include "Vector2d.h"
 #include <string>
 #include "Cell.h"
@@ -52,6 +53,7 @@ private:
 	void checkOrders(Creature* c);
 	void checkExplosions(Unit* c);
 	void damage(Unit* c);
+	void loadUnitCharacteristics(Unit* c, std::ifstream file);
 	int checkWall(Vector2d pos);
 	Cell& getCell(Vector2d pos);
 	std::vector<Unit*> getNeighbors(const Unit* unit);

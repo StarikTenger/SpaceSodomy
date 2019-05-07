@@ -27,6 +27,7 @@ void DrawSystem::loadTextures() {
 	loadTexture("leftTurnFire", "textures/LTfire.png");
 	loadTexture("directFireRed", "textures/directFireRed.png");
 	loadTexture("laser", "textures/laser.png");
+	loadTexture("laserBase", "textures/laserBase.png");
 	loadTexture("laserEnd", "textures/laserEnd.png");
 	loadTexture("bullet", "textures/bullet.png");
 	loadTexture("bulletBad", "textures/bulletBad.png");

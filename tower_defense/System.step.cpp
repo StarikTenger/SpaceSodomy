@@ -49,7 +49,8 @@ void System::step() {
 						double a = laserCarrier->body.direction + laser.direction + M_PI / 2;
 						Vector2d r = direction(a) *  victim->body.r;
 						if (agressor->team != victim->team && isCross(laser.end, laser.base, victim->body.pos - r, victim->body.pos + r)) {
-							damage(victim);
+							if(!dynamic_cast<Bonus*>(victim))
+								damage(victim);
 						}
 
 					}
@@ -65,6 +66,11 @@ void System::step() {
 				if (dynamic_cast<Creature*>(victim) || dynamic_cast<Bullet*>(victim) || dynamic_cast<Dummy*>(victim)) {
 					if (distance(agressor->body.pos, victim->body.pos) < agressor->body.r + victim->body.r && agressor->team != victim->team) {
 						bool dmg = 0;
+						if (!dynamic_cast<Bullet*>(agressor)) {
+							damage(agressor);
+							damage(victim);
+							dmg = 1;
+						}
 						if (!dynamic_cast<Explosion*>(agressor)) {
 							damage(agressor);
 							dmg = 1;

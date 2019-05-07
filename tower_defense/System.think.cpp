@@ -70,8 +70,9 @@ void System::think(Robot* r) {
 	r->fear -= dt;
 	if (r->fear < -1 && r->fear + dt >= -1)
 		r->characteristic = random::intRandom(0, 16000);
+	r->orders.shoot = 0;
 	for (Unit* target : units) {
-		if (target->team == r->team || (!dynamic_cast<Ship*>(target) && !dynamic_cast<Bullet*>(target)))
+		if (target->team == r->team || !dynamic_cast<Ship*>(target))
 			continue;
 		bool contact = 1;
 		double stepSize = 0.5;
@@ -80,7 +81,6 @@ void System::think(Robot* r) {
 			if (checkWall(r->body.pos + step * i)) {
 				contact = 0;
 				break;
-				//std::cout << "no contact\n";
 			}
 		}
 
@@ -92,7 +92,6 @@ void System::think(Robot* r) {
 		while (a <= 0) {
 			a += 2 * M_PI;
 		}
-		r->orders.shoot = 0;
 		if (a < 0.02 && contact) {
 			r->orders.shoot = 1;
 		}

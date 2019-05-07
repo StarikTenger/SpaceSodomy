@@ -67,9 +67,12 @@ void DrawSystem::draw() {
 		drawLaserCarrier(dynamic_cast<LaserCarrier*>(u));
 		drawRobot(dynamic_cast<Robot*>(u));
 	}
+	for (auto u : sys.units) {
+		drawLaserCarrierBase(dynamic_cast<LaserCarrier*>(u));
+	}
 	//draw walls
 	drawWalls(sys);
-
+	
 	//draw shields
 	{	
 		double size = h / 7;

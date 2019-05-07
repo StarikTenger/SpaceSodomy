@@ -302,12 +302,18 @@ System::System(string path) {
 				else if (characteristic == "SHIELDS") {
 					file >> robot->shields;
 				}
-
+				else if (characteristic == "TEAM") {
+					file >> robot->team;
+				}
 				
 			}
 			units.push_back(robot);
 		}
 	}
+}
+
+void System::loadUnitCharacteristics(Unit* c, ifstream file) {
+
 }
 
 void System::sound(string name, Vector2d pos, double volume) {

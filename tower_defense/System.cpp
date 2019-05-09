@@ -322,3 +322,13 @@ void System::sound(string name, Vector2d pos, double volume) {
 	//cout << pos.x << " " << pos.y << "\n";
 	events.push_back(name + " " + to_string(pos.x) + " " + to_string(pos.y) + " " + to_string(volume));
 }
+
+void System::animation(std::string name, AnimationState stateStart, AnimationState stateFinish, double duration) {
+	animations.push_back(
+		new Animation(name, stateStart, stateFinish, time, time + duration)
+	);
+}
+
+bool System::checkTime(double t) {
+	return abs(int(time / t) - time / t) <= dt || abs(int(time / t + 1) - time / t) <= dt;
+}

@@ -22,7 +22,7 @@ Control::Control() {
 		std::string key;
 		keys >> key;
 		while (keys) {
-			std::string key1;
+			std::string key1; 
 			keys >> key1;
 			if (key1 == "END")
 				break;

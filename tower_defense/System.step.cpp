@@ -24,10 +24,7 @@ void System::step() {
 	//movement
 	for (Unit* u : units) {
 		auto& b = u->body;
-		//b.vel -= b.vel*wetFrictionK*b.wetFrictionK*dt;
-		if (dynamic_cast<Ship*>(u)) {
-			//b.w -= b.w*wetFrictionK*b.wetFrictionK*dt;
-		}
+		
 		b.pos += b.vel*dt;
 		b.direction += b.w*dt;
 		b.posPrev = b.pos;
@@ -129,6 +126,17 @@ void System::step() {
 				additionalUnits.push_back(e);
 				sound("explosion", u->body.pos, 1);
 			}
+			double d = 0.1;
+			double dist = 0;
+			double r = 0.2;
+			Vector2d dp = direction(floatRandom(0, 2 * M_PI, 3)) * floatRandom(0, 0.2, 3);
+			if (checkTime(particlePeriod)) {
+				animation("particleSmoke",
+					AnimationState(u->body.pos, Vector2d(r, r), u->body.direction, Color(255, 255, 255)),
+					AnimationState(u->body.pos + dp + u->body.vel*d * 0 - direction(u->body.direction + floatRandom(-0.1, 0.1, 3)) *dist, Vector2d(r, r), u->body.direction, Color(255, 255, 255, 0)),
+					d);
+				
+			}
 		}
 		Explosion* e;
 		if (e = dynamic_cast<Explosion*>(u)) {
@@ -185,6 +193,23 @@ void System::step() {
 					}
 					pos += dir * 0.5;
 				}
+				for (int i = 0; i < 1; i++) {
+					if (checkTime(particlePeriod)) {
+						double d = 0.3;
+						double dist = 1;
+						double r = 0.3;
+						double disp = 1;
+						double dir = angle(laser.end - laser.base) + floatRandom(-disp, disp, 3);
+						Vector2d dp = direction(angle(laser.end - laser.base) + M_PI/2) * floatRandom(-0.2, 0.2, 3);
+						if (checkTime(particlePeriod)) {
+							animation("particleLaser",
+								AnimationState(laser.end + dp, Vector2d(0, r), dir, Color(255, 255, 255)),
+								AnimationState(laser.end + dp - direction(dir) *dist,
+									Vector2d(r, 0), dir, Color(255, 255, 255)),
+								d);
+						}
+					}
+				}
 			}
 		}
 	}
@@ -236,6 +261,14 @@ void System::step() {
 				delete units[i];
 				units[i] = d;
 			}
+		}
+	}
+
+	//animations
+	for (int i = 0; i < animations.size(); i++) {
+		if (animations[i]->time >= animations[i]->timeFinish || animations[i]->time < animations[i]->timeStart) {
+			delete animations[i];
+			animations.erase(animations.begin() + i);
 		}
 	}
 }

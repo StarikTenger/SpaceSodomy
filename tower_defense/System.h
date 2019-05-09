@@ -15,6 +15,7 @@
 #include "RocketLauncher.h"
 #include "LaserCarrier.h"
 #include "Robot.h"
+#include "Animation.h"
 
 class System{
 public:
@@ -26,11 +27,14 @@ public:
 	std::vector<std::vector<std::vector<Unit*> > > chunks;
 	std::vector<Unit*> units;
 	std::vector<Unit*> additionalUnits;
+	std::vector<Animation*> animations;
 	std::vector<std::string> events;
 	double bounce = 0.5;
 	double wetFrictionK = 1;
 	std::string status = "running";
 	int level = 0;
+	double particleLevel = 1;
+	double particlePeriod = 0.01;
 
 	System();
 	System(int width, int height);
@@ -43,8 +47,10 @@ public:
 	bool checkAbility(Unit* shooter, Unit* target, double threshold);
 private:
 	double chunkSize = 3;
+	bool checkTime(double t);
 	void fillChunks();
 	void sound(std::string name, Vector2d pos, double volume);
+	void animation(std::string name, AnimationState stateStart, AnimationState stateFinish, double duration);
 	void collision();
 	void start();
 	void think(Creature* c);

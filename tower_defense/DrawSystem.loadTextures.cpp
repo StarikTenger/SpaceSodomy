@@ -54,4 +54,6 @@ void DrawSystem::loadTextures() {
 	loadTexture("robot", "textures/robot.png");
 	loadTexture("glowRed", "textures/glowRed.png");
 	loadTexture("glowCornerRed", "textures/glowCornerRed.png");
+	loadTexture("particleSmoke", "textures/particleSmoke.png");
+	loadTexture("particleLaser", "textures/particleLaser.png");
 }

@@ -53,7 +53,12 @@ void DrawSystem::draw() {
 		(sys.field.size())*blockSize / 2,
 		(sys.field.size())*blockSize,
 		(sys.field.size())*blockSize, 0);
-
+	//draw animations
+	for (auto a : sys.animations) {
+		a->time = sys.time;
+		a->setState();
+		image(a->img, a->state.pos.x, a->state.pos.y, a->state.box.x, a->state.box.y, a->state.direction, a->state.color);
+	}
 	for (auto u : sys.units) {
 		drawTarget(dynamic_cast<Unit*>(u));
 		drawExplosion(dynamic_cast<Explosion*>(u));
@@ -72,7 +77,17 @@ void DrawSystem::draw() {
 	}
 	//draw walls
 	drawWalls(sys);
+	//draw animations
+	for (auto a : sys.animations) {
+		if (a->img != "particleLaser")
+			continue;
+		a->time = sys.time;
+		a->setState();
+		image(a->img, a->state.pos.x, a->state.pos.y, a->state.box.x, a->state.box.y, a->state.direction, a->state.color);
+	}
 	
+
+	//draw interface//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//draw shields
 	{	
 		double size = h / 7;

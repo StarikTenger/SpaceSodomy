@@ -53,7 +53,6 @@ void System::checkOrders(Creature* c) {
 					additionalUnits.push_back(b);
 					t->gun.timeToCooldown = t->gun.cooldownTime;
 					sound("launch", c->body.pos, 1);
-					
 				}
 			}
 		}

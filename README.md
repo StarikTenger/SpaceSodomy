@@ -1,4 +1,4 @@
-#Space Sodomy
+# Space Sodomy
 
 In this game you control a spaceship using its engines. This way you can't change its position and direction directly, but you can change its linear and angular velocities. On each level you need to reach exit through the lines of obstacles and enemies.
 

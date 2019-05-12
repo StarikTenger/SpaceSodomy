@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\control">
+      <UniqueIdentifier>{70fdb18b-3d7e-41d2-8255-b22510e190d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\system">
+      <UniqueIdentifier>{6511599a-c997-4ab4-99a3-ef537edee310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\audio">
+      <UniqueIdentifier>{20e90eae-0bb3-4e34-ae07-bee3da483df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\draw">
+      <UniqueIdentifier>{cca2339d-8d0a-467c-846d-20149fa09ca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\global">
+      <UniqueIdentifier>{9accc320-788b-4430-985f-fcd0f87d258c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\system\classes">
+      <UniqueIdentifier>{e9d55d42-1ebd-4b5f-a3b9-b23ef348d4f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\audio">
+      <UniqueIdentifier>{06cbc3d1-4eb6-4d58-b0d5-a03a43cd3042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\control">
+      <UniqueIdentifier>{770ab7e3-b778-4b1d-bd17-76069a8096c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\draw">
+      <UniqueIdentifier>{76b64261-70de-427c-a731-79dee19da2ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\global">
+      <UniqueIdentifier>{706ca6f7-0a34-43c6-8d42-07141163da6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\system">
+      <UniqueIdentifier>{f4760c63-c6c8-4729-8f82-dd71c9c1b9ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\system\classes">
+      <UniqueIdentifier>{fe465d3c-8e7b-4c68-a1b1-10908763aa98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\system\methods">
+      <UniqueIdentifier>{235f4540-2b47-4308-8a4c-a87c5afcc36f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\draw\classes">
+      <UniqueIdentifier>{6207f106-c536-418f-8d45-103021985916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\draw\system">
+      <UniqueIdentifier>{bac44877-d154-4597-afe3-0e638cf464ee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawSystem.h">
+      <Filter>Header Files\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Control.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="Gamepad.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="System.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="keys.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="getMilliCount.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2d.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="random.h">
+      <Filter>Header Files\global</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Bonus.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Cell.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Creature.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Dummy.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="LaserCarrier.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Mover.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Orderlist.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Robot.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="RocketLauncher.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Shooter.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Turret.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Control.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="Control.events.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="Control.gameEvents.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.cpp">
+      <Filter>Source Files\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="getMilliCount.cpp">
+      <Filter>Source Files\global</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry.cpp">
+      <Filter>Source Files\global</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2d.cpp">
+      <Filter>Source Files\global</Filter>
+    </ClCompile>
+    <ClCompile Include="random.cpp">
+      <Filter>Source Files\global</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="Gamepad.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="Body.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Bonus.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Cell.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Dummy.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="LaserCarrier.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Mover.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Orderlist.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Robot.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="RocketLauncher.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Shooter.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="System.think.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.damage.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.fillChunks.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.getCell.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.getNeighbors.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.start.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.step.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.checkAbility.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.checkExplosions.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.checkOrders.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.checkWall.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="System.collision.cpp">
+      <Filter>Source Files\system\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Turret.cpp">
+      <Filter>Source Files\system\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="System.cpp">
+      <Filter>Source Files\system</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\draw\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\draw\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files\draw\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.basics.cpp">
+      <Filter>Source Files\draw\system</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.drawWalls.cpp">
+      <Filter>Source Files\draw\system</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.loadTextures.cpp">
+      <Filter>Source Files\draw\system</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.loadWalls.cpp">
+      <Filter>Source Files\draw\system</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.objects.cpp">
+      <Filter>Source Files\draw\system</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

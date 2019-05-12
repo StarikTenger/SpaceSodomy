@@ -1,0 +1,8 @@
+﻿  Animation.cpp
+  Audio.cpp
+c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(36): warning C4018: '<': signed/unsigned mismatch
+c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Body.cpp
+  Bonus.cpp

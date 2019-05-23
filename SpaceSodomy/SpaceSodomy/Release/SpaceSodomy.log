@@ -1,103 +1,11 @@
-﻿  Animation.cpp
-  Audio.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\audio.cpp(32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\audio.cpp(36): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\audio.cpp(47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\audio.cpp(48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Body.cpp
-  Bonus.cpp
-  Bullet.cpp
-  Camera.cpp
-  Cell.cpp
-  Color.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\color.cpp(22): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\color.cpp(25): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Control.cpp
+﻿  Control.cpp
   Control.events.cpp
   Control.gameEvents.cpp
 c:\github\spacesodomy\spacesodomy\spacesodomy\control.gameevents.cpp(7): warning C4018: '<': signed/unsigned mismatch
-  Creature.cpp
-  DrawSystem.basics.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.basics.cpp(20): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.basics.cpp(22): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.basics.cpp(23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.basics.cpp(25): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  DrawSystem.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.cpp(36): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.cpp(37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.cpp(39): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.cpp(95): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.cpp(104): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.cpp(123): warning C4018: '<': signed/unsigned mismatch
-  DrawSystem.drawWalls.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.drawwalls.cpp(11): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.drawwalls.cpp(12): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.drawwalls.cpp(33): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.drawwalls.cpp(45): warning C4018: '<': signed/unsigned mismatch
-  DrawSystem.loadTextures.cpp
-  DrawSystem.loadWalls.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.loadwalls.cpp(17): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\drawsystem.loadwalls.cpp(18): warning C4018: '<': signed/unsigned mismatch
-  DrawSystem.objects.cpp
-  Dummy.cpp
-  Engine.cpp
-  Compiling...
-  Exit.cpp
-  Explosion.cpp
-  Gamepad.cpp
-  geometry.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\geometry.cpp(70): warning C4018: '<': signed/unsigned mismatch
-  getMilliCount.cpp
-  Gun.cpp
-  Laser.cpp
-  LaserCarrier.cpp
   main.cpp
-  Mouse.cpp
-  Mover.cpp
-  Orderlist.cpp
-  random.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\random.cpp(6): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Robot.cpp
-  RocketLauncher.cpp
-  Ship.cpp
-  Shooter.cpp
-  System.checkAbility.cpp
-  System.checkExplosions.cpp
-  System.checkOrders.cpp
-  Compiling...
-  System.checkWall.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.checkwall.cpp(13): warning C4018: '>=': signed/unsigned mismatch
-  System.collision.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(67): warning C4018: '>=': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(67): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(68): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(76): warning C4018: '>=': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(76): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(77): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(97): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(103): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(109): warning C4018: '<': signed/unsigned mismatch
-  System.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.cpp(16): warning C4018: '>=': signed/unsigned mismatch
-  System.damage.cpp
-  System.fillChunks.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.fillchunks.cpp(14): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  System.getCell.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.getcell.cpp(18): warning C4018: '<': signed/unsigned mismatch
-  System.getNeighbors.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.getneighbors.cpp(15): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  System.start.cpp
-  System.step.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.step.cpp(245): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.step.cpp(277): warning C4018: '<': signed/unsigned mismatch
-  System.think.cpp
-  Turret.cpp
-  Unit.cpp
-  Vector2d.cpp
   Generating code
-c:\github\spacesodomy\spacesodomy\spacesodomy\gamepad.cpp(32): warning C4715: 'Gamepad::get': not all control paths return a value
-  1834 of 1858 functions (98.7%) were compiled, the rest were copied from previous compilation.
-    6 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  5 of 1858 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SpaceSodomy.vcxproj -> C:\GitHub\SpaceSodomy\SpaceSodomy\Release\SpaceSodomy.exe

@@ -24,12 +24,25 @@ void System::checkOrders(Creature* c) {
 			}
 			if (c->orders.left) {
 				c->body.vel += direction(c->body.direction - M_PI / 2)*s->engine.mainForce / c->body.m * dt;
+				c->orders.turnLeft = 0;
 			}
 			if (c->orders.turnRight) {
 				c->body.w += s->engine.turnForce / c->body.m * dt;
+				c->orders.stabilizeRotation = 0;
 			}
 			if (c->orders.turnLeft) {
 				c->body.w -= s->engine.turnForce / c->body.m * dt;
+				c->orders.stabilizeRotation = 0;
+			}
+			if (c->orders.stabilizeRotation) {
+
+					if (c->body.w > EPS) {
+						c->orders.turnLeft = 1;
+					}
+					if (c->body.w < -EPS) {
+						c->orders.turnRight = 1;
+					}
+				
 			}
 		}
 		else if (c->orders.forward) {

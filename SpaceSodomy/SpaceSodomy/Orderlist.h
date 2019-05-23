@@ -8,6 +8,7 @@ public:
 	bool turnLeft = 0;
 	bool turnRight = 0;
 	bool shoot = 0;
+	bool stabilizeRotation = 0;
 	Orderlist();
 	~Orderlist();
 };

@@ -58,45 +58,45 @@ void Control::step() {
 		
 		events();
 		drawSys.mouse = mouse;
-		for(int i = 0; i < dt/sys.dt/1000; i++)
-			sys.step();
 		double camVel = 0.005;
 		
-
 		drawSys.cam.pos = sys.getShip(0)->body.pos + getCursorPos()*0;
 		drawSys.cam.angle = sys.getShip(0)->body.direction+M_PI/2;
 		sys.getShip(0)->orders = {};
 		if (sys.status != "death") {
 			double threshold = 50;
-			if (keys[LEFT] || joystick.pos.x < -threshold) {
+			if (keys[MOVE_LEFT] || joystick.pos.x < -threshold) {
 				sys.getShip(0)->orders.left = 1;
 			}
-			if (keys[RIGHT] || joystick.pos.x > threshold) {
+			if (keys[MOVE_RIGHT] || joystick.pos.x > threshold) {
 				sys.getShip(0)->orders.right = 1;
 			}
-			if (keys[W] || keys[UP] || joystick.pos.y < -threshold) {
+			if (keys[MOVE_FORWARD] || joystick.pos.y < -threshold) {
 				sys.getShip(0)->orders.forward = 1;
 			}
-			if (keys[S] || keys[DOWN] || joystick.pos.y > threshold) {
+			if (keys[MOVE_BACKWARD] || joystick.pos.y > threshold) {
 				sys.getShip(0)->orders.backward = 1;
 			}
-			if (keys[A] || joystick.leftUp || joystick.leftDown) {
+			if (keys[TURN_LEFT] || joystick.leftUp || joystick.leftDown) {
 				sys.getShip(0)->orders.turnLeft = 1;
 			}
-			if (keys[D] || joystick.rightUp || joystick.rightDown) {
+			if (keys[TURN_RIGHT] || joystick.rightUp || joystick.rightDown) {
 				sys.getShip(0)->orders.turnRight = 1;
 			}
-			if (keys[SPACE] || joystick.button4) {
+			if (keys[STABILIZE_ROTATION]) {
+				sys.getShip(0)->orders.stabilizeRotation = 1;
+			}
+			if (keys[SHOOT] || joystick.button4) {
 				sys.getShip(0)->orders.shoot = 1;
 			}
-			if (keys[Q] || joystick.button3) {
+			if (keys[ZOOM_OUT] || joystick.button3) {
 				drawSys.cam.scale /= pow(drawSys.cam.scaleVel, 1 / (double)dt);
 			}
-			if (keys[E] || joystick.button2) {
+			if (keys[ZOOM_IN] || joystick.button2) {
 				drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1 / (double)dt);
 			}
 		}
-		if (keys[R] || joystick.button1) {
+		if (keys[RESTART] || joystick.button1) {
 			sys.status = "restart";
 		}
 		if (sys.status == "restart") {
@@ -108,6 +108,9 @@ void Control::step() {
 			std::cout << level << " " << levels.size() << "\n";
 			sys = System(levels[level]);
 		}
+
+		for (int i = 0; i < dt / sys.dt / 1000; i++)
+			sys.step();
 
 		drawSys.system = &sys;
 		drawSys.draw();

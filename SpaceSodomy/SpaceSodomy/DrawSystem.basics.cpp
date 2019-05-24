@@ -44,3 +44,14 @@ void DrawSystem::animation(std::string img, AnimationState p1, AnimationState p2
 		)
 	);
 }
+
+void DrawSystem::text(std::string text, double x, double y, int size, Color color) {
+	sf::Text drawnText;
+	drawnText.setFont(font);
+	drawnText.setString(text);
+	drawnText.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	drawnText.setCharacterSize(size);
+	drawnText.setOrigin(floor(drawnText.getLocalBounds().width / 2), floor(drawnText.getLocalBounds().height ));
+	drawnText.setPosition(x, y);
+	window->draw(drawnText);
+}

@@ -150,6 +150,8 @@
     <ClInclude Include="keys.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="LaserCarrier.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuButton.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Mover.h" />
     <ClInclude Include="Orderlist.h" />
@@ -178,6 +180,7 @@
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="DrawSystem.basics.cpp" />
     <ClCompile Include="DrawSystem.cpp" />
+    <ClCompile Include="DrawSystem.drawMenu.cpp" />
     <ClCompile Include="DrawSystem.drawWalls.cpp" />
     <ClCompile Include="DrawSystem.loadTextures.cpp" />
     <ClCompile Include="DrawSystem.loadWalls.cpp" />
@@ -193,6 +196,8 @@
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="LaserCarrier.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Mover.cpp" />
     <ClCompile Include="Orderlist.cpp" />

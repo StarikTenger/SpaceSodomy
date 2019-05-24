@@ -11,9 +11,17 @@
 #include "geometry.h"
 #include "Mouse.h"
 #include "Gamepad.h"
+#include "Menu.h"
+
+enum controlMode {
+	MENU, GAME
+};
 
 class Control{
 public:
+	controlMode mode = MENU;
+	Menu menu;
+
 	System sys;
 	DrawSystem drawSys;
 	Audio audio;
@@ -21,13 +29,12 @@ public:
 	Mouse mouse;
 	Gamepad joystick;
 
-	std::vector<bool> keys = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	std::vector<bool> keys = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	std::vector<std::vector<int> > keyMatches;
 
+	int levelMax = 0;
 	int level = 0;
 	std::vector<std::string> levels;
-
-
 
 	//time
 	int dt = 20;
@@ -42,7 +49,7 @@ public:
 	Control();
 	~Control();
 
-	void events();
+	void events();	
 	void gameEvents();
 	void step();
 	Vector2d getCursorPos();

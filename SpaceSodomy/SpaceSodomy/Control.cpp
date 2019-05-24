@@ -2,6 +2,7 @@
 #include "getMilliCount.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 Control::Control() {
 	std::ifstream file("levels.l");
@@ -99,30 +100,68 @@ void Control::step() {
 		if (keys[RESTART] || joystick.button1) {
 			sys.status = "restart";
 		}
-		if (sys.status == "restart") {
-			sys = System(levels[level]);
+		if (keys[EXIT]) {
+			mode = MENU;
 		}
-		if (sys.status == "next level") {
-			level++;
-			level = level % levels.size();
-			std::cout << level << " " << levels.size() << "\n";
-			sys = System(levels[level]);
+		
+		if (mode == GAME) {
+			if (sys.status == "restart") {
+				sys = System(levels[level]);
+			}
+			if (sys.status == "next level") {
+				level++;
+				level = level % levels.size();
+				std::cout << level << " " << levels.size() << "\n";
+				sys = System(levels[level]);
+				if (level > levelMax) {
+					levelMax = level;
+				}
+			}
+
+			for (int i = 0; i < dt / sys.dt / 1000; i++)
+				sys.step();
+
+			drawSys.system = &sys;
+			drawSys.draw();
+
+			sf::Text text;
+			text.setFont(drawSys.font);
+			text.setString(std::to_string(fps));
+			text.setCharacterSize(32);
+			drawSys.window->draw(text);
+			drawSys.window->display();
+
+			gameEvents();
 		}
+		if (mode == MENU) {
+			drawSys.menu = &menu;
+			menu.mouse = &mouse;
+			menu.step();
+			menu.scale = Vector2d(drawSys.w, drawSys.h);
+			drawSys.drawMenu();
+			drawSys.window->display();
 
-		for (int i = 0; i < dt / sys.dt / 1000; i++)
-			sys.step();
-
-		drawSys.system = &sys;
-		drawSys.draw();
-
-		sf::Text text;
-		text.setFont(drawSys.font);
-		text.setString(std::to_string(fps));
-		text.setCharacterSize(32);
-		drawSys.window->draw(text);
-		drawSys.window->display();
-
-		gameEvents();
+			for (int i = 0; i < menu.events.size(); i++) {
+				std::stringstream ss;
+				ss << menu.events[i];
+				std::string command;
+				ss >> command;
+				if (command == "play") {
+					level = levelMax;
+					sys = System(levels[level]);
+					mode = GAME;
+					continue;
+				}
+				if (command == "level") {
+					int l;
+					ss >> l;
+					level = l%levels.size();
+					sys = System(levels[level]);
+					mode = GAME;
+				}
+			}
+			menu.events = {};
+		}
 	}
 
 	iteration++;

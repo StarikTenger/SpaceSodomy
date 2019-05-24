@@ -55,7 +55,13 @@
     <Filter Include="Source Files\draw\classes">
       <UniqueIdentifier>{6207f106-c536-418f-8d45-103021985916}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\draw\system">
+    <Filter Include="Header Files\menu">
+      <UniqueIdentifier>{9a9b0257-faa8-44e4-8c08-592fda7f1966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\menu">
+      <UniqueIdentifier>{7ab08b8a-222f-4c6e-b820-00178864ab7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\draw\methods">
       <UniqueIdentifier>{bac44877-d154-4597-afe3-0e638cf464ee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -161,6 +167,12 @@
     </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>Header Files\system\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButton.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -309,19 +321,28 @@
       <Filter>Source Files\draw\classes</Filter>
     </ClCompile>
     <ClCompile Include="DrawSystem.basics.cpp">
-      <Filter>Source Files\draw\system</Filter>
+      <Filter>Source Files\draw\methods</Filter>
     </ClCompile>
     <ClCompile Include="DrawSystem.drawWalls.cpp">
-      <Filter>Source Files\draw\system</Filter>
+      <Filter>Source Files\draw\methods</Filter>
     </ClCompile>
     <ClCompile Include="DrawSystem.loadTextures.cpp">
-      <Filter>Source Files\draw\system</Filter>
+      <Filter>Source Files\draw\methods</Filter>
     </ClCompile>
     <ClCompile Include="DrawSystem.loadWalls.cpp">
-      <Filter>Source Files\draw\system</Filter>
+      <Filter>Source Files\draw\methods</Filter>
     </ClCompile>
     <ClCompile Include="DrawSystem.objects.cpp">
-      <Filter>Source Files\draw\system</Filter>
+      <Filter>Source Files\draw\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawSystem.drawMenu.cpp">
+      <Filter>Source Files\draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>Source Files\draw</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

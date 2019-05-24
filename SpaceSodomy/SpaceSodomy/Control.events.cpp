@@ -4,7 +4,7 @@
 void Control::events() {
 	
 
-
+	mouse.statePrev = mouse.state;
 	sf::Event event;
 	while (drawSys.window->pollEvent(event))
 	{
@@ -26,6 +26,12 @@ void Control::events() {
 		case sf::Event::MouseMoved:
 			mouse.pos.x = event.mouseMove.x;
 			mouse.pos.y = event.mouseMove.y;
+			break;
+		case sf::Event::MouseButtonPressed:
+			mouse.state = 1;
+			break;
+		case sf::Event::MouseButtonReleased:
+			mouse.state = 0;
 			break;
 		case sf::Event::JoystickButtonPressed:
 			joystick.get(event.joystickButton.button) = 1;

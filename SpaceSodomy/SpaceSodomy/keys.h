@@ -4,13 +4,26 @@
 
 enum Commands {
 	NONE,
-	MOVE_FORWARD, MOVE_BACKWARD, MOVE_LEFT, MOVE_RIGHT, TURN_LEFT, TURN_RIGHT, SHOOT, ZOOM_IN, ZOOM_OUT, STABILIZE_ROTATION, RESTART,
+	MOVE_FORWARD, 
+	MOVE_BACKWARD, 
+	MOVE_LEFT, 
+	MOVE_RIGHT, 
+	TURN_LEFT, 
+	TURN_RIGHT, 
+	SHOOT, 
+	ZOOM_IN, 
+	ZOOM_OUT, 
+	STABILIZE_ROTATION, 
+	RESTART, 
+	EXIT,
+	/////////////////////////////////////////
 	RIGHT,
 	LEFT,
 	DOWN,
 	UP,
 	SPACE,
 	SHIFT,
+	ESCAPE,
 	Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M
 };
 
@@ -29,6 +42,8 @@ inline Commands getKey(sf::Keyboard::Key key) {
 		return SPACE;
 	case sf::Keyboard::LShift:
 		return SHIFT;
+	case sf::Keyboard::Escape:
+		return ESCAPE;
 
 	case sf::Keyboard::Q:
 		return Q;
@@ -100,6 +115,8 @@ inline Commands getKey(std::string s) {
 		return SPACE;
 	if (s == "SHIFT")
 		return SHIFT;
+	if (s == "ESCAPE")
+		return ESCAPE;
 
 	if (s == "Q")
 		return Q;
@@ -169,6 +186,8 @@ inline Commands getKey(std::string s) {
 		return STABILIZE_ROTATION;
 	if (s == "RESTART")
 		return RESTART;
+	if (s == "EXIT")
+		return EXIT;
 	return NONE;
 }
 

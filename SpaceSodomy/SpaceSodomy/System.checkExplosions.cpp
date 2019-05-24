@@ -14,9 +14,11 @@ using namespace random;
 void System::checkExplosions(Unit* c) {
 	double k = 1;
 	double d = 0.05;
-	for (auto& u : units) {
+	for (Unit* u : units) {
 		Explosion* e;
 		if (!(e = dynamic_cast<Explosion*>(u)) || distance(c->body.pos, u->body.pos) < EPS)
+			continue;
+		if (dynamic_cast<LaserCarrier*>(u) || dynamic_cast<RocketLauncher*>(u))
 			continue;
 		double r = distance(c->body.pos, u->body.pos);
 		if (r < c->body.r + u->body.r) {

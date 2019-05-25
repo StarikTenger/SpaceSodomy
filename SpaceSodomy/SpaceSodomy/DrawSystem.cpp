@@ -15,11 +15,8 @@ DrawSystem::DrawSystem(){
 
 DrawSystem::~DrawSystem(){}
 
-
-void DrawSystem::draw() {
+void DrawSystem::drawScene() {
 	System& sys = *system;
-	window->clear();
-
 	sf::Texture tex;
 	w = window->getSize().x;
 	h = window->getSize().y;
@@ -30,23 +27,23 @@ void DrawSystem::draw() {
 		w * 1.5,
 		w * 1.5, -sys.units[0]->body.direction
 	);
-	
-	
+
+
 	sf::View view(sf::FloatRect(
-		sf::Vector2f(sys.units[0]->body.pos.x- w * 1 / cam.scale/2, sys.units[0]->body.pos.y - h * 1 / cam.scale / 2),
-		sf::Vector2f(w* 1 / cam.scale, h*1/cam.scale)
+		sf::Vector2f(sys.units[0]->body.pos.x - w * 1 / cam.scale / 2, sys.units[0]->body.pos.y - h * 1 / cam.scale / 2),
+		sf::Vector2f(w * 1 / cam.scale, h * 1 / cam.scale)
 	));
-	view.setRotation((sys.units[0]->body.direction*180/M_PI)+90);
+	view.setRotation((sys.units[0]->body.direction * 180 / M_PI) + 90);
 	window->setView(view);
 
-	
+
 	image("backwall1",
 		(sys.field.size())*blockSize / 2,
 		(sys.field.size())*blockSize / 2,
 		(sys.field.size())*blockSize * 2 * 2,
 		(sys.field.size())*blockSize * 2 * 2
 		, 0,
-		1.0/2
+		1.0 / 2
 	);
 	image("backwall",
 		(sys.field.size())*blockSize / 2,
@@ -85,11 +82,13 @@ void DrawSystem::draw() {
 		a->setState();
 		image(a->img, a->state.pos.x, a->state.pos.y, a->state.box.x, a->state.box.y, a->state.direction, a->state.color);
 	}
-	
+}
 
+void DrawSystem::drawInterface() {
+	System& sys = *system;
 	//draw interface//////////////////////////////////////////////////////////////////////////////////////////////////////
 	//draw shields
-	{	
+	{
 		double size = h / 7;
 		double d = size / 2;
 		window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
@@ -109,7 +108,7 @@ void DrawSystem::draw() {
 				animation(
 					"shield",
 					AnimationState({ size*0.6, h - size * 0.6 - dynamic_cast<Creature*>(sys.units[0])->shields *d + d }, { size, size }, 0, Color(0, 255, 0, 255)),
-					AnimationState({ size*0.6, 0}, { size, size }, 0, Color(0, 0, 0, 0)),
+					AnimationState({ size*0.6, 0 }, { size, size }, 0, Color(0, 0, 0, 0)),
 					1
 				);
 				damageScreen();
@@ -117,7 +116,7 @@ void DrawSystem::draw() {
 		}
 	}
 	//events
-	
+
 
 	//anime
 	for (int i = 0; i < animations.size(); i++) {
@@ -131,10 +130,17 @@ void DrawSystem::draw() {
 		image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
 	}
 	if (sys.status == "death") {
-		image("death", w/2, h/2, w, h, 0);
+		image("death", w / 2, h / 2, w, h, 0);
 	}
-	
+}
 
+void DrawSystem::draw() {
+	System& sys = *system;
+	window->clear();
+
+	drawScene();
+	
+	drawInterface();
 
 	//window->display();
 }

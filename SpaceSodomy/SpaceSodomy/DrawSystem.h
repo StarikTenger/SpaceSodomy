@@ -22,6 +22,8 @@ public:
 	double blockSize = 1;
 
 	void draw();
+	void drawScene();
+	void drawInterface();
 	//decoration
 	void damageScreen();
 	sf::Font font;

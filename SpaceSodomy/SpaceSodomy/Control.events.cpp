@@ -3,7 +3,7 @@
 
 void Control::events() {
 	
-
+	drawSys.window->setKeyRepeatEnabled(false);
 	mouse.statePrev = mouse.state;
 	sf::Event event;
 	while (drawSys.window->pollEvent(event))

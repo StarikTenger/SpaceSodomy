@@ -172,7 +172,7 @@
       <Filter>Header Files\menu</Filter>
     </ClInclude>
     <ClInclude Include="MenuButton.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -342,7 +342,7 @@
       <Filter>Source Files\menu</Filter>
     </ClCompile>
     <ClCompile Include="MenuButton.cpp">
-      <Filter>Source Files\draw</Filter>
+      <Filter>Source Files\menu</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

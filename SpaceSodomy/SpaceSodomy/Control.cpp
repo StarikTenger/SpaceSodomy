@@ -30,6 +30,7 @@ Control::Control() {
 			keyMatches[getKey(key1)].push_back(getKey(key));
 		}
 	}
+	loadConfig();
 }
 
 
@@ -39,6 +40,31 @@ Control::~Control() {
 
 Vector2d Control::getCursorPos() {
 	return geom::rotate((mouse.pos - drawSys.cam.border/2) / drawSys.cam.scale, drawSys.cam.angle);
+}
+
+void Control::loadConfig() {
+	std::ifstream file(configParametersAdress);
+	while (file) {
+		std::string command;
+		file >> command;
+		if (command == "END") {
+			break;
+		} else 
+		if (command == "LEVEL") {
+			file >> levelMax;
+		}
+	}
+	file.close();
+}
+
+
+void Control::saveConfig() {
+	std::ofstream file(configParametersAdress);
+	std::string str = "";
+	str += "LEVEL " + std::to_string(levelMax) + "\n";
+	str += "END";
+	file << str;
+	file.close();
 }
 
 void Control::step() {
@@ -116,6 +142,7 @@ void Control::step() {
 				if (level > levelMax) {
 					levelMax = level;
 				}
+				saveConfig();
 			}
 
 			for (int i = 0; i < dt / sys.dt / 1000; i++)
@@ -136,6 +163,7 @@ void Control::step() {
 		if (mode == MENU) {
 			drawSys.menu = &menu;
 			menu.mouse = &mouse;
+			menu.level = levelMax;
 			menu.step();
 			menu.scale = Vector2d(drawSys.w, drawSys.h);
 			drawSys.drawMenu();
@@ -148,7 +176,7 @@ void Control::step() {
 				ss >> command;
 				if (command == "play") {
 					level = levelMax;
-					sys = System(levels[level]);
+					//sys = System(levels[level]);
 					mode = GAME;
 					continue;
 				}

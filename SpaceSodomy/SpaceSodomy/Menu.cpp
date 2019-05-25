@@ -45,8 +45,8 @@ void Menu::step() {
 					events.push_back("play");
 					break;
 				case LEVEL:
-					std::cout << button->state + " ";
-					events.push_back("level " + std::to_string(button->state));
+					if(level >= button->state)
+						events.push_back("level " + std::to_string(button->state));
 					break;
 				}
 			}

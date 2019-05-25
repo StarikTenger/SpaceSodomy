@@ -42,6 +42,7 @@ public:
 	bool stop = 0;
 	int iteration = 0;
 
+	//fps couting
 	int frames = 0;
 	int timePrevFrame = 0;
 	int fps = 0;
@@ -53,6 +54,8 @@ public:
 	void gameEvents();
 	void step();
 	Vector2d getCursorPos();
-
+	std::string configParametersAdress = "parameters.conf";
+	void loadConfig();
+	void saveConfig();
 };
 

@@ -14,7 +14,7 @@ Control::Control() {
 		}
 		levels.push_back(path);
 	}
-	sys = {levels[0]};
+	
 	for (int i = 0; i < 50; i++) {
 		keyMatches.push_back({});
 	}
@@ -31,8 +31,8 @@ Control::Control() {
 		}
 	}
 	loadConfig();
+	sys = { levels[levelMax] };
 }
-
 
 Control::~Control() {
 
@@ -74,12 +74,10 @@ void Control::step() {
 		frames++;
 		
 		if (timeMs - timePrevFrame > 1000) {
-			//std::cout << frames << "\n";
 			fps = frames;
 			frames = 0;
 			timePrevFrame = timeMs;
 		}
-		//std::cout << getMilliCount() << "\n";
 		sys.level = level;
 
 		
@@ -133,6 +131,7 @@ void Control::step() {
 		if (mode == GAME) {
 			if (sys.status == "restart") {
 				sys = System(levels[level]);
+				std::cout << level << " restart\n";
 			}
 			if (sys.status == "next level") {
 				level++;
@@ -176,8 +175,8 @@ void Control::step() {
 				ss >> command;
 				if (command == "play") {
 					level = levelMax;
-					//sys = System(levels[level]);
 					mode = GAME;
+					std::cout << level << " play\n";
 					continue;
 				}
 				if (command == "level") {

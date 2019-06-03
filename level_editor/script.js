@@ -241,22 +241,7 @@ function getModel(s){
 	return str;
 }
 function generate(){
-	document.getElementById("output").innerHTML = getModel(1000);
+	document.getElementById("output").value = getModel(1000);
 }
 setInterval(draw, 5);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

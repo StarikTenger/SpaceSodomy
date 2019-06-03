@@ -11,8 +11,11 @@ namespace geom {
 	Vector2d direction(double a);
 	Vector2d direction(Vector2d  a, Vector2d  b);
 	double angle(Vector2d p);
-	double distance(Vector2d  a, Vector2d  b);
+	double angle(Vector2d a, Vector2d b, Vector2d c);
+	double distance(Vector2d  a, Vector2d b);
+	double distance(Vector2d  p, Vector2d a, Vector2d b);
 	Vector2d rotate(Vector2d p, double angle);
 	double square(std::vector<Vector2d> polygon);
+	bool inPolygon(Vector2d point, std::vector<Vector2d> polygon);
 	std::vector<double> angleDistribution(double direction, double width, int n);
 }

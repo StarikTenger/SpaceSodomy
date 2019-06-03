@@ -1,9 +1,22 @@
 #pragma once
+
+enum CellType {
+	EMPTY,
+	WALL,
+	CORNER_A,
+	CORNER_B,
+	CORNER_C,
+	CORNER_D
+	//A --- B
+	//|     |
+	//|     |
+	//D --- C
+};
+
 class Cell{ 
 public:
-	int place = 1;
 	int type = 0;
-
+	int spikes = 0;
 	Cell();
 	~Cell();
 };

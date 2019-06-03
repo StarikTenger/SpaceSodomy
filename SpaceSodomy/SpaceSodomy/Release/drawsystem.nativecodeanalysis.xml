@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>color.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Color::g' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Color::{ctor}</FUNCTION>
+    <DECORATED>??0Color@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>color.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Color::a' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Color::{ctor}</FUNCTION>
+    <DECORATED>??0Color@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>color.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Color::b' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Color::{ctor}</FUNCTION>
+    <DECORATED>??0Color@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>color.h</FILENAME>
+      <LINE>6</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Color::r' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Color::{ctor}</FUNCTION>
+    <DECORATED>??0Color@@QAE@XZ</DECORATED>
+    <FUNCLINE>6</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>drawsystem.cpp</FILENAME>
+      <LINE>11</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'DrawSystem::system' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>DrawSystem::{ctor}</FUNCTION>
+    <DECORATED>??0DrawSystem@@QAE@XZ</DECORATED>
+    <FUNCLINE>11</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>drawsystem.cpp</FILENAME>
+      <LINE>11</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'DrawSystem::w' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>DrawSystem::{ctor}</FUNCTION>
+    <DECORATED>??0DrawSystem@@QAE@XZ</DECORATED>
+    <FUNCLINE>11</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>drawsystem.cpp</FILENAME>
+      <LINE>11</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'DrawSystem::h' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>DrawSystem::{ctor}</FUNCTION>
+    <DECORATED>??0DrawSystem@@QAE@XZ</DECORATED>
+    <FUNCLINE>11</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>c:\github\spacesodomy\spacesodomy\spacesodomy</FILEPATH>
+      <FILENAME>drawsystem.cpp</FILENAME>
+      <LINE>11</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'DrawSystem::menu' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>DrawSystem::{ctor}</FUNCTION>
+    <DECORATED>??0DrawSystem@@QAE@XZ</DECORATED>
+    <FUNCLINE>11</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

@@ -40,6 +40,10 @@ void DrawSystem::loadTextures() {
 	loadTexture("circle", "textures/circle.png");
 	loadTexture("angerParticle", "textures/angerParticle.png");
 	loadTexture("wall", "textures/wall.png");
+	loadTexture("wallA", "textures/wallA.png");
+	loadTexture("wallB", "textures/wallB.png");
+	loadTexture("wallC", "textures/wallC.png");
+	loadTexture("wallD", "textures/wallD.png");
 	loadTexture("wallBorder", "textures/wallBorder.png");
 	loadTexture("shield", "textures/shield.png");
 	loadTexture("blood", "textures/blood.png");

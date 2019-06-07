@@ -95,20 +95,25 @@ void DrawSystem::drawWalls(System& sys) {
 			}
 		}
 	}
+	double s = sqrt(2);
 	for (int x = 0; x < sys.field.size(); x++) {
 		for (int y = 0; y < sys.field[0].size(); y++) {
 			switch (sys.field[x][y].type) {
 			case CORNER_A:
 				image("wallA", x + 0.5, y + 0.5, 1, 1, 0, color);
+				image("wallBorder", x, y, s, s, M_PI*0.25, color);
 				break;
 			case CORNER_B:
 				image("wallB", x + 0.5, y + 0.5, 1, 1,0, color);
+				image("wallBorder", x + 1, y, s, s, M_PI*0.75, color);
 				break;
 			case CORNER_C:
 				image("wallC", x + 0.5, y + 0.5, 1, 1, 0, color);
+				image("wallBorder", x + 1, y + 1, s, s, M_PI*1.25, color);
 				break;
 			case CORNER_D:
 				image("wallD", x + 0.5, y + 0.5, 1, 1, 0, color);
+				image("wallBorder", x, y + 1, s, s, M_PI*1.75, color);
 				break;
 			}
 		}

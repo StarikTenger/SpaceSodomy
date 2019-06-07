@@ -53,7 +53,6 @@ void System::collision() {
 		double r = u->body.r;
 		int dmg = 0;
 		//corners
-		std::cout << "\n";
 		for (int x1 = std::max(0, x - 1); x1 <= std::min((int)field.size()-1, x + 1); x1++) {
 			for (int y1 = std::max(0, y - 1); y1 <= std::min((int)field[0].size()-1, y + 1); y1++) {
 				if (field[x1][y1].type == CORNER_A || field[x1][y1].type == CORNER_B || field[x1][y1].type == CORNER_C || field[x1][y1].type == CORNER_D) {
@@ -72,7 +71,6 @@ void System::collision() {
 						points1.erase(points1.begin() + 0);
 					}
 					Vector2d pos1 = b.pos + b.vel*dt;
-					std::cout << geom::distance(pos1, points[0], points[1]) << " corner\n";
 					if (geom::distance(pos1, points[0], points[1]) < u->body.r && geom::distance(pos1, points1[0], points1[1]) < sqrt(2)/2) {
 						double ang = geom::angle(points[0] - points[1]);
 						Vector2d vel = geom::rotate(u->body.vel, ang);
@@ -151,7 +149,6 @@ void System::collision() {
 			}
 		}
 		int i = 0;
-		//if(0)
 		for (auto& p : points) {
 			Vector2d pos = u->body.pos + u->body.vel*dt;
 			if (distance(p, pos) > u->body.r)

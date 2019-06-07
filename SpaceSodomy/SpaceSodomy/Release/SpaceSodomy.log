@@ -1,16 +1,16 @@
 ﻿  System.collision.cpp
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(105): warning C4018: '>=': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(105): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(106): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(114): warning C4018: '>=': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(114): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(115): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(135): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(141): warning C4018: '<': signed/unsigned mismatch
-c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(147): warning C4018: '<': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(103): warning C4018: '>=': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(103): warning C4018: '<': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(104): warning C4018: '<': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(112): warning C4018: '>=': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(112): warning C4018: '<': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(113): warning C4018: '<': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(133): warning C4018: '<': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(139): warning C4018: '<': signed/unsigned mismatch
+c:\github\spacesodomy\spacesodomy\spacesodomy\system.collision.cpp(145): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 2146 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 2146 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    16 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SpaceSodomy.vcxproj -> C:\GitHub\SpaceSodomy\SpaceSodomy\Release\SpaceSodomy.exe

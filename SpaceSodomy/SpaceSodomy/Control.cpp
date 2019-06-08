@@ -31,7 +31,7 @@ Control::Control() {
 		}
 	}
 	loadConfig();
-	sys = { levels[levelMax] };
+	sys = { levels[levelMax%levels.size()] };
 }
 
 Control::~Control() {
@@ -174,7 +174,7 @@ void Control::step() {
 				std::string command;
 				ss >> command;
 				if (command == "play") {
-					level = levelMax;
+					//level = levelMax;
 					mode = GAME;
 					std::cout << level << " play\n";
 					continue;

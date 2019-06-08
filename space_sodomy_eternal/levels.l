@@ -5,5 +5,5 @@ levels/learn4.lvl
 levels/learn5.lvl
 levels/learn6.lvl
 level.lvl
-level1.lvl
+level.lvl
 END

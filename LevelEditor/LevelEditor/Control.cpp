@@ -6,7 +6,7 @@
 
 Control::Control() {
 	sys = System("level.lvl");
-	for (int i = 0; i < 50; i++) {
+	for (int i = 0; i < 100; i++) {
 		keyMatches.push_back({});
 	}
 	std::ifstream keys("keys.conf");
@@ -19,6 +19,7 @@ Control::Control() {
 			if (key1 == "END")
 				break;
 			keyMatches[getKey(key1)].push_back(getKey(key));
+			
 		}
 	}
 	drawSys.system = &sys;
@@ -29,7 +30,7 @@ Control::~Control() {
 }
 
 Vector2d Control::getCursorPos() {
-	return geom::rotate((mouse.pos - drawSys.cam.border/2 ) / drawSys.cam.scale + drawSys.cam.pos, drawSys.cam.angle);
+	return drawSys.getCursorPos();
 }
 
 

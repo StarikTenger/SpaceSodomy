@@ -38,7 +38,6 @@ void Control::events() {
 			break;
 		case sf::Event::MouseWheelMoved:
 			mouse.delta = event.mouseWheel.delta;
-			std::cout << mouse.delta << "\n";
 			break;
 		}
 	}

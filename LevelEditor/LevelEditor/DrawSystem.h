@@ -26,6 +26,7 @@ public:
 	void drawInterface();
 	sf::Font font;
 	
+	Vector2d getCursorPos();
 //private:
 	//basics
 	void fillRect(double x, double y, double width, double height, Color color);

@@ -34,6 +34,7 @@ enum Commands {
 	SHIFT,
 	ESCAPE,
 	CONTROL,
+	DELETE,
 	Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M
 };
 
@@ -56,6 +57,8 @@ inline Commands getKey(sf::Keyboard::Key key) {
 		return CONTROL;
 	case sf::Keyboard::Escape:
 		return ESCAPE;
+	case sf::Keyboard::Delete:
+		return DELETE;
 	/////////////////////////////////////////
 	case sf::Keyboard::Num1:
 		return NUM1;
@@ -152,6 +155,8 @@ inline Commands getKey(std::string s) {
 		return CONTROL;
 	if (s == "ESCAPE")
 		return ESCAPE;
+	if (s == "DELETE")
+		return DELETE;
 
 	if (s == "Q")
 		return Q;
@@ -199,6 +204,12 @@ inline Commands getKey(std::string s) {
 		return C;
 	if (s == "V")
 		return V;
+	if (s == "B")
+		return B;
+	if (s == "N")
+		return N;
+	if (s == "M")
+		return M;
 	/////////////////////////////
 	if (s == "NUM1")
 		return NUM1;

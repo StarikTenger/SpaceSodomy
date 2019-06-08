@@ -1,7 +1,12 @@
 ﻿  Control.actions.cpp
+c:\github\spacesodomy\leveleditor\leveleditor\control.actions.cpp(131): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\github\spacesodomy\leveleditor\leveleditor\control.actions.cpp(137): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\github\spacesodomy\leveleditor\leveleditor\control.actions.cpp(152): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\github\spacesodomy\leveleditor\leveleditor\control.actions.cpp(171): warning C4018: '<': signed/unsigned mismatch
+  Control.cpp
   Generating code
-  3 of 1224 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  27 of 1252 functions ( 2.2%) were compiled, the rest were copied from previous compilation.
+    14 functions were new in current compilation
+    35 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   LevelEditor.vcxproj -> C:\GitHub\SpaceSodomy\LevelEditor\Release\LevelEditor.exe

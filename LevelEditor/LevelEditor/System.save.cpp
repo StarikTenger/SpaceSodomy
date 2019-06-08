@@ -48,7 +48,7 @@ void System::save(std::string path) {
 		}
 		{//SPAWNPOINT
 			Ship* ship;
-			if (ship = dynamic_cast<Ship*>(unit)) {
+			if ((ship = dynamic_cast<Ship*>(unit)) && !dynamic_cast<Robot*>(unit)) {
 				file << "SPAWNPOINT " << (int)ship->body.pos.x << " " << (int)ship->body.pos.y << " \n";
 				continue;
 			}

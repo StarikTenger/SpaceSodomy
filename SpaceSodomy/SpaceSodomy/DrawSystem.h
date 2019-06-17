@@ -55,6 +55,7 @@ public:
 	void drawLaserCarrier(LaserCarrier* s);
 	void drawLaserCarrierBase(LaserCarrier* s);
 	void drawRobot(Robot* s);
+	void drawGenerator(Generator* s);
 	//load
 	std::map<std::string, sf::Texture*> textures;
 	void loadWalls(std::string name, std::string img, System& sys);

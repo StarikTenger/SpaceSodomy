@@ -23,7 +23,7 @@ void DrawSystem::drawWalls(System& sys) {
 				int up, down, left, right;
 				up = down = left = right = 0;
 				if (sys.field[x][y].type == WALL )
-					image("wall", x + 0.5, y + 0.5, 1, 1, 0, Color(0, 151, 255));
+					image("wall", x + 0.5, y + 0.5, 1, 1, 0, sys.colorMatches[sys.field[x][y].color]);
 
 				if (x > 0 && !sys.field[x - 1][y].type) {
 					left = 1;
@@ -54,7 +54,7 @@ void DrawSystem::drawWalls(System& sys) {
 	for (int x = 0; x < sys.field.size(); x++) {
 		for (int y = 0; y < sys.field[0].size(); y++) {
 			if (sys.field[x][y].type) {
-				color = Color(0, 151, 255);
+				color = sys.colorMatches[sys.field[x][y].color];
 				Color color1 = color;
 				int type = 0;
 				if (sys.field[x][y].spikes ) {
@@ -98,6 +98,7 @@ void DrawSystem::drawWalls(System& sys) {
 	double s = sqrt(2);
 	for (int x = 0; x < sys.field.size(); x++) {
 		for (int y = 0; y < sys.field[0].size(); y++) {
+			color = sys.colorMatches[sys.field[x][y].color];
 			switch (sys.field[x][y].type) {
 			case CORNER_A:
 				image("wallA", x + 0.5, y + 0.5, 1, 1, 0, color);

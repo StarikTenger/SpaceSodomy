@@ -235,7 +235,7 @@ System::System(string path) {
 				}
 			}
 			units.push_back(rocketLauncher);
-		}
+		} else
 		if (command == "LASER_CARRIER") {
 			LaserCarrier* laserCarrier = new LaserCarrier();
 			laserCarrier->body.m = 10000;
@@ -281,7 +281,7 @@ System::System(string path) {
 				}
 			}
 			units.push_back(laserCarrier);
-		}
+		} else
 		if (command == "ROBOT") {
 			Robot* robot = new Robot();
 			robot->body.m = 1;
@@ -333,7 +333,50 @@ System::System(string path) {
 				
 			}
 			units.push_back(robot);
+		} else
+		if (command == "GENERATOR") {
+			Generator* generator = new Generator();
+			while (1) {
+				std::string characteristic;
+				file >> characteristic;
+				if (characteristic == "END") {
+					cout << "END\n";
+					break;
+				}
+				else if (characteristic == "POS") {
+					file >> generator->body.pos.x >> generator->body.pos.y;
+					generator->body.pos.x += 0.5*blockSize;
+					generator->body.pos.y += 0.5*blockSize;
+				}
+				else if (characteristic == "DIR") {
+					file >> generator->body.direction;
+				}
+				else if (characteristic == "W") {
+					file >> generator->body.w;
+				}
+				else if (characteristic == "M") {
+					file >> generator->body.m;
+				}
+				else if (characteristic == "R") {
+					file >> generator->body.r;
+				}
+				else if (characteristic == "COLOR") {
+					file >> generator->color;
+				}
+				else {
+					cout << characteristic << "\n";
+				}
+			}
+			units.push_back(generator);
+		} else
+		if (command == "COLORS") {
+			for (int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
+					file >> field[y][x].color; 
+				}
+			}
 		}
+	
 	}
 }
 

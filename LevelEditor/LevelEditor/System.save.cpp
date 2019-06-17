@@ -38,6 +38,13 @@ void System::save(std::string path) {
 		}
 		file << "\n";
 	}
+	file << "COLORS \n";
+	for (int y = 0; y < field[0].size(); y++) {
+		for (int x = 0; x < field.size(); x++) {
+			file << field[x][y].color << " ";
+		}
+		file << "\n";
+	}
 	for (Unit* unit : units) {
 		{//EXIT
 			Exit* exit;
@@ -93,6 +100,13 @@ void System::save(std::string path) {
 				file << "BV " << robot->gun.bulletVelocity << " ";
 				file << "MF " << robot->engine.mainForce << " ";
 				file << "SHIELDS " << 0 << " ";
+			}
+		}
+		{//GENERATOR
+			Generator* generator;
+			if (generator = dynamic_cast<Generator*>(unit)) {
+				file << "GENERATOR ";
+				file << "COLOR " << generator->color << " ";
 			}
 		}
 

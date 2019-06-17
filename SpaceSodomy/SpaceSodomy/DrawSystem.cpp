@@ -68,6 +68,7 @@ void DrawSystem::drawScene() {
 		drawRocketLauncher(dynamic_cast<RocketLauncher*>(u));
 		drawLaserCarrier(dynamic_cast<LaserCarrier*>(u));
 		drawRobot(dynamic_cast<Robot*>(u));
+		drawGenerator(dynamic_cast<Generator*>(u));
 	}
 	for (auto u : sys.units) {
 		drawLaserCarrierBase(dynamic_cast<LaserCarrier*>(u));
@@ -141,6 +142,4 @@ void DrawSystem::draw() {
 	drawScene();
 	
 	drawInterface();
-
-	//window->display();
 }

@@ -11,6 +11,7 @@
 #include "Explosion.h"
 #include "Exit.h"
 #include "Dummy.h"
+#include "Generator.h"
 #include "Bonus.h"
 #include "RocketLauncher.h"
 #include "LaserCarrier.h"
@@ -29,6 +30,16 @@ public:
 	std::vector<Unit*> additionalUnits;
 	std::vector<Animation*> animations;
 	std::vector<std::string> events;
+	std::vector<int> colorsActive = {0, 0, 0, 0, 0, 0, 0};
+	std::vector<Color> colorMatches = {
+		Color(0, 151, 255),
+		Color(50, 255, 81),
+		Color(255, 238, 61),
+		Color(200, 61, 255),
+		Color(255, 61, 141),
+		Color(255, 158, 61)
+	};
+
 	double bounce = 0.5;
 	double wetFrictionK = 1;
 	std::string status = "running";

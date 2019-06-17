@@ -163,6 +163,14 @@ void DrawSystem::drawRobot(Robot* s) {
 	drawShip(s);
 }
 
+void DrawSystem::drawGenerator(Generator* s) {
+	if (!s)
+		return;
+	auto p = s->body.pos;
+	image("generatorBody", p.x, p.y, blockSize, blockSize, s->body.direction);
+	image("generatorLight", p.x, p.y, blockSize, blockSize, s->body.direction, system->colorMatches[s->color]);
+}
+
 //////////////////////////////////////////////////////////////////////
 void DrawSystem::damageScreen() {
 	animation(

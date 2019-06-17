@@ -135,6 +135,9 @@
     <ClCompile Include="Control.actions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Generator.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DrawSystem.h">
@@ -223,6 +226,9 @@
     </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Generator.h">
+      <Filter>Header Files\objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -55,6 +55,8 @@ void DrawSystem::loadTextures() {
 	loadTexture("shieldBonus", "textures/shield.png");
 	loadTexture("rocketLauncher", "textures/rocketLauncher.png");
 	loadTexture("laserCarrier", "textures/laserCarrier.png");
+	loadTexture("generatorBody", "textures/generatorBody.png");
+	loadTexture("generatorLight", "textures/generatorLight.png");
 	loadTexture("robot", "textures/robot.png");
 	loadTexture("glowRed", "textures/glowRed.png");
 	loadTexture("glowCornerRed", "textures/glowCornerRed.png");

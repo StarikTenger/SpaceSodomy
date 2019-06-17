@@ -144,6 +144,7 @@
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Gamepad.h" />
+    <ClInclude Include="Generator.h" />
     <ClInclude Include="geometry.h" />
     <ClInclude Include="getMilliCount.h" />
     <ClInclude Include="Gun.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Gamepad.cpp" />
+    <ClCompile Include="Generator.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="getMilliCount.cpp" />
     <ClCompile Include="Gun.cpp" />

@@ -17,6 +17,7 @@ class Cell{
 public:
 	int type = 0;
 	int spikes = 0;
+	int color = 0;
 	Cell();
 	~Cell();
 };

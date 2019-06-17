@@ -7,6 +7,7 @@
 #include "Mouse.h"
 #include "System.h"
 #include "Menu.h"
+#include "Generator.h"
 
 class DrawSystem{
 public:
@@ -45,6 +46,7 @@ public:
 	void drawLaserCarrierBase(LaserCarrier* s);
 	void drawRobot(Robot* s);
 	void drawShip(Ship* s);
+	void drawGenerator(Generator* s);
 	//load
 	std::map<std::string, sf::Texture*> textures;
 	void loadTexture(std::string name, std::string path);

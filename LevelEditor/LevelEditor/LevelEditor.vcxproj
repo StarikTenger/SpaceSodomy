@@ -145,6 +145,7 @@
     <ClCompile Include="DrawSystem.objects.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Exit.cpp" />
+    <ClCompile Include="Generator.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="getMilliCount.cpp" />
     <ClCompile Include="Gun.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="DrawSystem.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Exit.h" />
+    <ClInclude Include="Generator.h" />
     <ClInclude Include="geometry.h" />
     <ClInclude Include="getMilliCount.h" />
     <ClInclude Include="Gun.h" />

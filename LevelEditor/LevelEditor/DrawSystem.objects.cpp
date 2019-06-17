@@ -10,19 +10,19 @@ void DrawSystem::drawShip(Ship* s) {
 		return;
 	auto p = s->body.pos;
 	double a = geom::angle(s->body.vel);
-	double d = geom::distance({}, s->body.vel)*1;
+	double d = geom::distance({}, s->body.vel) * 1;
 	int n = 5;
 	if (!dynamic_cast<Robot*>(s))
-	for (int i = 0; i < n; i++) {
-		Vector2d pos = p + geom::direction(a)*d*i / n;
-		image("arrow", pos.x, pos.y, blockSize*0.5, blockSize*0.5, a);
-	}
+		for (int i = 0; i < n; i++) {
+			Vector2d pos = p + geom::direction(a)*d*i / n;
+			image("arrow", pos.x, pos.y, blockSize*0.5, blockSize*0.5, a);
+		}
 
 	if (s->engine.directMode && s->orders.forward)
 		image("directFireRed", p.x, p.y, blockSize, blockSize, s->body.direction + s->engine.direction);
 
 	else {
-		if(dynamic_cast<Robot*>(s))
+		if (dynamic_cast<Robot*>(s))
 			image("robot", p.x, p.y, blockSize, blockSize, s->body.direction);
 		else
 			image("ship", p.x, p.y, blockSize, blockSize, s->body.direction);
@@ -49,7 +49,7 @@ void DrawSystem::drawTurret(Turret* s) {
 		return;
 	auto p = s->body.pos;
 	//image("circle", p.x, p.y, s->activeRadius * 2, s->activeRadius * 2, 0);
-	if(s->anger > s->angerThreshold)
+	if (s->anger > s->angerThreshold)
 		image("turretAngry", p.x, p.y, blockSize, blockSize, s->body.direction);
 	else {
 		image("turret", p.x, p.y, blockSize, blockSize, s->body.direction);
@@ -65,6 +65,7 @@ void DrawSystem::drawTurret(Turret* s) {
 	}
 }
 
+
 void  DrawSystem::drawExit(Exit* s) {
 	if (!s)
 		return;
@@ -74,13 +75,14 @@ void  DrawSystem::drawExit(Exit* s) {
 	image("exit2", p.x, p.y, blockSize, blockSize, s->body.direction);
 }
 
+
 void  DrawSystem::drawBonus(Bonus* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
-	double k = 0.5;
+	double k = 0;
 	double newSize = blockSize * (0.5 + k);
-	if(s->type == "shield")
+	if (s->type == "shield")
 		image("shieldBonus", p.x, p.y, newSize, newSize, s->body.direction);
 }
 
@@ -88,7 +90,7 @@ void DrawSystem::drawRocketLauncher(RocketLauncher* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
-	double da = M_PI*2 / (double)s->gun.directions;
+	double da = M_PI * 2 / (double)s->gun.directions;
 	auto angles = geom::angleDistribution(s->body.direction, s->gun.divergenceAngle, s->gun.directions);
 	for (double a : angles) {
 		image("rocketLauncher", p.x, p.y, blockSize, blockSize, a);
@@ -110,7 +112,7 @@ void DrawSystem::drawLaserCarrierBase(LaserCarrier* s) {
 		image("laserBase", pos.x, pos.y, geom::distance(l.base, l.end) - 0, 1, s->body.direction + l.direction);
 	}
 	for (auto l : s->lasers) {
-		image("laserCarrier", p.x, p.y, blockSize, blockSize, s->body.direction + l.direction, Color(255, 0, 0));
+		image("laserCarrier", p.x, p.y, blockSize, blockSize, s->body.direction + l.direction);
 	}
 }
 
@@ -119,5 +121,14 @@ void DrawSystem::drawRobot(Robot* s) {
 		return;
 	drawShip(s);
 }
+
+void DrawSystem::drawGenerator(Generator* s) {
+	if (!s)
+		return;
+	auto p = s->body.pos;
+	image("generatorBody", p.x, p.y, blockSize, blockSize, s->body.direction);
+	image("generatorLight", p.x, p.y, blockSize, blockSize, s->body.direction, system->colorMatches[s->color]);
+}
+
 
 

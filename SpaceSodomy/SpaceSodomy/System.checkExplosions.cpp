@@ -26,9 +26,7 @@ void System::checkExplosions(Unit* c) {
 		if (!dynamic_cast<Explosion*>(u))
 			continue;
 		
-
+		
 		c->body.vel += direction(c->body.pos, u->body.pos) * k / c->body.m / r / r * dt;
-		
-		
 	}
 }

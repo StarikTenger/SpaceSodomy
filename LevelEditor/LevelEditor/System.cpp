@@ -75,11 +75,145 @@ System::System(string path) {
 			units.push_back(ship);
 		}
 		else
-			if (command == "TURRET") {
-				Turret* turret = new Turret();
-				turret->team = "enemy";
-				turret->body.r = 0.4;
-				turret->body.m = 2;
+		if (command == "TURRET") {
+			Turret* turret = new Turret();
+			turret->team = "enemy";
+			turret->body.r = 0.4;
+			turret->body.m = 2;
+			while (1) {
+				std::string characteristic;
+				file >> characteristic;
+				if (characteristic == "END") {
+					cout << "END\n";
+					break;
+				}
+				else if (characteristic == "POS") {
+					file >> turret->body.pos.x >> turret->body.pos.y;
+					turret->body.pos.x += 0.5*blockSize;
+					turret->body.pos.y += 0.5*blockSize;
+				}
+				else if (characteristic == "DIR") {
+					file >> turret->body.direction;
+				}
+				else if (characteristic == "W") {
+					file >> turret->body.w;
+				}
+				else if (characteristic == "CD") {
+					file >> turret->gun.cooldownTime;
+				}
+				else if (characteristic == "BV") {
+					file >> turret->gun.bulletVelocity;
+				}
+				else if (characteristic == "M") {
+					file >> turret->body.m;
+				}
+				else if (characteristic == "R") {
+					file >> turret->body.r;
+				}
+				else {
+					cout << characteristic << "\n";
+					//return;
+				}
+			}
+			units.push_back(turret);
+		}
+		else
+		if (command == "EXIT") {
+			Exit* exit = new Exit();
+			file >> exit->body.pos.x >> exit->body.pos.y;
+			exit->body.pos.x += 0.5*blockSize;
+			exit->body.pos.y += 0.5*blockSize;
+			units.push_back(exit);
+		}
+		else
+		if (command == "BONUS") {
+			Bonus* bonus = new Bonus();
+			while (1) {
+				std::string characteristic;
+				file >> characteristic;
+				if (characteristic == "END") {
+					cout << "END\n";
+					break;
+				}
+				else if (characteristic == "POS") {
+					file >> bonus->body.pos.x >> bonus->body.pos.y;
+					bonus->body.pos.x += 0.5*blockSize;
+					bonus->body.pos.y += 0.5*blockSize;
+				}
+				else if (characteristic == "DIR") {
+					file >> bonus->body.direction;
+				}
+				else if (characteristic == "W") {
+					file >> bonus->body.w;
+				}
+				else if (characteristic == "M") {
+					file >> bonus->body.m;
+				}
+				else if (characteristic == "R") {
+					file >> bonus->body.r;
+				}
+				else if (characteristic == "TYPE") {
+					file >> bonus->type;
+				}
+				else {
+					cout << characteristic << "\n";
+					//return;
+				}
+			}
+			units.push_back(bonus);
+		}
+		else
+		if (command == "ROCKET_LAUNCHER") {
+			RocketLauncher* rocketLauncher = new RocketLauncher();
+			rocketLauncher->body.m = 10000;
+			rocketLauncher->shields = 10;
+			rocketLauncher->team = "enemy";
+			while (1) {
+				std::string characteristic;
+				file >> characteristic;
+				if (characteristic == "END") {
+					cout << "END\n";
+					break;
+				}
+				else if (characteristic == "POS") {
+					file >> rocketLauncher->body.pos.x >> rocketLauncher->body.pos.y;
+					rocketLauncher->body.pos.x += 0.5*blockSize;
+					rocketLauncher->body.pos.y += 0.5*blockSize;
+				}
+				else if (characteristic == "DIR") {
+					file >> rocketLauncher->body.direction;
+				}
+				else if (characteristic == "W") {
+					file >> rocketLauncher->body.w;
+				}
+				else if (characteristic == "M") {
+					file >> rocketLauncher->body.m;
+				}
+				else if (characteristic == "R") {
+					file >> rocketLauncher->body.r;
+				}
+				else if (characteristic == "DIRECTIONS") {
+					file >> rocketLauncher->gun.directions;
+				}
+				else if (characteristic == "CD") {
+					file >> rocketLauncher->gun.cooldownTime;
+				}
+				else if (characteristic == "BV") {
+					file >> rocketLauncher->gun.bulletVelocity;
+				}
+				else {
+					cout << characteristic << "\n";
+					//return;
+				}
+			}
+			units.push_back(rocketLauncher);
+		}
+		else
+			if (command == "LASER_CARRIER") {
+				LaserCarrier* laserCarrier = new LaserCarrier();
+				laserCarrier->body.m = 10000;
+				laserCarrier->shields = 100;
+				laserCarrier->team = "enemy";
 				while (1) {
 					std::string characteristic;
 					file >> characteristic;
@@ -88,46 +222,95 @@ System::System(string path) {
 						break;
 					}
 					else if (characteristic == "POS") {
-						file >> turret->body.pos.x >> turret->body.pos.y;
-						turret->body.pos.x += 0.5*blockSize;
-						turret->body.pos.y += 0.5*blockSize;
+						file >> laserCarrier->body.pos.x >> laserCarrier->body.pos.y;
+						laserCarrier->body.pos.x += 0.5*blockSize;
+						laserCarrier->body.pos.y += 0.5*blockSize;
 					}
 					else if (characteristic == "DIR") {
-						file >> turret->body.direction;
+						file >> laserCarrier->body.direction;
 					}
 					else if (characteristic == "W") {
-						file >> turret->body.w;
-					}
-					else if (characteristic == "CD") {
-						file >> turret->gun.cooldownTime;
-					}
-					else if (characteristic == "BV") {
-						file >> turret->gun.bulletVelocity;
+						file >> laserCarrier->body.w;
 					}
 					else if (characteristic == "M") {
-						file >> turret->body.m;
+						file >> laserCarrier->body.m;
 					}
 					else if (characteristic == "R") {
-						file >> turret->body.r;
+						file >> laserCarrier->body.r;
+					}
+					else if (characteristic == "DIRECTIONS") {
+						int d;
+						file >> d;
+						auto directions = geom::angleDistribution(0, 2 * M_PI, d);
+						for (auto a : directions) {
+							Laser laser;
+							laser.direction = a;
+							laserCarrier->lasers.push_back(laser);
+						}
 					}
 					else {
 						cout << characteristic << "\n";
 						//return;
 					}
 				}
-				units.push_back(turret);
+				units.push_back(laserCarrier);
 			}
 			else
-				if (command == "EXIT") {
-					Exit* exit = new Exit();
-					file >> exit->body.pos.x >> exit->body.pos.y;
-					exit->body.pos.x += 0.5*blockSize;
-					exit->body.pos.y += 0.5*blockSize;
-					units.push_back(exit);
+				if (command == "ROBOT") {
+					Robot* robot = new Robot();
+					robot->body.m = 1;
+					robot->shields = 1;
+					robot->team = "enemy";
+					while (1) {
+						std::string characteristic;
+						file >> characteristic;
+						if (characteristic == "END") {
+							cout << "END\n";
+							break;
+						}
+						else if (characteristic == "POS") {
+							file >> robot->body.pos.x >> robot->body.pos.y;
+							robot->body.pos.x += 0.5*blockSize;
+							robot->body.pos.y += 0.5*blockSize;
+						}
+						else if (characteristic == "DIR") {
+							file >> robot->body.direction;
+						}
+						else if (characteristic == "W") {
+							file >> robot->body.w;
+						}
+						else if (characteristic == "CD") {
+							file >> robot->gun.cooldownTime;
+						}
+						else if (characteristic == "BV") {
+							file >> robot->gun.bulletVelocity;
+						}
+						else if (characteristic == "M") {
+							file >> robot->body.m;
+						}
+						else if (characteristic == "R") {
+							file >> robot->body.r;
+						}
+						else if (characteristic == "MF") {
+							file >> robot->engine.mainForce;
+							robot->engine.backForce = robot->engine.mainForce;
+						}
+						else if (characteristic == "TF") {
+							file >> robot->engine.turnForce;
+						}
+						else if (characteristic == "SHIELDS") {
+							file >> robot->shields;
+						}
+						else if (characteristic == "TEAM") {
+							file >> robot->team;
+						}
+
+					}
+					units.push_back(robot);
 				}
 				else
-					if (command == "BONUS") {
-						Bonus* bonus = new Bonus();
+					if (command == "GENERATOR") {
+						Generator* generator = new Generator();
 						while (1) {
 							std::string characteristic;
 							file >> characteristic;
@@ -136,176 +319,40 @@ System::System(string path) {
 								break;
 							}
 							else if (characteristic == "POS") {
-								file >> bonus->body.pos.x >> bonus->body.pos.y;
-								bonus->body.pos.x += 0.5*blockSize;
-								bonus->body.pos.y += 0.5*blockSize;
+								file >> generator->body.pos.x >> generator->body.pos.y;
+								generator->body.pos.x += 0.5*blockSize;
+								generator->body.pos.y += 0.5*blockSize;
 							}
 							else if (characteristic == "DIR") {
-								file >> bonus->body.direction;
+								file >> generator->body.direction;
 							}
 							else if (characteristic == "W") {
-								file >> bonus->body.w;
+								file >> generator->body.w;
 							}
 							else if (characteristic == "M") {
-								file >> bonus->body.m;
+								file >> generator->body.m;
 							}
 							else if (characteristic == "R") {
-								file >> bonus->body.r;
+								file >> generator->body.r;
 							}
-							else if (characteristic == "TYPE") {
-								file >> bonus->type;
+							else if (characteristic == "COLOR") {
+								file >> generator->color;
 							}
 							else {
 								cout << characteristic << "\n";
-								//return;
 							}
 						}
-						units.push_back(bonus);
+						units.push_back(generator);
 					}
 					else
-						if (command == "ROCKET_LAUNCHER") {
-							RocketLauncher* rocketLauncher = new RocketLauncher();
-							rocketLauncher->body.m = 10000;
-							rocketLauncher->shields = 10;
-							rocketLauncher->team = "enemy";
-							while (1) {
-								std::string characteristic;
-								file >> characteristic;
-								if (characteristic == "END") {
-									cout << "END\n";
-									break;
-								}
-								else if (characteristic == "POS") {
-									file >> rocketLauncher->body.pos.x >> rocketLauncher->body.pos.y;
-									rocketLauncher->body.pos.x += 0.5*blockSize;
-									rocketLauncher->body.pos.y += 0.5*blockSize;
-								}
-								else if (characteristic == "DIR") {
-									file >> rocketLauncher->body.direction;
-								}
-								else if (characteristic == "W") {
-									file >> rocketLauncher->body.w;
-								}
-								else if (characteristic == "M") {
-									file >> rocketLauncher->body.m;
-								}
-								else if (characteristic == "R") {
-									file >> rocketLauncher->body.r;
-								}
-								else if (characteristic == "DIRECTIONS") {
-									file >> rocketLauncher->gun.directions;
-								}
-								else if (characteristic == "CD") {
-									file >> rocketLauncher->gun.cooldownTime;
-								}
-								else if (characteristic == "BV") {
-									file >> rocketLauncher->gun.bulletVelocity;
-								}
-								else {
-									cout << characteristic << "\n";
-									//return;
+						if (command == "COLORS") {
+							for (int x = 0; x < width; x++) {
+								for (int y = 0; y < height; y++) {
+									file >> field[y][x].color;
 								}
 							}
-							units.push_back(rocketLauncher);
 						}
-		if (command == "LASER_CARRIER") {
-			LaserCarrier* laserCarrier = new LaserCarrier();
-			laserCarrier->body.m = 10000;
-			laserCarrier->shields = 100;
-			laserCarrier->team = "enemy";
-			while (1) {
-				std::string characteristic;
-				file >> characteristic;
-				if (characteristic == "END") {
-					cout << "END\n";
-					break;
-				}
-				else if (characteristic == "POS") {
-					file >> laserCarrier->body.pos.x >> laserCarrier->body.pos.y;
-					laserCarrier->body.pos.x += 0.5*blockSize;
-					laserCarrier->body.pos.y += 0.5*blockSize;
-				}
-				else if (characteristic == "DIR") {
-					file >> laserCarrier->body.direction;
-				}
-				else if (characteristic == "W") {
-					file >> laserCarrier->body.w;
-				}
-				else if (characteristic == "M") {
-					file >> laserCarrier->body.m;
-				}
-				else if (characteristic == "R") {
-					file >> laserCarrier->body.r;
-				}
-				else if (characteristic == "DIRECTIONS") {
-					int d;
-					file >> d;
-					auto directions = geom::angleDistribution(0, 2 * M_PI, d);
-					for (auto a : directions) {
-						Laser laser;
-						laser.direction = a;
-						laserCarrier->lasers.push_back(laser);
-					}
-				}
-				else {
-					cout << characteristic << "\n";
-					//return;
-				}
-			}
-			units.push_back(laserCarrier);
-		}
-		if (command == "ROBOT") {
-			Robot* robot = new Robot();
-			robot->body.m = 1;
-			robot->shields = 1;
-			robot->team = "enemy";
-			while (1) {
-				std::string characteristic;
-				file >> characteristic;
-				if (characteristic == "END") {
-					cout << "END\n";
-					break;
-				}
-				else if (characteristic == "POS") {
-					file >> robot->body.pos.x >> robot->body.pos.y;
-					robot->body.pos.x += 0.5*blockSize;
-					robot->body.pos.y += 0.5*blockSize;
-				}
-				else if (characteristic == "DIR") {
-					file >> robot->body.direction;
-				}
-				else if (characteristic == "W") {
-					file >> robot->body.w;
-				}
-				else if (characteristic == "CD") {
-					file >> robot->gun.cooldownTime;
-				}
-				else if (characteristic == "BV") {
-					file >> robot->gun.bulletVelocity;
-				}
-				else if (characteristic == "M") {
-					file >> robot->body.m;
-				}
-				else if (characteristic == "R") {
-					file >> robot->body.r;
-				}
-				else if (characteristic == "MF") {
-					file >> robot->engine.mainForce;
-					robot->engine.backForce = robot->engine.mainForce;
-				}
-				else if (characteristic == "TF") {
-					file >> robot->engine.turnForce;
-				}
-				else if (characteristic == "SHIELDS") {
-					file >> robot->shields;
-				}
-				else if (characteristic == "TEAM") {
-					file >> robot->team;
-				}
 
-			}
-			units.push_back(robot);
-		}
 	}
 }
 

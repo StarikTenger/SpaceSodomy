@@ -64,6 +64,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = 0;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
 		}
@@ -71,6 +72,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
 		}
@@ -78,6 +80,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_A;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
 		}
@@ -85,6 +88,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_B;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
 		}
@@ -92,6 +96,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_C;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
 		}
@@ -99,6 +104,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_D;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
 		}
@@ -106,6 +112,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 1;
+				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
 		}
@@ -155,18 +162,27 @@ void Control::actions() {
 		}
 		if (keys[NUM5] && !keysPrev[NUM5]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
+				Generator* generator = new Generator();
+				generator->body.pos = Vector2d((int)pos.x + 0.5, (int)pos.y + 0.5);
+				generator->color = (int)menu.b_color->value;
+				sys.units.push_back(generator);
+			}
+		}
+		if (keys[NUM6] && !keysPrev[NUM6]) {
+			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				Bonus* bonus = new Bonus();
 				bonus->body.pos = Vector2d((int)pos.x + 0.5, (int)pos.y + 0.5);
 				sys.units.push_back(bonus);
 			}
 		}
-		if (keys[NUM6] && !keysPrev[NUM6]) {
+		if (keys[NUM7] && !keysPrev[NUM7]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				Exit* exit = new Exit();
 				exit->body.pos = Vector2d((int)pos.x + 0.5, (int)pos.y + 0.5);
 				sys.units.push_back(exit);
 			}
 		}
+
 		if (keys[DELETE] && !keysPrev[DELETE] || keys[Q] && !keysPrev[Q]) {
 			for (int i = 0; i < sys.units.size(); i++) {
 				if (geom::distance(pos, sys.units[i]->body.pos) < 0.5 && i!=0) {

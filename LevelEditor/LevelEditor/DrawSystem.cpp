@@ -48,6 +48,7 @@ void DrawSystem::drawScene() {
 		drawRocketLauncher(dynamic_cast<RocketLauncher*>(u));
 		drawLaserCarrierBase(dynamic_cast<LaserCarrier*>(u));
 		drawRobot(dynamic_cast<Robot*>(u));
+		drawGenerator(dynamic_cast<Generator*>(u));
 	}
 }
 
@@ -66,11 +67,17 @@ void DrawSystem::drawInterface() {
 			text(str, b->pos.x*h, b->pos.y*h + 0.04*h, 0.04*h, Color(70, 70, 70));
 		}
 		if (b->type == 1) {
-			for (int i = 0; i < 2*M_PI / b->step; i++) {
-				Vector2d pos = Vector2d(b->pos.x*h, b->pos.y*h) + geom::direction(b->step*i) * b->box.x*h*0.45;
-				image("pointer", pos.x, pos.y, b->box.x*h/10, b->box.y*h/10, b->step*i + M_PI);
+			if (b == menu->b_color) {
+				fillRect(b->pos.x*h, b->pos.y*h, b->box.x*h*0.7, b->box.y*h*0.7, Color(20, 20, 20, 255));
+				fillRect(b->pos.x*h, b->pos.y*h, b->box.x*h*0.6, b->box.y*h*0.6, system->colorMatches[(int)b->value]);
 			}
-			image("pointer", b->pos.x*h, b->pos.y*h, b->box.x*h, b->box.y*h, b->value);
+			else {
+				for (int i = 0; i < 2 * M_PI / b->step; i++) {
+					Vector2d pos = Vector2d(b->pos.x*h, b->pos.y*h) + geom::direction(b->step*i) * b->box.x*h*0.45;
+					image("pointer", pos.x, pos.y, b->box.x*h / 10, b->box.y*h / 10, b->step*i + M_PI);
+				}
+				image("pointer", b->pos.x*h, b->pos.y*h, b->box.x*h, b->box.y*h, b->value);
+			}
 		}
 	}
 

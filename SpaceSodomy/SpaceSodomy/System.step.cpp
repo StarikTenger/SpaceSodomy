@@ -16,6 +16,14 @@ using namespace std;
 
 void System::step() {
 	time += dt;
+
+	//setting colors
+	for (int& c : colorsActive) {
+		c = 0;
+	}
+	colorsActive[0] = 1;
+	
+
 	//collision
 	fillChunks();
 	collision();
@@ -30,9 +38,6 @@ void System::step() {
 		b.posPrev = b.pos;
 		b.velPrev = b.vel;
 	}
-
-
-
 
 	//bullet-check
 	//lasers
@@ -106,11 +111,11 @@ void System::step() {
 
 	//personal managment (think)
 	for (Unit* u : units) {
-		Creature* c;
 		Shooter* s;
 		if (s = dynamic_cast<Shooter*>(u)) {
 			s->gun.timeToCooldown -= dt;
 		}
+		Creature* c;
 		if (c = dynamic_cast<Creature*>(u)) {
 			think(c);
 			c->immortality -= dt;
@@ -221,6 +226,18 @@ void System::step() {
 				}
 			}
 		}
+		Generator* g;
+		if (g = dynamic_cast<Generator*>(u)) {
+			colorsActive[g->color] = 1;
+			Vector2d pos = geom::direction(random::floatRandom(0, M_PI*2, 3))*random::floatRandom(0, 0.5, 3);
+			Color color = colorMatches[g->color];
+			if (checkTime(particlePeriod) && !random::intRandom(0, 6))
+				animation("particleFlame",
+					AnimationState(g->body.pos + pos, Vector2d(0.0, 0.0), 0, colorMatches[g->color]),
+					AnimationState(g->body.pos + pos, Vector2d(0.2, 0.2), 0, Color(color.r, color.g, color.b, 0)),
+					1
+				);
+		}
 	}
 
 	//orders	
@@ -269,6 +286,30 @@ void System::step() {
 				}
 				delete units[i];
 				units[i] = d;
+			}
+		}
+	}
+
+	//color checking
+	for (int x = 0; x < field.size(); x++) {
+		for (int y = 0; y < field[x].size(); y++) {
+			if (!colorsActive[field[x][y].color]) {
+				if (field[x][y].type != EMPTY) {
+					field[x][y].type = EMPTY;
+					field[x][y].spikes = 0;
+					Color col = colorMatches[field[x][y].color];
+					for (int i = 0; i < 5; i++) {
+						Vector2d pos = Vector2d(x + 0.5, y + 0.5) + Vector2d(random::floatRandom(-0.5, 0.5, 3), random::floatRandom(-0.5, 0.5, 3));
+						animation("particleFlame",
+							AnimationState(pos, Vector2d(0.2, 0.2), 0, col),
+							AnimationState(pos, Vector2d(0, 0), 0, col),
+							random::floatRandom(0.5, 3, 3)
+						);
+					}
+				}
+				
+
+				
 			}
 		}
 	}

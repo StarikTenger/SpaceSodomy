@@ -3,7 +3,7 @@
 
 void DrawSystem::loadTexture(std::string name, std::string path) {
 	sf::Texture* tex = new sf::Texture();
-	textures.insert(std::make_pair(name, 
+	textures.insert(std::make_pair(name,
 		tex
 	));
 	textures[name]->loadFromFile(path);
@@ -55,6 +55,8 @@ void DrawSystem::loadTextures() {
 	loadTexture("shieldBonus", "textures/shield.png");
 	loadTexture("rocketLauncher", "textures/rocketLauncher.png");
 	loadTexture("laserCarrier", "textures/laserCarrier.png");
+	loadTexture("generatorBody", "textures/generatorBody.png");
+	loadTexture("generatorLight", "textures/generatorLight.png");
 	loadTexture("robot", "textures/robot.png");
 	loadTexture("glowRed", "textures/glowRed.png");
 	loadTexture("glowCornerRed", "textures/glowCornerRed.png");

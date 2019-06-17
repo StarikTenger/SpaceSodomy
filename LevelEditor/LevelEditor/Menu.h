@@ -11,6 +11,7 @@ public:
 	Button* b_bv;
 	Button* b_cd;
 	Button* b_dirs;
+	Button* b_color;
 	Menu();
 	~Menu();
 };

@@ -31,6 +31,7 @@ Control::Control() {
 		}
 	}
 	loadConfig();
+	level = levelMax;
 	sys = { levels[levelMax%levels.size()] };
 }
 
@@ -52,6 +53,9 @@ void Control::loadConfig() {
 		} else 
 		if (command == "LEVEL") {
 			file >> levelMax;
+		}
+		if (command == "ENABLE_JOYSTICK") {
+			enableJoystick = 1;
 		}
 	}
 	file.close();
@@ -90,47 +94,50 @@ void Control::step() {
 		sys.getShip(0)->orders = {};
 		if (sys.status != "death") {
 			double threshold = 50;
-			if (keys[MOVE_LEFT] || joystick.pos.x < -threshold) {
+			if (keys[MOVE_LEFT] || joystick.pos.x < -threshold && enableJoystick) {
 				sys.getShip(0)->orders.left = 1;
 			}
-			if (keys[MOVE_RIGHT] || joystick.pos.x > threshold) {
+			if (keys[MOVE_RIGHT] || joystick.pos.x > threshold && enableJoystick) {
 				sys.getShip(0)->orders.right = 1;
 			}
-			if (keys[MOVE_FORWARD] || joystick.pos.y < -threshold) {
+			if (keys[MOVE_FORWARD] || joystick.pos.y < -threshold && enableJoystick) {
 				sys.getShip(0)->orders.forward = 1;
 			}
-			if (keys[MOVE_BACKWARD] || joystick.pos.y > threshold) {
+			if (keys[MOVE_BACKWARD] || joystick.pos.y > threshold && enableJoystick) {
 				sys.getShip(0)->orders.backward = 1;
 			}
-			if (keys[TURN_LEFT] || joystick.leftUp || joystick.leftDown) {
+			if (keys[TURN_LEFT] || joystick.leftUp || joystick.leftDown && enableJoystick) {
 				sys.getShip(0)->orders.turnLeft = 1;
 			}
-			if (keys[TURN_RIGHT] || joystick.rightUp || joystick.rightDown) {
+			if (keys[TURN_RIGHT] || joystick.rightUp || joystick.rightDown && enableJoystick) {
 				sys.getShip(0)->orders.turnRight = 1;
 			}
 			if (keys[STABILIZE_ROTATION]) {
 				sys.getShip(0)->orders.stabilizeRotation = 1;
 			}
-			if (keys[SHOOT] || joystick.button4) {
+			if (keys[SHOOT] || joystick.button4 && enableJoystick) {
 				sys.getShip(0)->orders.shoot = 1;
 			}
-			if (keys[ZOOM_OUT] || joystick.button3) {
+			if (keys[ZOOM_OUT] || joystick.button3 && enableJoystick) {
 				drawSys.cam.scale /= pow(drawSys.cam.scaleVel, 1 / (double)dt);
 			}
-			if (keys[ZOOM_IN] || joystick.button2) {
+			if (keys[ZOOM_IN] || joystick.button2 && enableJoystick) {
 				drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1 / (double)dt);
 			}
 		}
-		if (keys[RESTART] || joystick.button1) {
+		if (keys[RESTART] || joystick.button1 && enableJoystick) {
 			sys.status = "restart";
 		}
-		if (keys[EXIT]) {
-			mode = MENU;
+		if (keys[EXIT] && !keysPrev[EXIT]) {
+			if (mode == MENU)
+				mode = GAME;
+			else
+				mode = MENU;
 		}
 		
 		if (mode == GAME) {
 			if (sys.status == "restart") {
-				sys = System(levels[level]);
+				sys = System(levels[level%levels.size()]);
 				std::cout << level << " restart\n";
 			}
 			if (sys.status == "next level") {
@@ -176,7 +183,7 @@ void Control::step() {
 				if (command == "play") {
 					//level = levelMax;
 					mode = GAME;
-					std::cout << level << " play\n";
+					std::cout << level << " "<< levelMax <<  " play\n";
 					continue;
 				}
 				if (command == "level") {

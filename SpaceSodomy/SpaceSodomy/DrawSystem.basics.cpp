@@ -23,7 +23,7 @@ void DrawSystem::image(std::string name, double x, double y, double width, doubl
 	sprite.setPosition(x, y);
 	sprite.setColor(sf::Color(std::min(255, color.r), std::min(255, color.g), std::min(255, color.b), std::min(255, color.a)));
 	sprite.setRotation(angle * 180 / M_PI);
-
+	
 	window->draw(sprite);
 }
 

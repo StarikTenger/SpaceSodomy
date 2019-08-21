@@ -2,12 +2,9 @@
 
 int main(int, char**){
 	random::start();
-	
 	Control control;
-
 	while (!control.stop) {
-		control.step();
-		
+		control.step();		
 	}
 	return 0;
 }

@@ -17,19 +17,19 @@ using namespace std;
 void System::step() {
 	time += dt;
 
-	//setting colors
+	// setting colors
 	for (int& c : colorsActive) {
 		c = 0;
 	}
 	colorsActive[0] = 1;
 	
 
-	//collision
+	// collision
 	fillChunks();
 	collision();
 	
 
-	//movement
+	// movement
 	for (Unit* u : units) {
 		auto& b = u->body;
 		
@@ -39,8 +39,8 @@ void System::step() {
 		b.velPrev = b.vel;
 	}
 
-	//bullet-check
-	//lasers
+	// bullet-check
+	// lasers
 	for (Unit* agressor : units) {
 		if (dynamic_cast<Bullet*>(agressor) || dynamic_cast<Explosion*>(agressor) || dynamic_cast<LaserCarrier*>(agressor)) {
 			auto neighbors = getNeighbors(agressor);
@@ -60,7 +60,7 @@ void System::step() {
 			}
 		}
 	}
-	//bullets
+	// bullets
 	for (Unit* agressor : units) {
 		if (dynamic_cast<Bullet*>(agressor) || dynamic_cast<Explosion*>(agressor) || dynamic_cast<LaserCarrier*>(agressor)) {
 			auto neighbors = getNeighbors(agressor);
@@ -94,7 +94,7 @@ void System::step() {
 		}
 	}
 
-	//bonuses
+	// bonuses
 	for (Unit* u : units) {
 		auto neighbors = getNeighbors(u);
 		for (Unit* u1 : neighbors) {
@@ -109,7 +109,7 @@ void System::step() {
 		}
 	}
 
-	//personal managment (think)
+	// personal managment (think, particles)
 	for (Unit* u : units) {
 		Shooter* s;
 		if (s = dynamic_cast<Shooter*>(u)) {
@@ -163,32 +163,24 @@ void System::step() {
 		if (lC = dynamic_cast<LaserCarrier*>(u)) {
 			for (auto& laser : lC->lasers) {
 				Vector2d pos = lC->body.pos;
-				laser.base = pos;
+				laser.base = lC->body.pos;
 				double a = lC->body.direction + laser.direction;
 				Vector2d dir = direction(a);
+				double stepSize = 0.5;
 				
 				for (int i = 0; i < 100; i++) {
 					if (checkWall(pos)) {
-						double x = (int)(pos.x / blockSize + field.size()) - field.size();
-						double y = (int)(pos.y / blockSize + field[0].size()) - field[0].size();
+						double x = (double)(int)(pos.x / blockSize + field.size()) - field.size();
+						double y = (double)(int)(pos.y / blockSize + field[0].size()) - field[0].size();
 						double width = field.size();
 						double height = field[0].size();
 						Vector2d centre(x + 0.5, y + 0.5);
-						double r = 0.55;
-						if (isCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos)) {
-							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos);
-						} else 
-						if (isCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos)) {
-							laser.end = getCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos);
-						} else
-						if (isCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos)) {
-							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos);
-						} else
-						if (isCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos)) {
-							laser.end = getCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos);
-						} else if (isCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos)) {
+						Vector2d rel = pos - centre; // relative coordinates
+						double r = 0.5;
+						// borders
+						if (isCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos)) {
 							laser.end = getCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos);
-						} else 
+						} else
 						if (isCross(Vector2d(0, 0), Vector2d(0, height), laser.base, pos)) {
 							laser.end = getCross(Vector2d(0, 0), Vector2d(0, height), laser.base, pos);
 						} else
@@ -197,15 +189,38 @@ void System::step() {
 						} else
 						if (isCross(Vector2d(width, height), Vector2d(0, height), laser.base, pos)) {
 							laser.end = getCross(Vector2d(width, height), Vector2d(0, height), laser.base, pos);
+						} 
+						else /* / walls
+						if (isCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos) && field[x][y].type == WALL) {
+							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos);
+						} else 
+						if (isCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos) && field[x][y].type == WALL) {
+							laser.end = getCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos);
 						} else
-						if (isCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos)) {
-							laser.end = getCross(Vector2d(0, 0), Vector2d(width, 0), laser.base, pos);
-						} else {
+						if (isCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos) && field[x][y].type == WALL) {
+							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos);
+						} else
+						if (isCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos) && field[x][y].type == WALL) {
+							laser.end = getCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos);
+						} 
+						else /* / diagonal
+						if ( rel.y < -rel.x && field[x][y].type == CORNER_A || rel.y > -rel.x && field[x][y].type == CORNER_C) {
+							laser.end = getCross(centre + Vector2d(-r, r), centre + Vector2d(r, -r), laser.base, pos);
+						} else 
+						if (rel.y < rel.x && field[x][y].type == CORNER_B || rel.y > rel.x && field[x][y].type == CORNER_D) {
+							laser.end = getCross(centre + Vector2d(-r, -r), centre + Vector2d(r, r), laser.base, pos);					
+						}  
+						else*/  {
 							laser.end = pos;
+							if (stepSize > 0.02) {
+								pos -= dir * stepSize;
+								stepSize /= 2;
+								continue;
+							}
 						}
 						break;
 					}
-					pos += dir * 0.5;
+					pos += dir * stepSize;
 				}
 				for (int i = 0; i < 1; i++) {
 					if (checkTime(particlePeriod)) {
@@ -240,7 +255,7 @@ void System::step() {
 		}
 	}
 
-	//orders	
+	// orders	
 	for (Unit* u : units) {
 		Creature* c;
 		if (c = dynamic_cast<Creature*>(u)) {
@@ -249,16 +264,13 @@ void System::step() {
 
 	}
 
-
-	//additing units
+	// additing units
 	for (Unit* u : additionalUnits) {
 		units.push_back(u);
 	}
 	additionalUnits = {};
 
-	
-
-	//killing
+	// killing
 	for (int i = 0; i < units.size(); i++) {
 		if (units[i]->hp <= 0) {
 			if (i == 0) {
@@ -290,7 +302,7 @@ void System::step() {
 		}
 	}
 
-	//color checking
+	// color checking
 	for (int x = 0; x < field.size(); x++) {
 		for (int y = 0; y < field[x].size(); y++) {
 			if (!colorsActive[field[x][y].color]) {
@@ -314,7 +326,7 @@ void System::step() {
 		}
 	}
 
-	//animations
+	// animations
 	for (int i = 0; i < animations.size(); i++) {
 		if (animations[i]->time >= animations[i]->timeFinish || animations[i]->time < animations[i]->timeStart) {
 			delete animations[i];

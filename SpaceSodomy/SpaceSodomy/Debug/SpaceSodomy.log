@@ -1,8 +1,12 @@
-﻿  Animation.cpp
-  Audio.cpp
-c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(36): warning C4018: '<': signed/unsigned mismatch
-c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(47): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\dryn\desktop\spacesodomy\spacesodomy\audio.cpp(48): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Body.cpp
-  Bonus.cpp
+﻿  DrawSystem.drawWalls.cpp
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(12,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(13,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(31,11): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(37,11): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(54,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(55,21): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(78,11): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(90,11): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(100,20): warning C4018:  '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.drawWalls.cpp(101,21): warning C4018:  '<': signed/unsigned mismatch
+  SpaceSodomy.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\Debug\SpaceSodomy.exe

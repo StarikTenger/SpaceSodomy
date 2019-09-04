@@ -11,6 +11,7 @@ enum Commands {
 	SET_CORNER_C,
 	SET_CORNER_D,
 	SET_SPIKES,
+	SET_SPAWNPOINT,
 
 	/////////////////////////////////////////
 	NUM1, 
@@ -246,6 +247,8 @@ inline Commands getKey(std::string s) {
 		return SET_CORNER_D;
 	if (s == "SPIKES")
 		return SET_SPIKES;
+	if (s == "SPAWNPOINT")
+		return SET_SPAWNPOINT;
 	return NONE;
 }
 

@@ -50,7 +50,7 @@ void System::step() {
 					for (auto laser : laserCarrier->lasers) {
 						double a = laserCarrier->body.direction + laser.direction + M_PI / 2;
 						Vector2d r = direction(a) *  victim->body.r;
-						if (agressor->team != victim->team && isCross(laser.end, laser.base, victim->body.pos - r, victim->body.pos + r)) {
+						if (isCross(laser.end, laser.base, victim->body.pos - r, victim->body.pos + r) && !dynamic_cast<LaserCarrier*>(victim)) {
 							if(!dynamic_cast<Bonus*>(victim))
 								damage(victim);
 						}
@@ -159,7 +159,7 @@ void System::step() {
 				e->hp = -EPS;
 			}
 		}
-		LaserCarrier* lC;
+		LaserCarrier* lC; //laser crossing
 		if (lC = dynamic_cast<LaserCarrier*>(u)) {
 			for (auto& laser : lC->lasers) {
 				Vector2d pos = lC->body.pos;
@@ -190,27 +190,7 @@ void System::step() {
 						if (isCross(Vector2d(width, height), Vector2d(0, height), laser.base, pos)) {
 							laser.end = getCross(Vector2d(width, height), Vector2d(0, height), laser.base, pos);
 						} 
-						else /* / walls
-						if (isCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos) && field[x][y].type == WALL) {
-							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(r, -r), laser.base, pos);
-						} else 
-						if (isCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos) && field[x][y].type == WALL) {
-							laser.end = getCross(centre + Vector2d(-r, r), centre + Vector2d(-r, -r), laser.base, pos);
-						} else
-						if (isCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos) && field[x][y].type == WALL) {
-							laser.end = getCross(centre + Vector2d(r, r), centre + Vector2d(-r, r), laser.base, pos);
-						} else
-						if (isCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos) && field[x][y].type == WALL) {
-							laser.end = getCross(centre + Vector2d(-r, -r), centre + Vector2d(r, -r), laser.base, pos);
-						} 
-						else /* / diagonal
-						if ( rel.y < -rel.x && field[x][y].type == CORNER_A || rel.y > -rel.x && field[x][y].type == CORNER_C) {
-							laser.end = getCross(centre + Vector2d(-r, r), centre + Vector2d(r, -r), laser.base, pos);
-						} else 
-						if (rel.y < rel.x && field[x][y].type == CORNER_B || rel.y > rel.x && field[x][y].type == CORNER_D) {
-							laser.end = getCross(centre + Vector2d(-r, -r), centre + Vector2d(r, r), laser.base, pos);					
-						}  
-						else*/  {
+						else {
 							laser.end = pos;
 							if (stepSize > 0.02) {
 								pos -= dir * stepSize;

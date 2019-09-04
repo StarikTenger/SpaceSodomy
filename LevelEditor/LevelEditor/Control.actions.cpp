@@ -116,6 +116,12 @@ void Control::actions() {
 				saved = 0;
 			}
 		}
+		if (keys[SET_SPAWNPOINT]) {
+			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
+				sys.units[0]->body.pos = Vector2d((int)pos.x + 0.5, (int)pos.y + 0.5);
+				saved = 0;
+			}
+		}
 		if (keys[NUM1] && !keysPrev[NUM1]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				Turret* turret = new Turret();
@@ -151,12 +157,18 @@ void Control::actions() {
 		if (keys[NUM4] && !keysPrev[NUM4]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				Robot* robot = new Robot();
+				
+
 				robot->body.pos = Vector2d((int)pos.x + 0.5, (int)pos.y + 0.5);
 				robot->body.direction = menu.b_dir->value;
 				robot->body.w = menu.b_w->value * 2 * M_PI;
+
+				robot->engine.mainForce = 15;
+
 				robot->gun.cooldownTime = menu.b_cd->value;
 				robot->gun.bulletVelocity = menu.b_bv->value;
 				robot->gun.directions = menu.b_dirs->value;
+
 				sys.units.push_back(robot);
 			}
 		}

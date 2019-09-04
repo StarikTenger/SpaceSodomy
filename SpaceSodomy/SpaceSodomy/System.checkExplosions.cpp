@@ -19,7 +19,7 @@ void System::checkExplosions(Unit* c) {
 	for (Unit* u : units) {
 		
 		double r = distance(c->body.pos, u->body.pos);
-		if (!(r < c->body.r + u->body.r))
+		if (!(r < c->body.r + u->body.r) || r < EPS)
 			continue;
 		if (c == u)
 			continue;

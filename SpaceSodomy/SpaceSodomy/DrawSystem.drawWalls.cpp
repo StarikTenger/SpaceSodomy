@@ -56,9 +56,9 @@ void DrawSystem::drawWalls(System& sys) {
 			if (sys.field[x][y].type) {
 				color = sys.colorMatches[sys.field[x][y].color];
 				Color color1 = color;
-				int type = 0;
+				int spikes = 0;
 				if (sys.field[x][y].spikes ) {
-					type = 1;
+					spikes = 1;
 					double t = (sys.time - x * 0) * 5;
 					color = Color(255, 0, 0);
 					color1 = Color(255, 255, 255);
@@ -66,29 +66,30 @@ void DrawSystem::drawWalls(System& sys) {
 				int up, down, left, right;
 				up = down = left = right = 0;
 				
-				if (sys.field[x][y].type != WALL)
+				if (sys.field[x][y].type == EMPTY)
 					continue;
-				if (x > 0 && !sys.field[x - 1][y].type) {
+				int type = sys.field[x][y].type;
+				if (x > 0 && !sys.field[x - 1][y].type && (type == WALL || type == CORNER_A || type == CORNER_D)) {
 					left = 1;
-					if (type)
+					if (spikes)
 						image("glowRed", x - 1 + 0.5, y + 0.5, 1, 1, M_PI, color1);
 					image("wallBorder", x + 0.5, y + 0.5, 1, 1, M_PI, color1);
 				}
-				if (x < sys.field.size() - 1 && !sys.field[x + 1][y].type) {
+				if (x < sys.field.size() - 1 && !sys.field[x + 1][y].type && (type == WALL || type == CORNER_B || type == CORNER_C)) {
 					right = 1;
-					if (type)
+					if (spikes)
 						image("glowRed", x + 1 + 0.5, y + 0.5, 1, 1, 0, color1);
 					image("wallBorder", x + 0.5, y + 0.5, 1, 1, 0, color1);
 				}
-				if (y > 0 && !sys.field[x][y - 1].type) {
+				if (y > 0 && !sys.field[x][y - 1].type && (type == WALL || type == CORNER_A || type == CORNER_B)) {
 					up = 1;
-					if (type)
+					if (spikes)
 						image("glowRed", x + 0.5, y - 1 + 0.5, 1, 1, -M_PI * 0.5, color1);
 					image("wallBorder", x + 0.5, y + 0.5, 1, 1, -M_PI * 0.5, color1);
 				}
-				if (y < sys.field.size() - 1 && !sys.field[x][y + 1].type) {
+				if (y < sys.field.size() - 1 && !sys.field[x][y + 1].type && (type == WALL || type == CORNER_C || type == CORNER_D)) {
 					down = 1;
-					if (type)
+					if (spikes)
 						image("glowRed", x + 0.5, y + 1 + 0.5, 1, 1, M_PI * 0.5, color1);
 					image("wallBorder", x + 0.5, y + 0.5, 1, 1, M_PI*0.5, color1);
 				}

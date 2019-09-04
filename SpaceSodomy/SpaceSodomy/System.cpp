@@ -95,6 +95,9 @@ System::System(string path) {
 		if (command == "END") {
 			break;
 		}
+		if (command == "BACKGROUND") {
+			file >> background;
+		}
 		if (command == "SPAWNPOINT") {
 			std::cout << "spawn\n";
 			Ship* ship = new Ship(

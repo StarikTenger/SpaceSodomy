@@ -24,11 +24,16 @@ public:
 	double dt = 0.005;
 	double blockSize = 1;
 	double time = 0;
+
 	std::vector<std::vector<Cell> > field;
+
 	std::vector<std::vector<std::vector<Unit*> > > chunks;
+
 	std::vector<Unit*> units;
 	std::vector<Unit*> additionalUnits;
+
 	std::vector<Animation*> animations;
+
 	std::vector<std::string> events;
 	std::vector<int> colorsActive = {0, 0, 0, 0, 0, 0, 0};
 	std::vector<Color> colorMatches = {
@@ -42,10 +47,14 @@ public:
 
 	double bounce = 0.5;
 	double wetFrictionK = 1;
-	std::string status = "running";
-	int level = 0;
 	double particleLevel = 1;
 	double particlePeriod = 0.01;
+
+	std::string status = "running";
+
+	int level = 0;
+
+	bool background = 1;
 
 	System();
 	System(int width, int height);
@@ -58,7 +67,10 @@ public:
 	bool checkAbility(Unit* shooter, Unit* target, double threshold);
 private:
 	double chunkSize = 3;
+
 	bool checkTime(double t);
+	bool collision(Body& body, std::pair<Vector2d, Vector2d> wall);
+
 	void fillChunks();
 	void sound(std::string name, Vector2d pos, double volume);
 	void animation(std::string name, AnimationState stateStart, AnimationState stateFinish, double duration);

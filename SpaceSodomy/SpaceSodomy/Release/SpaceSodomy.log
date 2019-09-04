@@ -1,7 +1,42 @@
-﻿  main.cpp
+﻿  DrawSystem.cpp
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,91): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,91): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,91): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,91): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,91): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,41): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,41): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,41): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,41): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(33,41): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,41): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,41): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,41): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,41): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,41): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,22): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,22): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,22): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,22): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(34,22): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(36,63): warning C4244:  'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,51): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,51): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,51): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,51): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,51): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,48): warning C4244:  'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,48): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,48): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,48): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(96,48): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(105,43): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(105,29): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(105,14): warning C4244:  'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\SpaceSodomy\DrawSystem.cpp(124,20): warning C4018:  '<': signed/unsigned mismatch
   Generating code
-  1 of 1858 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  0 of 1700 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    6 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   SpaceSodomy.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomy\SpaceSodomy\Release\SpaceSodomy.exe

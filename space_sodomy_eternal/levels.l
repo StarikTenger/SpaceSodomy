@@ -1,3 +1,6 @@
+levels/l01.lvl
+levels/l02.lvl
+levels/l03.lvl
 levels/learn1.lvl
 levels/learn2.lvl
 levels/learn3.lvl

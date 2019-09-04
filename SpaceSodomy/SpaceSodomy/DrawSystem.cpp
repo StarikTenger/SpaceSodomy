@@ -45,11 +45,12 @@ void DrawSystem::drawScene() {
 		, 0,
 		1.0 / 2
 	);
-	image("backwall",
-		(sys.field.size())*blockSize / 2,
-		(sys.field.size())*blockSize / 2,
-		(sys.field.size())*blockSize,
-		(sys.field.size())*blockSize, 0);
+	if(sys.background)
+		image("backwall",
+			(sys.field.size())*blockSize / 2,
+			(sys.field.size())*blockSize / 2,
+			(sys.field.size())*blockSize,
+			(sys.field.size())*blockSize, 0);
 	//draw animations
 	for (auto a : sys.animations) {
 		a->time = sys.time;

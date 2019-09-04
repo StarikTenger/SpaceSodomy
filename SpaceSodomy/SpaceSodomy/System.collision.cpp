@@ -8,9 +8,42 @@
 
 #include "getMilliCount.h"
 
-using namespace geom;
 using namespace random;
 using namespace std;
+
+bool System::collision(Body& body, std::pair<Vector2d, Vector2d> wall) {
+	bool touch = 0;
+	//calculating mid perpendicular
+	Vector2d center = (wall.first + wall.second) / 2;
+	std::pair<Vector2d, Vector2d> perpendicular;
+	perpendicular.first = geom::rotate(wall.first - center, M_PI / 2) + center;
+	perpendicular.second = geom::rotate(wall.second - center, M_PI / 2) + center;
+	//length of wall
+	double length = geom::distance(wall.first, wall.second);
+	//pos after movement
+	Vector2d posNew = body.pos + body.vel * dt;
+	//checking collsion
+	if (geom::distance(posNew, wall.first, wall.second) < body.r && 
+		geom::distance(posNew, perpendicular.first, perpendicular.second) < length / 2 &&
+		geom::distance(posNew, wall.first, wall.second) < geom::distance(body.pos, wall.first, wall.second)) {
+		touch = 1;
+		Vector2d velNew = geom::rotate(body.vel, -geom::angle(wall.first - wall.second));
+		velNew.y *= -bounce;
+		body.vel = geom::rotate(velNew, geom::angle(wall.first - wall.second));
+	}
+	else if (geom::distance(posNew, wall.first) < body.r) { //point collision
+		touch = 1;
+		Vector2d velNew = geom::rotate(body.vel, -geom::angle(wall.first - posNew));
+		velNew.x *= -bounce;
+		body.vel = geom::rotate(velNew, (geom::angle(wall.first - posNew)));
+	}else if (geom::distance(posNew, wall.second) < body.r) {
+		touch = 1;
+		Vector2d velNew = geom::rotate(body.vel, -geom::angle(wall.second - posNew));
+		velNew.x *= -bounce;
+		body.vel = geom::rotate(velNew, (geom::angle(wall.second - posNew)));
+	}
+	return touch;
+}
 
 void System::collision() {
 	bool touch = 0;
@@ -20,159 +53,99 @@ void System::collision() {
 		for (Unit* b : neighbors) {
 			Vector2d aPos = a->body.pos + a->body.vel*dt;
 			Vector2d bPos = b->body.pos + b->body.vel*dt;
-			if (distance(aPos, bPos) < EPS || !a->collision || !b->collision)
+			if (geom::distance(aPos, bPos) < EPS || !a->collision || !b->collision)
 				continue;
-			if (distance(a->body.pos, b->body.pos) < a->body.r + b->body.r) {
-				a->body.vel += direction(a->body.pos, b->body.pos)*dt*100/a->body.m;
+			if (geom::distance(a->body.pos, b->body.pos) < a->body.r + b->body.r) {
+				a->body.vel += geom::direction(a->body.pos, b->body.pos)*dt*100/a->body.m;
 			}
 			else {
-				if (distance(aPos, bPos) < a->body.r + b->body.r) {
-					double ang = angle(a->body.pos - b->body.pos);
-					Vector2d v = rotate(a->body.vel, -ang);
+				if (geom::distance(aPos, bPos) < a->body.r + b->body.r) {
+					double ang = geom::angle(a->body.pos - b->body.pos);
+					Vector2d v = geom::rotate(a->body.vel, -ang);
 					v.x *= bounce;
-					a->body.vel = rotate(v, ang);
+					a->body.vel = geom::rotate(v, ang);
 					touch = 1;
 				}
 			}
 			
 		}
 		if (touch && !dynamic_cast<Bullet*>(a) && !dynamic_cast<Explosion*>(a)) {
-			if (distance(a->body.vel, a->body.velPrev)>0.1)
-			sound("knock", units[0]->body.pos, distance(a->body.vel, a->body.velPrev));
+			if (geom::distance(a->body.vel, a->body.velPrev)>0.1)
+			sound("knock", units[0]->body.pos, geom::distance(a->body.vel, a->body.velPrev));
 		}
 	}
+	
 	//walls
 	for (Unit* u : units) {
+		vector<pair<pair<Vector2d, Vector2d>, bool> > walls;
+		walls.push_back({ {{0, 0}, {0, (double)field.size()}}, 0 });
+		walls.push_back({ {{0, 0}, {(double)field.size(), 0}}, 0 });
+		walls.push_back({ {{(double)field.size(), (double)field.size()}, {0, (double)field.size()}}, 0 });
+		walls.push_back({ {{(double)field.size(), (double)field.size()}, {(double)field.size(), 0}}, 0 });
+
+		int x0 = (int)(u->body.pos.x / blockSize + 1) - 1;
+		int y0 = (int)(u->body.pos.y / blockSize + 1) - 1;
+		for (int x = std::max(0, x0 - 1); x <= std::min((int)field.size() - 1, x0 + 1); x++) {
+			for (int y = std::max(0, y0 - 1); y <= std::min((int)field[0].size() - 1, y0 + 1); y++) {
+				//block verticies
+				Vector2d pA(x + 0.0, y + 0.0);
+				Vector2d pB(x + 1.0, y + 0.0);
+				Vector2d pC(x + 1.0, y + 1.0);
+				Vector2d pD(x + 0.0, y + 1.0);
+				bool danger = field[x][y].spikes;
+				if (field[x][y].type == WALL) {
+					walls.push_back({ {pA, pB}, danger });
+					walls.push_back({ {pB, pC}, danger });
+					walls.push_back({ {pC, pD}, danger });
+					walls.push_back({ {pD, pA}, danger });
+				}
+				if (field[x][y].type == CORNER_A) {
+					walls.push_back({ {pA, pB}, danger });
+					walls.push_back({ {pA, pD}, danger });
+					walls.push_back({ {pB, pD}, danger });
+				}
+				if (field[x][y].type == CORNER_B) {
+					walls.push_back({ {pA, pB}, danger });
+					walls.push_back({ {pB, pC}, danger });
+					walls.push_back({ {pA, pC}, danger });
+				}
+				if (field[x][y].type == CORNER_C) {
+					walls.push_back({ {pB, pC}, danger });
+					walls.push_back({ {pC, pD}, danger });
+					walls.push_back({ {pB, pD}, danger });
+				}
+				if (field[x][y].type == CORNER_D) {
+					walls.push_back({ {pC, pD}, danger });
+					walls.push_back({ {pA, pD}, danger });
+					walls.push_back({ {pA, pC}, danger });
+				}
+			}
+		}
 		bool touch = 0;
-		auto& b = u->body;
-		checkExplosions(u);
-		int x = (int)(b.pos.x / blockSize + 1) - 1;
-		int y = (int)(b.pos.y / blockSize + 1) - 1;
-		Vector2d inCell = Vector2d(u->body.pos.x - x, u->body.pos.y - y);
-		
-		double r = u->body.r;
-		int dmg = 0;
-		//corners
-		for (int x1 = std::max(0, x - 1); x1 <= std::min((int)field.size()-1, x + 1); x1++) {
-			for (int y1 = std::max(0, y - 1); y1 <= std::min((int)field[0].size()-1, y + 1); y1++) {
-				if (field[x1][y1].type == CORNER_A || field[x1][y1].type == CORNER_B || field[x1][y1].type == CORNER_C || field[x1][y1].type == CORNER_D) {
-					std::vector<Vector2d> points = { Vector2d(x1, y1), Vector2d(x1 + 1, y1), Vector2d(x1 + 1, y1 + 1), Vector2d(x1, y1 + 1) };
-					std::vector<Vector2d> points1 = { Vector2d(x1, y1), Vector2d(x1 + 1, y1), Vector2d(x1 + 1, y1 + 1), Vector2d(x1, y1 + 1) };
-					if (field[x1][y1].type == CORNER_A || field[x1][y1].type == CORNER_C) {
-						points.erase(points.begin() + 2);
-						points.erase(points.begin() + 0);
-						points1.erase(points1.begin() + 3);
-						points1.erase(points1.begin() + 1);
-					}
-					if (field[x1][y1].type == CORNER_B || field[x1][y1].type == CORNER_D) {
-						points.erase(points.begin() + 3);
-						points.erase(points.begin() + 1);
-						points1.erase(points1.begin() + 2);
-						points1.erase(points1.begin() + 0);
-					}
-					Vector2d pos1 = b.pos + b.vel*dt;
-					if (geom::distance(pos1, points[0], points[1]) < u->body.r && geom::distance(pos1, points1[0], points1[1]) < sqrt(2)/2) {
-						double ang = geom::angle(points[0] - points[1]);
-						Vector2d vel = geom::rotate(u->body.vel, ang);
-						vel.x *= -bounce;
-						u->body.vel = geom::rotate(vel, -ang);
-						touch = 1;
-						
-						if (dynamic_cast<Bullet*>(u)) {
-							u->hp = 0;
-						}
-					}
-				}
+		bool dmg = 0;
+		for (const auto& wall : walls) {
+			if (collision(u->body, wall.first)) {
+				touch = 1;
+				if (wall.second)
+					dmg = 1;
 			}
 		}
 		
-
-
-		vector<Vector2d> anchors = {
-			{0, r},
-			{0, -r},
-			{r, 0},
-			{-r, 0}
-		};
-		for (auto& a : anchors) {
-			Vector2d p = b.pos + a;
-			int x = (int)(p.x / blockSize + 1) - 1;
-			int y = (int)(p.y / blockSize + 1) - 1;
-			int x1 = (int)((p.x + b.vel.x*dt) / blockSize + 1) - 1;
-			int y1 = (int)((p.y + b.vel.y*dt) / blockSize + 1) - 1;
-			if (x1 < 0 || x1 >= field.size() || y >= 0 && y < field[0].size() && field[x1][y].type == WALL) {
-				if (x1 >= 0 && x1 < field.size() && y >= 0 && y < field[0].size() && field[x1][y].spikes)
-					dmg = 1;
-				b.vel.x *= -bounce;
-				touch = 1;
-				if (dynamic_cast<Bullet*>(u)) {
-					u->hp = 0;
-				}
-			}
-			if (y1 < 0 || y1 >= field[0].size() || x >= 0 && x < field.size() && field[x][y1].type == WALL) {
-				if (x >= 0 && x < field.size() && y1 >= 0 && y1 < field[0].size() && field[x][y1].spikes)
-					dmg = 1;
-				b.vel.y *= -bounce;
-				touch = 1;
-				if (dynamic_cast<Bullet*>(u)) {
-					u->hp = 0;
-				}
-			}
-		}
-
-		int x1 = (int)((b.pos.x + b.vel.x*dt) / blockSize + 1) - 1;
-		int y1 = (int)((b.pos.y + b.vel.y*dt) / blockSize + 1) - 1;
-		vector<Vector2d> points;
-		vector<int> danger;
-		if (x1 > 0 && y1 > 0) {
-			if (field[x1 - 1][y1 - 1].type && field[x1 - 1][y1 - 1].type != CORNER_A) {
-				points.push_back(Vector2d(x1, y1));
-				danger.push_back(field[x1 - 1][y1 - 1].spikes);
-			}
-		}
-		if (x1 < field.size() - 1 && y1 > 0) {
-			if (field[x1 + 1][y1 - 1].type && field[x1 + 1][y1 - 1].type != CORNER_B) {
-				points.push_back(Vector2d(x1 + 1, y1 ));
-				danger.push_back(field[x1 + 1][y1 - 1].spikes);
-			}
-		}
-		if (x1 > 0 && y1 < field[0].size() - 1) {
-			if (field[x1 - 1][y1 + 1].type && field[x1 - 1][y1 + 1].type != CORNER_D) {
-				points.push_back(Vector2d(x1, y1 + 1 ));
-				danger.push_back(field[x1 - 1][y1 + 1].spikes);
-			}
-		}
-		if (x1 < field.size() - 1 && y1 < field[0].size() - 1) {
-			if (field[x1 + 1][y1 + 1].type && field[x1 + 1][y1 + 1].type != CORNER_C) {
-				points.push_back(Vector2d(x1 + 1, y1 + 1 ));
-				danger.push_back(field[x1 + 1][y1 + 1].spikes);
-			}
-		}
-		int i = 0;
-		for (auto& p : points) {
-			Vector2d pos = u->body.pos + u->body.vel*dt;
-			if (distance(p, pos) > u->body.r)
-				continue;
-			if (danger[i])
-				dmg = 1;
-			double a = angle(p - pos);
-			Vector2d velRel = rotate(u->body.vel, -a);
-			velRel.x *= -bounce;
-			u->body.vel = rotate(velRel, a);
-			u->body.vel += direction(p, u->body.pos)*dt*(-10);
-			touch = 1;
-			if (dynamic_cast<Bullet*>(u)) {
-				u->hp = 0;
-			}
-			i++;
-		}
-		if (touch && !dynamic_cast<Bullet*>(u) && !dynamic_cast<Explosion*>(u)) {
-			if(distance(u->body.vel, u->body.velPrev)>0.1)
-			sound("knock", units[0]->body.pos, distance(u->body.vel, u->body.velPrev));
+		if (touch && dynamic_cast<Bullet*>(u)) {
+			u->hp = 0;
 		}
 		if (dmg && !dynamic_cast<Explosion*>(u)) {
 			damage(u);
 		}
-	}
 
+		//sound
+		if (touch && !dynamic_cast<Bullet*>(u) && !dynamic_cast<Explosion*>(u)) {
+			if (geom::distance(u->body.vel, u->body.velPrev) > 0.1) {
+				sound("knock", units[0]->body.pos, geom::distance(u->body.vel, u->body.velPrev));
+				std::cout << "0\n";
+			}
+		}
+		
+
+	}
 }

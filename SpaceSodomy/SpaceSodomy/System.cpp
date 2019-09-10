@@ -395,9 +395,10 @@ void System::sound(string name, Vector2d pos, double volume) {
 }
 
 void System::animation(std::string name, AnimationState stateStart, AnimationState stateFinish, double duration) {
-	animations.push_back(
-		new Animation(name, stateStart, stateFinish, time, time + duration)
-	);
+	if(geom::distance(units[0]->body.pos, stateStart.pos)<10)
+		animations.push_back(
+			new Animation(name, stateStart, stateFinish, time, time + duration)
+		);
 }
 
 void System::particleSplash(std::string name, Vector2d pos, Vector2d box, double direction, double width, int n, double r, double duration) {

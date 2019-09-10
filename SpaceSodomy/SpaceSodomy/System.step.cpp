@@ -258,7 +258,16 @@ void System::step() {
 				status = "death";
 			}
 			else if (!dynamic_cast<Creature*>(units[i])) {
-				delete units[i];
+				Unit* unit = units[i];
+				if (dynamic_cast<Dummy*>(units[i])) {
+					for(int i=0; i<10; i++)
+						animation("particleSmoke",
+							AnimationState(units[i]->body.pos, Vector2d(0.5, 0.5), 0, {100, 100, 100}),
+							AnimationState(units[i]->body.pos + Vector2d(random::floatRandom(-0.5, 0.5, 3), random::floatRandom(-0.5, 0.5, 3)), Vector2d(1, 1), 0, { 100, 100, 100, 0 }),
+							random::floatRandom(0.5, 1, 3)
+						);
+				}
+				delete unit;
 				units.erase(units.begin() + i);
 				i--;
 			}
@@ -266,7 +275,7 @@ void System::step() {
 				sound("death", units[i]->body.pos, 100);
 				Dummy* d = new Dummy();
 				d->body = units[i]->body;
-				d->hp = 100000;
+				d->hp = 1;
 				if (dynamic_cast<Turret*>(units[i])) {
 					d->type = "turret";
 				}

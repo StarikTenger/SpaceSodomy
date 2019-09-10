@@ -49,6 +49,7 @@ public:
 	double wetFrictionK = 1;
 	double particleLevel = 1;
 	double particlePeriod = 0.01;
+	double animationDistanceLimit = 10;
 
 	std::string status = "running";
 

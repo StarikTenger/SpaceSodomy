@@ -26,7 +26,7 @@ void DrawSystem::drawScene() {
 		h / 2,
 		w * 1.5,
 		w * 1.5, -sys.units[0]->body.direction
-	);
+	); 
 
 
 	sf::View view(sf::FloatRect(

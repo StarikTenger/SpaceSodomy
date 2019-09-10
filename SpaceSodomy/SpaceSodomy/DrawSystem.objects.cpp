@@ -105,12 +105,13 @@ void  DrawSystem::drawDummy(Dummy* s) {
 	if (!s)
 		return;
 	auto p = s->body.pos;
+	Color color = { (int)(s->hp * 255), (int)(s->hp * 255), (int)(s->hp * 255), 255 };
 	if(s->type == "turret")
-		image("turretBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
+		image("turretBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2, color);
 	if(s->type == "rocketLauncher")
-		image("rocketLauncherBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
+		image("rocketLauncherBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2, color);
 	if (s->type == "robot")
-		image("robotBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2);
+		image("robotBody", p.x, p.y, blockSize, blockSize, s->body.direction*0.2, color);
 }
 
 void  DrawSystem::drawBonus(Bonus* s) {

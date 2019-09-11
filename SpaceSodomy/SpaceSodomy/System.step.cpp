@@ -260,7 +260,7 @@ void System::step() {
 			else if (!dynamic_cast<Creature*>(units[i])) {
 				Unit* unit = units[i];
 				if (dynamic_cast<Dummy*>(units[i])) {
-					for(int i=0; i<10; i++)
+					for (int j = 0; j < 10; j++)
 						animation("particleSmoke",
 							AnimationState(units[i]->body.pos, Vector2d(0.5, 0.5), 0, {100, 100, 100}),
 							AnimationState(units[i]->body.pos + Vector2d(random::floatRandom(-0.5, 0.5, 3), random::floatRandom(-0.5, 0.5, 3)), Vector2d(1, 1), 0, { 100, 100, 100, 0 }),
